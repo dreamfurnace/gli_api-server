@@ -1,0 +1,153 @@
+[settings.py] 로드됨
+✅ 현재 CORS_ALLOWED_ORIGINS: ['http://localhost:3000', 'http://localhost:5173']
+[settings.py] 로드됨
+✅ 현재 CORS_ALLOWED_ORIGINS: ['http://localhost:3000', 'http://localhost:5173']
+Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+[wsgi.py] 환경 변수 DJANGO_ENV: development
+[wsgi.py] DJANGO_SETTINGS_MODULE: config.settings
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/verify/ HTTP/1.1" 200 1295
+INFO:django.server:"POST /api/auth/verify/ HTTP/1.1" 200 1295
+"GET /api/user/profile/ HTTP/1.1" 200 459
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 459
+Unauthorized: /api/user/transactions/
+WARNING:django.request:Unauthorized: /api/user/transactions/
+"GET /api/user/transactions/ HTTP/1.1" 401 107
+WARNING:django.server:"GET /api/user/transactions/ HTTP/1.1" 401 107
+Unauthorized: /api/auth/refresh/
+WARNING:django.request:Unauthorized: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 401 58
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 401 58
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py changed, reloading.
+INFO:django.utils.autoreload:/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py changed, reloading.
+[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! : development
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 29, 2025 - 20:12:55
+Django version 5.0.2, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+[settings.py] 로드됨
+✅ 현재 CORS_ALLOWED_ORIGINS: ['http://localhost:3000', 'http://localhost:5173']
+Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+[wsgi.py] 환경 변수 DJANGO_ENV: development
+[wsgi.py] DJANGO_SETTINGS_MODULE: config.settings
+Unauthorized: /api/auth/refresh/
+WARNING:django.request:Unauthorized: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 401 40
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 401 40
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py changed, reloading.
+INFO:django.utils.autoreload:/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py changed, reloading.
+[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! : development
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 29, 2025 - 20:14:16
+Django version 5.0.2, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+[settings.py] 로드됨
+✅ 현재 CORS_ALLOWED_ORIGINS: ['http://localhost:3000', 'http://localhost:5173']
+Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+[wsgi.py] 환경 변수 DJANGO_ENV: development
+[wsgi.py] DJANGO_SETTINGS_MODULE: config.settings
+Bad Request: /api/auth/refresh/
+WARNING:django.request:Bad Request: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 400 37
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 400 37
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+Bad Request: /api/auth/verify/
+WARNING:django.request:Bad Request: /api/auth/verify/
+"POST /api/auth/verify/ HTTP/1.1" 400 85
+WARNING:django.server:"POST /api/auth/verify/ HTTP/1.1" 400 85
+"POST /api/auth/verify/ HTTP/1.1" 200 1295
+INFO:django.server:"POST /api/auth/verify/ HTTP/1.1" 200 1295
+Bad Request: /api/auth/verify/
+WARNING:django.request:Bad Request: /api/auth/verify/
+"POST /api/auth/verify/ HTTP/1.1" 400 36
+WARNING:django.server:"POST /api/auth/verify/ HTTP/1.1" 400 36
+Unauthorized: /api/auth/refresh/
+WARNING:django.request:Unauthorized: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 401 32
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 401 32
+"HEAD /api/schema/swagger-ui/ HTTP/1.1" 200 0
+INFO:django.server:"HEAD /api/schema/swagger-ui/ HTTP/1.1" 200 0
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py: Error [logout]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py: Error [request_nonce]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py: Error [refresh_token]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py: Error [verify_signature]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/common/views.py: Error [health_check]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py: Error [user_profile]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/apps/solana_auth/views.py: Error [user_transactions]: unable to guess serializer. This is graceful fallback handling for APIViews. Consider using GenericAPIView as view base class, if view is under your control. Either way you may want to add a serializer_class (or method). Ignoring view for now.
+"HEAD /api/schema/ HTTP/1.1" 200 0
+INFO:django.server:"HEAD /api/schema/ HTTP/1.1" 200 0
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/verify/ HTTP/1.1" 200 1295
+INFO:django.server:"POST /api/auth/verify/ HTTP/1.1" 200 1295
+"GET /api/user/profile/ HTTP/1.1" 200 459
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 459
+Bad Request: /api/auth/nonce/
+WARNING:django.request:Bad Request: /api/auth/nonce/
+"POST /api/auth/nonce/ HTTP/1.1" 400 109
+WARNING:django.server:"POST /api/auth/nonce/ HTTP/1.1" 400 109
+Bad Request: /api/auth/nonce/
+WARNING:django.request:Bad Request: /api/auth/nonce/
+"POST /api/auth/nonce/ HTTP/1.1" 400 89
+WARNING:django.server:"POST /api/auth/nonce/ HTTP/1.1" 400 89
+Bad Request: /api/auth/verify/
+WARNING:django.request:Bad Request: /api/auth/verify/
+"POST /api/auth/verify/ HTTP/1.1" 400 36
+WARNING:django.server:"POST /api/auth/verify/ HTTP/1.1" 400 36
+Unauthorized: /api/user/profile/
+WARNING:django.request:Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 58
+WARNING:django.server:"GET /api/user/profile/ HTTP/1.1" 401 58
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/verify/ HTTP/1.1" 200 1295
+INFO:django.server:"POST /api/auth/verify/ HTTP/1.1" 200 1295
+"POST /api/auth/logout/ HTTP/1.1" 200 66
+INFO:django.server:"POST /api/auth/logout/ HTTP/1.1" 200 66
+"GET /api/user/profile/ HTTP/1.1" 200 459
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 459
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/config/settings.py changed, reloading.
+INFO:django.utils.autoreload:/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/config/settings.py changed, reloading.
+[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! : development
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 29, 2025 - 20:14:33
+Django version 5.0.2, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+[settings.py] 로드됨
+✅ CORS 설정 (development): ALLOW_ALL=True, ORIGINS=['http://localhost:3000', 'http://localhost:5173', 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://127.0.0.1:8080']
+Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+[wsgi.py] 환경 변수 DJANGO_ENV: development
+[wsgi.py] DJANGO_SETTINGS_MODULE: config.settings
+"POST /api/auth/nonce/ HTTP/1.1" 200 175
+INFO:django.server:"POST /api/auth/nonce/ HTTP/1.1" 200 175
+"OPTIONS /api/auth/nonce/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/nonce/ HTTP/1.1" 200 0
+[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! : development

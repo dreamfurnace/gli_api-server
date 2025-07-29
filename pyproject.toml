@@ -1,0 +1,29 @@
+[project]
+name = "gli-api"
+version = "0.1.0"
+description = "GLI project backend API"
+requires-python = ">=3.10"
+dependencies = [
+  "django==5.0.2",
+  "djangorestframework",
+  "djangorestframework-simplejwt",
+  "django-cors-headers",
+  "celery[redis]>=5.3",
+  "boto3",
+  "pandas",
+  "openpyxl",
+  "whitenoise",
+  "gunicorn",
+  "psycopg2",
+  "python-dotenv",
+  "drf-spectacular",
+  "xlrd",
+  "xlwt",
+  "requests",
+  "PyYAML",
+  "psycopg[binary]>=3.2.9",
+]
+
+[tool.uv]
+# dev deps 예시:
+# dev-dependencies = ["pytest", "pytest-django", "black", "ruff"]
