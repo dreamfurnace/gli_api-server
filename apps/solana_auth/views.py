@@ -99,24 +99,32 @@ def request_nonce(request):
     
     wallet_address = serializer.validated_data['wallet_address']
     
-    # 기존 미사용 nonce 정리 (5분 이상 된 것들)
-    AuthNonce.objects.filter(
-        wallet_address=wallet_address,
-        used=False,
-        created_at__lt=timezone.now() - timedelta(minutes=5)
-    ).delete()
+    # 지갑 주소가 이미 등록된 사용자가 있는지 확인
+    try:
+        existing_user = SolanaUser.objects.get(wallet_address=wallet_address)
+        return Response(
+            {'error': '이미 등록된 지갑 주소입니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    except SolanaUser.DoesNotExist:
+        pass
     
     # 새로운 nonce 생성
     nonce = secrets.token_hex(32)
-    auth_nonce = AuthNonce.objects.create(
+    
+    # 기존 nonce가 있다면 사용됨으로 표시
+    AuthNonce.objects.filter(wallet_address=wallet_address, used=False).update(used=True)
+    
+    # 새로운 nonce 저장
+    AuthNonce.objects.create(
         wallet_address=wallet_address,
-        nonce=nonce
+        nonce=nonce,
+        used=False
     )
     
     return Response({
         'nonce': nonce,
-        'expires_in': 300,  # 5분
-        'message': f'GLI Platform 로그인을 위한 nonce가 발급되었습니다. 🎉'
+        'message': 'Nonce가 성공적으로 생성되었습니다.'
     })
 
 

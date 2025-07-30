@@ -6,7 +6,7 @@ import uuid
 class SolanaUser(AbstractUser):
     """Solana 지갑 기반 사용자 모델"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    wallet_address = models.CharField(max_length=50, unique=True, db_index=True)
+    wallet_address = models.CharField(max_length=50, unique=True, db_index=True, blank=True, null=True)
     
     # AbstractUser의 기본 필드들을 오버라이드
     username = models.CharField(max_length=100, unique=True)
@@ -16,7 +16,7 @@ class SolanaUser(AbstractUser):
     
     # Django 인증 시스템 호환성을 위한 설정
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['wallet_address']
+    REQUIRED_FIELDS = []  # wallet_address를 필수 필드에서 제거
     
     # GLI Platform 관련 필드
     membership_level = models.CharField(
@@ -44,7 +44,10 @@ class SolanaUser(AbstractUser):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.username or 'GLI Member'} ({self.wallet_address[:8]}...)"
+        if self.wallet_address:
+            return f"{self.username or 'GLI Member'} ({self.wallet_address[:8]}...)"
+        else:
+            return f"{self.username or 'GLI Member'} (No Wallet)"
 
 
 class AuthNonce(models.Model):

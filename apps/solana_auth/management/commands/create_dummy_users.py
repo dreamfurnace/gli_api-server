@@ -13,6 +13,11 @@ class Command(BaseCommand):
             action='store_true',
             help='Force recreate users if they already exist',
         )
+        parser.add_argument(
+            '--no-wallet',
+            action='store_true',
+            help='Create admin user without wallet address',
+        )
 
     def handle(self, *args, **options):
         dummy_users = [
@@ -20,7 +25,7 @@ class Command(BaseCommand):
                 'username': 'admin_gli',
                 'email': 'admin@gli.com',
                 'password': 'admin123!',
-                'wallet_address': self.generate_dummy_wallet(),
+                'wallet_address': None if options['no_wallet'] else self.generate_dummy_wallet(),
                 'membership_level': 'vip',
                 'is_staff': True,
                 'is_superuser': True,
@@ -81,9 +86,10 @@ class Command(BaseCommand):
                 is_active=True
             )
 
+            wallet_info = f" (Wallet: {user_data['wallet_address'][:8]}...)" if user_data['wallet_address'] else " (No Wallet)"
             self.stdout.write(
                 self.style.SUCCESS(
-                    f'Successfully created user: {user.email} ({user.membership_level})'
+                    f'Successfully created user: {user.email} ({user.membership_level}){wallet_info}'
                 )
             )
 

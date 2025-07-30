@@ -19,17 +19,21 @@ class SolanaAuthMiddleware(MiddlewareMixin):
                 # JWT 토큰 검증
                 validated_token = UntypedToken(token)
                 
-                # 토큰에서 지갑 주소 추출
+                # 토큰에서 지갑 주소 추출 (선택적)
                 wallet_address = validated_token.get('wallet_address')
                 user_id = validated_token.get('user_id')
                 
-                if wallet_address and user_id:
+                if user_id:
                     try:
-                        # 사용자 조회
-                        user = SolanaUser.objects.get(
-                            id=user_id, 
-                            wallet_address=wallet_address
-                        )
+                        # 사용자 조회 (지갑 주소가 있는 경우와 없는 경우 모두 처리)
+                        if wallet_address:
+                            user = SolanaUser.objects.get(
+                                id=user_id, 
+                                wallet_address=wallet_address
+                            )
+                        else:
+                            # 지갑 주소가 없는 사용자 조회
+                            user = SolanaUser.objects.get(id=user_id)
                         
                         # request 객체에 사용자 정보 추가
                         request.solana_user = user

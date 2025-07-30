@@ -14,6 +14,13 @@ class SolanaUserSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at', 'last_login'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at', 'last_login']
+    
+    def to_representation(self, instance):
+        """지갑 주소가 없는 경우 처리"""
+        data = super().to_representation(instance)
+        if not data.get('wallet_address'):
+            data['wallet_address'] = None
+        return data
 
 
 class NonceRequestSerializer(serializers.Serializer):
