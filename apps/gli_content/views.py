@@ -434,3 +434,74 @@ class DashboardStatsViewSet(viewsets.ViewSet):
             'investment_stats': InvestmentStatsSerializer(user_stats).data,
             'shopping_stats': shopping_stats
         })
+
+
+class UserProfileViewSet(viewsets.ViewSet):
+    """사용자 프로필 API"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    @action(detail=False, methods=['get'], url_path='profile')
+    def get_profile(self, request):
+        """사용자 프로필 조회"""
+        user = request.user
+        
+        # 사용자 기본 정보
+        profile_data = {
+            'id': str(user.id),
+            'email': user.email,
+            'username': user.username,
+            'wallet_address': getattr(user, 'wallet_address', ''),
+            'name': getattr(user, 'name', ''),
+            'phone': getattr(user, 'phone', ''),
+            'profile_image': getattr(user, 'profile_image', ''),
+            'role': getattr(user, 'role', 'user'),
+            'is_active': user.is_active,
+            'date_joined': user.date_joined,
+            'last_login': user.last_login,
+        }
+        
+        # 투자 통계 추가
+        investments = Investment.objects.filter(investor=user)
+        investment_stats = investments.aggregate(
+            total_invested=Sum('amount_gleb') or Decimal('0'),
+            total_current_value=Sum('current_value_gleb') or Decimal('0'),
+            active_count=Count('id', filter=Q(status='active')),
+            completed_count=Count('id', filter=Q(status='completed'))
+        )
+        
+        profit_loss = investment_stats['total_current_value'] - investment_stats['total_invested']
+        profit_percentage = (
+            (profit_loss / investment_stats['total_invested'] * 100) 
+            if investment_stats['total_invested'] > 0 else Decimal('0')
+        )
+        
+        profile_data['investment_stats'] = {
+            'total_invested': str(investment_stats['total_invested']),
+            'total_current_value': str(investment_stats['total_current_value']),
+            'total_profit_loss': str(profit_loss),
+            'profit_loss_percentage': str(profit_percentage),
+            'active_investments': investment_stats['active_count'],
+            'completed_investments': investment_stats['completed_count']
+        }
+        
+        return Response(profile_data)
+    
+    @action(detail=False, methods=['patch'], url_path='profile')
+    def update_profile(self, request):
+        """사용자 프로필 수정"""
+        user = request.user
+        data = request.data
+        
+        # 업데이트 가능한 필드들
+        updatable_fields = ['name', 'phone', 'profile_image']
+        updated_fields = []
+        
+        for field in updatable_fields:
+            if field in data:
+                setattr(user, field, data[field])
+                updated_fields.append(field)
+        
+        if updated_fields:
+            user.save(update_fields=updated_fields)
+        
+        return self.get_profile(request)
