@@ -37,6 +37,9 @@ urlpatterns = [
     
     # Solana Auth URLs
     path('', include('apps.solana_auth.urls')),
+    
+    # GLI Content Management URLs
+    path('', include('apps.gli_content.urls')),
 ]
 
 if settings.DEBUG:
