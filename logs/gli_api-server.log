@@ -1,0 +1,130 @@
+[settings.py] 로드됨
+✅ CORS 설정 (development): ALLOW_ALL=True, ORIGINS=['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://127.0.0.1:8080']
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/.venv/lib/python3.11/site-packages/django/db/backends/utils.py:98: RuntimeWarning: Accessing the database during app initialization is discouraged. To fix this warning, avoid executing queries in AppConfig.ready() or when your app modules are imported.
+  warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)
+[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! : development
+User already exists: admin@gli.com. Use --force to recreate.
+User already exists: token@gli.com. Use --force to recreate.
+User already exists: user@gli.com. Use --force to recreate.
+✅ Dummy users creation completed!
+[settings.py] 로드됨
+✅ CORS 설정 (development): ALLOW_ALL=True, ORIGINS=['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://127.0.0.1:8080']
+/Users/ahndonghyun/dongfiles/ADHcode/DreamFurnace/gli_root/gli_api-server/.venv/lib/python3.11/site-packages/django/db/backends/utils.py:98: RuntimeWarning: Accessing the database during app initialization is discouraged. To fix this warning, avoid executing queries in AppConfig.ready() or when your app modules are imported.
+  warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)
+[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! : development
+User already exists: admin@gli.com. Use --force to recreate.
+User already exists: token@gli.com. Use --force to recreate.
+User already exists: user@gli.com. Use --force to recreate.
+✅ Dummy users creation completed!
+Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+[wsgi.py] 환경 변수 DJANGO_ENV: development
+[wsgi.py] DJANGO_SETTINGS_MODULE: config.settings
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1085
+INFO:django.server:"POST /api/auth/login/ HTTP/1.1" 200 1085
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1131
+INFO:django.server:"POST /api/auth/login/ HTTP/1.1" 200 1131
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 478
+INFO:django.server:"GET /api/user/profile/ HTTP/1.1" 200 478
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+WARNING:django.request:Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+WARNING:django.server:"GET /api/user/profile/ HTTP/1.1" 401 172
+"OPTIONS /api/auth/refresh/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/refresh/ HTTP/1.1" 200 0
+Bad Request: /api/auth/refresh/
+WARNING:django.request:Bad Request: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 400 37
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 400 37
+"OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+Unauthorized: /api/auth/logout/
+WARNING:django.request:Unauthorized: /api/auth/logout/
+"POST /api/auth/logout/ HTTP/1.1" 401 58
+WARNING:django.server:"POST /api/auth/logout/ HTTP/1.1" 401 58
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1085
+INFO:django.server:"POST /api/auth/login/ HTTP/1.1" 200 1085
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+WARNING:django.request:Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 45
+WARNING:django.server:"GET /api/user/profile/ HTTP/1.1" 401 45
+"OPTIONS /api/auth/refresh/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/refresh/ HTTP/1.1" 200 0
+Bad Request: /api/auth/refresh/
+WARNING:django.request:Bad Request: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 400 37
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 400 37
+"OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+Unauthorized: /api/auth/logout/
+WARNING:django.request:Unauthorized: /api/auth/logout/
+"POST /api/auth/logout/ HTTP/1.1" 401 58
+WARNING:django.server:"POST /api/auth/logout/ HTTP/1.1" 401 58
+"OPTIONS /api/common/user/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/common/user/ HTTP/1.1" 200 0
+Not Found: /api/common/user/
+WARNING:django.request:Not Found: /api/common/user/
+"GET /api/common/user/ HTTP/1.1" 404 4542
+WARNING:django.server:"GET /api/common/user/ HTTP/1.1" 404 4542
+"OPTIONS /api/auth/refresh/ HTTP/1.1" 200 0
+INFO:django.server:"OPTIONS /api/auth/refresh/ HTTP/1.1" 200 0
+Unauthorized: /api/auth/refresh/
+WARNING:django.request:Unauthorized: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 401 172
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 401 172
+Unauthorized: /api/auth/refresh/
+WARNING:django.request:Unauthorized: /api/auth/refresh/
+"POST /api/auth/refresh/ HTTP/1.1" 401 172
+WARNING:django.server:"POST /api/auth/refresh/ HTTP/1.1" 401 172

@@ -171,7 +171,9 @@ CORS_ALLOW_HEADERS = [
     'origin',
     'user-agent',
     'x-csrftoken',
+    'x-csrf-token',  # 프론트엔드가 사용하는 대시 포함 버전
     'x-requested-with',
+    'x-client-version',  # 프론트엔드 클라이언트 버전 헤더
 ]
 
 print(f"✅ CORS 설정 ({ENV}): ALLOW_ALL={CORS_ALLOW_ALL_ORIGINS}, ORIGINS={CORS_ALLOWED_ORIGINS}", file=sys.stderr)
