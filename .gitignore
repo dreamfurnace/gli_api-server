@@ -1,1 +1,12 @@
 .DS_Store
+
+# Process files
+*.pid
+
+# Log files
+logs/
+*.log
+
+# Database files
+*.sqlite3
+*.db
