@@ -184,6 +184,29 @@ CORS_ALLOW_HEADERS = [
 
 print(f"✅ CORS 설정 ({ENV}): ALLOW_ALL={CORS_ALLOW_ALL_ORIGINS}, ORIGINS={CORS_ALLOWED_ORIGINS}", file=sys.stderr)
 
+# CSRF 설정
+if ENV == "development":
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:8080",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:8080",
+    ]
+elif ENV == "staging":
+    CSRF_TRUSTED_ORIGINS = [
+        "https://stg-api.glibiz.com",
+        "https://stg.glibiz.com",
+        "https://stg-admin.glibiz.com",
+    ]
+elif ENV == "production":
+    CSRF_TRUSTED_ORIGINS = [
+        "https://api.glibiz.com",
+        "https://glibiz.com",
+        "https://admin.glibiz.com",
+    ]
+
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
 
