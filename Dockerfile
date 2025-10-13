@@ -24,7 +24,8 @@ RUN uv sync --frozen
 # 애플리케이션 코드 복사
 COPY . .
 
-# 정적 파일 수집
+# 정적 파일 수집 (빌드 타임 전용 환경변수 설정)
+ENV DOCKER_BUILD=true
 RUN uv run python manage.py collectstatic --noinput || true
 
 # 로그 디렉토리 생성

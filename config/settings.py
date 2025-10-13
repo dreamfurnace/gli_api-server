@@ -23,9 +23,15 @@ print("[settings.py] 로드된 환경 변수 ~~mT.Tm~~ 고오!!! :", ENV)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Docker 빌드 시에는 더미 값 사용, 런타임에는 실제 값 필요
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
-    raise ValueError("환경변수 DJANGO_SECRET_KEY가 설정되지 않았습니다.")
+    # 빌드 타임에는 더미 값 사용 (실제로는 런타임에 env로 주입됨)
+    if os.getenv("DOCKER_BUILD", "false") == "true":
+        SECRET_KEY = "docker-build-temporary-secret-key-will-be-replaced-at-runtime"
+        print("[settings.py] ⚠️  Using temporary SECRET_KEY for Docker build", file=sys.stderr)
+    else:
+        raise ValueError("환경변수 DJANGO_SECRET_KEY가 설정되지 않았습니다.")
 
 
 allowed_hosts = os.getenv("DJANGO_ALLOWED_HOSTS", "")
