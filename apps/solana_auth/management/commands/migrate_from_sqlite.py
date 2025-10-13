@@ -85,7 +85,7 @@ class Command(BaseCommand):
             s3 = boto3.client('s3')
             response = s3.get_object(Bucket='gli-platform-media-dev', Key=s3_key)
             data = response['Body'].read().decode('utf-8')
-            return json.load(data)
+            return json.loads(data)  # Use loads() for string, not load()
         except Exception as e:
             raise CommandError(f'Failed to load from S3: {e}')
 
