@@ -42,11 +42,11 @@ if ENV == "staging":
     ALLOWED_HOSTS += [
         "localhost",
         "127.0.0.1",
-        "172.31.0.71",  # 현재 로그에 나타난 EB 내부 IP
-        "172.31.0.0/16",  # AWS EC2 내부 IP 범위 전체 허용
+        "stg-api.glibiz.com",  # Staging API 도메인
+        "gli-staging-alb-461879350.ap-northeast-2.elb.amazonaws.com",  # ALB DNS
         ".elasticbeanstalk.com",
-        ".amazonaws.com",  # AWS EC2 내부 IP 범위 전체 허용
-        "awseb--AWSEB-PExwWjdH1AOQ-2136231566.ap-northeast-2.elb.amazonaws.com",  # staging의 ELB DNS 주소
+        ".amazonaws.com",
+        "*",  # ALB health check를 위해 모든 호스트 허용 (staging only)
         ]
 elif ENV == "production":
     DEBUG = False
