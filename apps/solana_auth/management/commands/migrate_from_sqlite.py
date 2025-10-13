@@ -11,9 +11,9 @@ import boto3
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.contrib.auth import get_user_model
-from apps.solana_auth.models import Member
+from apps.solana_auth.models import SolanaUser, AdminUser
 
-User = get_user_model()
+User = get_user_model()  # This will be SolanaUser
 
 
 class Command(BaseCommand):
@@ -90,7 +90,7 @@ class Command(BaseCommand):
             raise CommandError(f'Failed to load from S3: {e}')
 
     def migrate_users(self, users_data, dry_run=False):
-        """Migrate User (admin) data"""
+        """Migrate AdminUser data"""
         self.stdout.write(self.style.MIGRATE_HEADING(f'\n📦 Migrating {len(users_data)} admin users...'))
 
         created = 0
@@ -102,37 +102,37 @@ class Command(BaseCommand):
             email = user_data.get('email')
 
             if not username:
-                self.stdout.write(self.style.WARNING(f'⚠️  Skipping user without username: {user_data}'))
+                self.stdout.write(self.style.WARNING(f'⚠️  Skipping admin user without username: {user_data}'))
                 skipped += 1
                 continue
 
-            # Check if user exists
-            existing_user = User.objects.filter(username=username).first()
+            # Check if admin user exists
+            existing_user = AdminUser.objects.filter(username=username).first()
 
             if existing_user:
-                self.stdout.write(f'   ⏭️  User already exists: {username}')
+                self.stdout.write(f'   ⏭️  AdminUser already exists: {username}')
                 updated += 1
             else:
                 if not dry_run:
-                    User.objects.create(
+                    # AdminUser doesn't have is_staff/is_superuser, only is_active
+                    AdminUser.objects.create(
                         username=username,
                         email=email or f'{username}@gli.com',
                         first_name=user_data.get('first_name', ''),
                         last_name=user_data.get('last_name', ''),
-                        is_staff=user_data.get('is_staff', False),
-                        is_superuser=user_data.get('is_superuser', False),
                         is_active=user_data.get('is_active', True),
+                        # grade will be set to default by the model
                     )
-                self.stdout.write(self.style.SUCCESS(f'   ✅ Created user: {username}'))
+                self.stdout.write(self.style.SUCCESS(f'   ✅ Created AdminUser: {username}'))
                 created += 1
 
         self.stdout.write(self.style.SUCCESS(
-            f'\n✅ Users: {created} created, {updated} updated, {skipped} skipped'
+            f'\n✅ AdminUsers: {created} created, {updated} updated, {skipped} skipped'
         ))
 
     def migrate_members(self, members_data, dry_run=False):
-        """Migrate Member data"""
-        self.stdout.write(self.style.MIGRATE_HEADING(f'\n📦 Migrating {len(members_data)} members...'))
+        """Migrate SolanaUser data"""
+        self.stdout.write(self.style.MIGRATE_HEADING(f'\n📦 Migrating {len(members_data)} SolanaUsers...'))
 
         created = 0
         updated = 0
@@ -143,34 +143,29 @@ class Command(BaseCommand):
             email = member_data.get('email')
 
             if not username:
-                self.stdout.write(self.style.WARNING(f'⚠️  Skipping member without username: {member_data}'))
+                self.stdout.write(self.style.WARNING(f'⚠️  Skipping user without username: {member_data}'))
                 skipped += 1
                 continue
 
-            # Check if member exists
-            existing_member = Member.objects.filter(username=username).first()
+            # Check if user exists
+            existing_user = SolanaUser.objects.filter(username=username).first()
 
-            if existing_member:
-                self.stdout.write(f'   ⏭️  Member already exists: {username}')
+            if existing_user:
+                self.stdout.write(f'   ⏭️  SolanaUser already exists: {username}')
                 updated += 1
             else:
                 if not dry_run:
-                    Member.objects.create(
+                    SolanaUser.objects.create(
                         username=username,
                         email=email or f'{username}@user.gli.com',
                         wallet_address=member_data.get('wallet_address'),
-                        membership_level=member_data.get('membership_level', 'basic'),
-                        sol_balance=member_data.get('sol_balance', '0.000000000'),
-                        is_active=member_data.get('is_active', True),
-                        vpx_verify=member_data.get('vpx_verify', 0),
-                        vpx_partner=member_data.get('vpx_partner', 0),
-                        vpx_experience=member_data.get('vpx_experience', 0),
                         first_name=member_data.get('first_name', ''),
                         last_name=member_data.get('last_name', ''),
+                        is_active=member_data.get('is_active', True),
                     )
-                self.stdout.write(self.style.SUCCESS(f'   ✅ Created member: {username}'))
+                self.stdout.write(self.style.SUCCESS(f'   ✅ Created SolanaUser: {username}'))
                 created += 1
 
         self.stdout.write(self.style.SUCCESS(
-            f'\n✅ Members: {created} created, {updated} updated, {skipped} skipped'
+            f'\n✅ SolanaUsers: {created} created, {updated} updated, {skipped} skipped'
         ))
