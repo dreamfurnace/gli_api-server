@@ -22,37 +22,37 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         dummy_users = [
             {
-                'username': 'admin_gli',
-                'email': 'admin@gli.com',
-                'password': 'admin123!',
-                'wallet_address': None if options['no_wallet'] else self.generate_dummy_wallet(),
-                'membership_level': 'vip',
-                'is_staff': True,
-                'is_superuser': True,
-                'first_name': 'GLI',
-                'last_name': 'Administrator'
-            },
-            {
-                'username': 'token_manager',
-                'email': 'token@gli.com',
-                'password': 'token123!',
+                'username': 'member1',
+                'email': 'member1@gli.com',
+                'password': 'member1!',
                 'wallet_address': self.generate_dummy_wallet(),
                 'membership_level': 'premium',
-                'is_staff': True,
+                'is_staff': False,
                 'is_superuser': False,
-                'first_name': 'Token',
-                'last_name': 'Manager'
+                'first_name': '회원',
+                'last_name': '1'
             },
             {
-                'username': 'gli_user',
-                'email': 'user@gli.com',
-                'password': 'user123!',
+                'username': 'member2',
+                'email': 'member2@gli.com',
+                'password': 'member2!',
+                'wallet_address': self.generate_dummy_wallet(),
+                'membership_level': 'premium',
+                'is_staff': False,
+                'is_superuser': False,
+                'first_name': '회원',
+                'last_name': '2'
+            },
+            {
+                'username': 'member3',
+                'email': 'member3@gli.com',
+                'password': 'member3!',
                 'wallet_address': self.generate_dummy_wallet(),
                 'membership_level': 'basic',
                 'is_staff': False,
                 'is_superuser': False,
-                'first_name': 'GLI',
-                'last_name': 'User'
+                'first_name': '회원',
+                'last_name': '3'
             }
         ]
 

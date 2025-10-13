@@ -20,31 +20,37 @@ def create_dummy_users():
 
     dummy_users = [
         {
-            'username': 'admin@gli.com',
-            'email': 'admin@gli.com',
-            'password': 'admin123!',
-            'is_staff': True,
-            'is_superuser': True,
-            'membership_level': 'premium',
-            'description': '관리자'
-        },
-        {
-            'username': 'token@gli.com',
-            'email': 'token@gli.com',
-            'password': 'token123!',
-            'is_staff': True,
+            'username': 'member1',
+            'email': 'member1@gli.com',
+            'password': 'member1!',
+            'is_staff': False,
             'is_superuser': False,
             'membership_level': 'premium',
-            'description': '토큰 매니저'
+            'first_name': '회원',
+            'last_name': '1',
+            'description': '회원1'
         },
         {
-            'username': 'user@gli.com',
-            'email': 'user@gli.com',
-            'password': 'user123!',
+            'username': 'member2',
+            'email': 'member2@gli.com',
+            'password': 'member2!',
+            'is_staff': False,
+            'is_superuser': False,
+            'membership_level': 'premium',
+            'first_name': '회원',
+            'last_name': '2',
+            'description': '회원2'
+        },
+        {
+            'username': 'member3',
+            'email': 'member3@gli.com',
+            'password': 'member3!',
             'is_staff': False,
             'is_superuser': False,
             'membership_level': 'basic',
-            'description': '일반 사용자'
+            'first_name': '회원',
+            'last_name': '3',
+            'description': '회원3'
         }
     ]
 
@@ -67,6 +73,8 @@ def create_dummy_users():
                 is_staff=user_data['is_staff'],
                 is_superuser=user_data['is_superuser'],
                 membership_level=user_data['membership_level'],
+                first_name=user_data.get('first_name', ''),
+                last_name=user_data.get('last_name', ''),
                 is_active=True
             )
 
@@ -78,9 +86,9 @@ def create_dummy_users():
     print(f"\n📊 생성된 사용자 수: {SolanaUser.objects.count()}명")
     print("\n🎉 더미 사용자 생성 완료!")
     print("\n💡 로그인 테스트:")
-    print("   - 관리자: admin@gli.com / admin123!")
-    print("   - 토큰 매니저: token@gli.com / token123!")
-    print("   - 일반 사용자: user@gli.com / user123!")
+    print("   - 회원1: member1@gli.com / member1!")
+    print("   - 회원2: member2@gli.com / member2!")
+    print("   - 회원3: member3@gli.com / member3!")
 
 if __name__ == '__main__':
     create_dummy_users()
