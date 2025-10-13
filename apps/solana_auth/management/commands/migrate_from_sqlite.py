@@ -193,6 +193,8 @@ class Command(BaseCommand):
                         first_name=member_data.get('first_name', ''),
                         last_name=member_data.get('last_name', ''),
                         is_active=member_data.get('is_active', True),
+                        is_staff=member_data.get('is_staff', False),
+                        is_superuser=member_data.get('is_superuser', False),
                         membership_level=member_data.get('membership_level', 'basic'),
                         sol_balance=member_data.get('sol_balance', '0'),
                     )
