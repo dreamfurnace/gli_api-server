@@ -51,11 +51,34 @@ class Command(BaseCommand):
         if dry_run:
             self.stdout.write(self.style.WARNING('🧪 DRY RUN MODE - No data will be committed'))
 
+        # Parse Django dumpdata format
+        self.stdout.write(self.style.WARNING(f'📥 Loaded {len(data)} records from backup'))
+
+        # Separate SolanaUser and AdminUser records
+        solana_users = []
+        admin_users = []
+
+        for record in data:
+            model_name = record.get('model', '')
+            fields = record.get('fields', {})
+
+            # Add pk as id to fields
+            fields['id'] = record.get('pk')
+
+            if model_name == 'solana_auth.solanauser':
+                solana_users.append(fields)
+            elif model_name == 'solana_auth.adminuser':
+                admin_users.append(fields)
+
+        self.stdout.write(self.style.SUCCESS(
+            f'📊 Found {len(solana_users)} SolanaUsers and {len(admin_users)} AdminUsers'
+        ))
+
         # Migrate data
         try:
             with transaction.atomic():
-                self.migrate_users(data.get('users', []), dry_run)
-                self.migrate_members(data.get('members', []), dry_run)
+                self.migrate_admin_users(admin_users, dry_run)
+                self.migrate_solana_users(solana_users, dry_run)
 
                 if dry_run:
                     raise Exception('Dry run - rolling back transaction')
@@ -89,9 +112,9 @@ class Command(BaseCommand):
         except Exception as e:
             raise CommandError(f'Failed to load from S3: {e}')
 
-    def migrate_users(self, users_data, dry_run=False):
+    def migrate_admin_users(self, users_data, dry_run=False):
         """Migrate AdminUser data"""
-        self.stdout.write(self.style.MIGRATE_HEADING(f'\n📦 Migrating {len(users_data)} admin users...'))
+        self.stdout.write(self.style.MIGRATE_HEADING(f'\n📦 Migrating {len(users_data)} AdminUsers...'))
 
         created = 0
         updated = 0
@@ -102,7 +125,7 @@ class Command(BaseCommand):
             email = user_data.get('email')
 
             if not username:
-                self.stdout.write(self.style.WARNING(f'⚠️  Skipping admin user without username: {user_data}'))
+                self.stdout.write(self.style.WARNING(f'⚠️  Skipping admin user without username'))
                 skipped += 1
                 continue
 
@@ -114,15 +137,21 @@ class Command(BaseCommand):
                 updated += 1
             else:
                 if not dry_run:
-                    # AdminUser doesn't have is_staff/is_superuser, only is_active
-                    AdminUser.objects.create(
+                    # Set password from backup if available
+                    admin_user = AdminUser(
+                        id=user_data.get('id'),
                         username=username,
                         email=email or f'{username}@gli.com',
                         first_name=user_data.get('first_name', ''),
                         last_name=user_data.get('last_name', ''),
                         is_active=user_data.get('is_active', True),
-                        # grade will be set to default by the model
                     )
+                    # Set password hash directly
+                    password_hash = user_data.get('password')
+                    if password_hash:
+                        admin_user.password = password_hash
+                    admin_user.save()
+
                 self.stdout.write(self.style.SUCCESS(f'   ✅ Created AdminUser: {username}'))
                 created += 1
 
@@ -130,7 +159,7 @@ class Command(BaseCommand):
             f'\n✅ AdminUsers: {created} created, {updated} updated, {skipped} skipped'
         ))
 
-    def migrate_members(self, members_data, dry_run=False):
+    def migrate_solana_users(self, members_data, dry_run=False):
         """Migrate SolanaUser data"""
         self.stdout.write(self.style.MIGRATE_HEADING(f'\n📦 Migrating {len(members_data)} SolanaUsers...'))
 
@@ -143,7 +172,7 @@ class Command(BaseCommand):
             email = member_data.get('email')
 
             if not username:
-                self.stdout.write(self.style.WARNING(f'⚠️  Skipping user without username: {member_data}'))
+                self.stdout.write(self.style.WARNING(f'⚠️  Skipping user without username'))
                 skipped += 1
                 continue
 
@@ -155,14 +184,24 @@ class Command(BaseCommand):
                 updated += 1
             else:
                 if not dry_run:
-                    SolanaUser.objects.create(
+                    # Create user with password hash from backup
+                    solana_user = SolanaUser(
+                        id=member_data.get('id'),
                         username=username,
                         email=email or f'{username}@user.gli.com',
                         wallet_address=member_data.get('wallet_address'),
                         first_name=member_data.get('first_name', ''),
                         last_name=member_data.get('last_name', ''),
                         is_active=member_data.get('is_active', True),
+                        membership_level=member_data.get('membership_level', 'basic'),
+                        sol_balance=member_data.get('sol_balance', '0'),
                     )
+                    # Set password hash directly
+                    password_hash = member_data.get('password')
+                    if password_hash:
+                        solana_user.password = password_hash
+                    solana_user.save()
+
                 self.stdout.write(self.style.SUCCESS(f'   ✅ Created SolanaUser: {username}'))
                 created += 1
 
