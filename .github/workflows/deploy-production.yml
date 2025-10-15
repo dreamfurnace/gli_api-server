@@ -223,17 +223,35 @@ jobs:
           --query 'Subnets[0:2].SubnetId' \
           --output text | tr '\t' ',')
 
-        # Security Group 조회
+        # Security Group 조회 또는 생성
         SG_ID=$(aws ec2 describe-security-groups \
-          --filters "Name=group-name,Values=production-ecs-sg" \
+          --filters "Name=group-name,Values=gli-ecs-tasks-sg" \
           --query 'SecurityGroups[0].GroupId' \
           --output text 2>/dev/null || echo "")
 
         if [ -z "$SG_ID" ] || [ "$SG_ID" = "None" ]; then
-          echo "⚠️  Security Group이 없습니다. 생성이 필요합니다."
-          echo "다음 명령으로 Security Group을 생성하세요:"
-          echo "aws ec2 create-security-group --group-name production-ecs-sg --description 'ECS Production Security Group' --vpc-id ${{ env.VPC_ID }}"
-          exit 1
+          echo "📝 ECS Task Security Group 생성 중..."
+
+          SG_ID=$(aws ec2 create-security-group \
+            --group-name "gli-ecs-tasks-sg" \
+            --description "Security group for GLI ECS Tasks" \
+            --vpc-id "${{ env.VPC_ID }}" \
+            --query 'GroupId' \
+            --output text)
+
+          # ALB에서 8000 포트 접근 허용
+          ALB_SG=$(aws ec2 describe-security-groups \
+            --filters "Name=group-name,Values=gli-alb-sg" \
+            --query 'SecurityGroups[0].GroupId' \
+            --output text)
+
+          aws ec2 authorize-security-group-ingress \
+            --group-id "$SG_ID" \
+            --protocol tcp \
+            --port 8000 \
+            --source-group "$ALB_SG" || true
+
+          echo "✅ ECS Security Group 생성 완료: $SG_ID"
         fi
 
         echo "네트워크 설정: Subnets=$SUBNETS, SecurityGroup=$SG_ID"
