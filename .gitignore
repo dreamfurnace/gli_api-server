@@ -109,3 +109,4 @@ logs/
 # Database files
 *.sqlite3
 *.db
+README.md.backup
