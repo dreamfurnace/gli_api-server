@@ -201,6 +201,9 @@ class Command(BaseCommand):
                 with open(json_file, 'wb') as f_out:
                     f_out.write(f_in.read())
 
+            # 압축 파일 즉시 삭제 (fixture 충돌 방지)
+            os.remove(gz_file)
+
             # 파일 크기 확인
             file_size = os.path.getsize(json_file)
             self.stdout.write(f'📊 다운로드 완료: {file_size / 1024 / 1024:.2f} MB')
