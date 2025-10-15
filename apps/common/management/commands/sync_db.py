@@ -90,7 +90,8 @@ class Command(BaseCommand):
 
     def dump_and_upload(self):
         """현재 DB를 덤프하여 S3에 업로드"""
-        self.stdout.write(self.style.WARNING(f'📤 {settings.DJANGO_ENV} DB 덤프 시작...'))
+        django_env = os.getenv('DJANGO_ENV', 'unknown')
+        self.stdout.write(self.style.WARNING(f'📤 {django_env} DB 덤프 시작...'))
 
         # 임시 파일 생성
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -133,7 +134,7 @@ class Command(BaseCommand):
                     self.s3_key,
                     ExtraArgs={
                         'Metadata': {
-                            'source_env': settings.DJANGO_ENV,
+                            'source_env': django_env,
                             'dump_timestamp': timestamp,
                             'django_version': str(settings.VERSION) if hasattr(settings, 'VERSION') else 'unknown'
                         }
@@ -161,7 +162,8 @@ class Command(BaseCommand):
 
     def download_and_load(self):
         """S3에서 다운로드하여 현재 DB에 복원"""
-        if settings.DJANGO_ENV != 'development':
+        django_env = os.getenv('DJANGO_ENV', 'unknown')
+        if django_env != 'development':
             raise CommandError('⚠️  이 명령은 development 환경에서만 실행하세요!')
 
         # 확인
