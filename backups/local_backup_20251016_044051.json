@@ -1,0 +1,83 @@
+[
+{
+  "model": "solana_auth.solanauser",
+  "pk": "1fd077c8-6960-4c74-ac5b-4427118c237f",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$S6GKh9kN7tZfvpigIYzbMZ$FWoiMYSPDJXPyZ1z9GAAA5avshP1rS5LUizVT73h8js=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-15T19:40:51.283Z",
+    "wallet_address": "A2pVUa2JWFA7M4inqWtmet9VBZ8mMxJy8jWwWU9QZSir",
+    "username": "member3",
+    "email": "member3@gli.com",
+    "first_name": "회원",
+    "last_name": "3",
+    "membership_level": "basic",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-15T19:40:51.284Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-15T19:40:51.284Z",
+    "updated_at": "2025-10-15T19:40:51.284Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "c27f8628-e276-40f9-989e-806d32563eeb",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$WhpWox2idKCVOiXiPWY38X$vCbUElmJw87zdhIjYotWi9/vrqrWM8DxCZU6+W6zYOs=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-15T19:40:50.400Z",
+    "wallet_address": "XdSWxtu9BN37QNrbRSuLAF8eFLUYtGM7i4kUCJySzf76",
+    "username": "member1",
+    "email": "member1@gli.com",
+    "first_name": "회원",
+    "last_name": "1",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-15T19:40:50.407Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-15T19:40:50.407Z",
+    "updated_at": "2025-10-15T19:40:50.407Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "e9152a98-f752-4b92-9103-5138c6f1b7a4",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$RlTVCPBeJ34bViDiv8fDhH$iTP7IxeM3BS26uV2PVqWXk5YbvQpmOlKfdehazuNIb0=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-15T19:40:50.838Z",
+    "wallet_address": "FguksySJAFup5rbbNQAEnLVUpykjEhCvfVbF4Vy47tTY",
+    "username": "member2",
+    "email": "member2@gli.com",
+    "first_name": "회원",
+    "last_name": "2",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-15T19:40:50.838Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-15T19:40:50.838Z",
+    "updated_at": "2025-10-15T19:40:50.838Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

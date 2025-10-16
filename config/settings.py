@@ -226,25 +226,29 @@ TEMPLATES = [
     },
 ]
 
-# Database settings
-if ENV == "development":
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
+# Database settings - PostgreSQL only (모든 환경에서 PostgreSQL 사용)
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv('DATABASE_NAME'),
+        "USER": os.getenv('DATABASE_USER'),
+        "PASSWORD": os.getenv('DATABASE_PASSWORD'),
+        "HOST": os.getenv('DATABASE_HOST'),
+        "PORT": os.getenv('DATABASE_PORT', '5432'),
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv('DATABASE_NAME'),
-            "USER": os.getenv('DATABASE_USER'),
-            "PASSWORD": os.getenv('DATABASE_PASSWORD'),
-            "HOST": os.getenv('DATABASE_HOST'),
-            "PORT": os.getenv('DATABASE_PORT'),
-        }
-    }
+}
+
+# Database 설정 검증
+if not all([
+    os.getenv('DATABASE_NAME'),
+    os.getenv('DATABASE_USER'),
+    os.getenv('DATABASE_PASSWORD'),
+    os.getenv('DATABASE_HOST'),
+]):
+    raise ValueError(
+        "Database configuration is incomplete. Required environment variables: "
+        "DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST"
+    )
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
