@@ -44,15 +44,13 @@ class S3Uploader:
             # Content-Type 설정
             content_type = file.content_type or 'application/octet-stream'
 
-            # S3에 업로드
-            # Note: ACL을 사용하지 않음 (S3 버킷 정책으로 공개 액세스 관리)
+            # S3에 업로드 (버킷 정책을 통해 퍼블릭 접근 관리)
             self.s3_client.upload_fileobj(
                 file,
                 self.bucket_name,
                 s3_key,
                 ExtraArgs={
                     'ContentType': content_type,
-                    # ACL 제거: 최신 S3 버킷은 ACL을 비활성화하고 버킷 정책 사용
                 }
             )
 

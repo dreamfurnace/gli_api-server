@@ -177,27 +177,63 @@ class AdminUserUpdateSerializer(serializers.ModelSerializer):
 
 class TeamMemberSerializer(serializers.ModelSerializer):
     """팀 구성원 시리얼라이저"""
-    
+
     class Meta:
         model = TeamMember
         fields = [
-            'id', 'image_url', 'position_ko', 'position_en',
+            'id', 'image_url', 'name_ko', 'name_en', 'position_ko', 'position_en',
             'role_ko', 'role_en', 'tags', 'order', 'is_active',
             'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
-    
+        extra_kwargs = {
+            'image_url': {'required': False, 'allow_blank': True, 'allow_null': True},
+        }
+
+    def validate_image_url(self, value):
+        """image_url 필드 검증 - 선택사항"""
+        # None이나 빈 문자열은 허용
+        if not value:
+            return None
+
+        # 배열이 전달된 경우 첫 번째 요소를 사용하거나 에러 처리
+        if isinstance(value, list):
+            if len(value) > 0 and isinstance(value[0], str):
+                return value[0]  # 배열의 첫 번째 요소를 사용
+            else:
+                raise serializers.ValidationError(
+                    "image_url이 배열로 전달되었지만 유효한 URL이 없습니다."
+                )
+
+        # URL 형식 검증
+        if not isinstance(value, str):
+            raise serializers.ValidationError("image_url은 문자열이어야 합니다.")
+
+        if not value.startswith(('http://', 'https://')):
+            raise serializers.ValidationError("유효한 URL 형식이 아닙니다.")
+
+        return value
+
     def validate_tags(self, value):
         """태그가 리스트 형식인지 검증"""
         if not isinstance(value, list):
             raise serializers.ValidationError("태그는 배열 형식이어야 합니다.")
         return value
-    
+
     def validate_order(self, value):
         """정렬 순서는 0 이상이어야 함"""
         if value < 0:
             raise serializers.ValidationError("순서는 0 이상이어야 합니다.")
         return value
+
+    def to_representation(self, instance):
+        """원본 S3 URL 반환 (웹사이트 콘텐츠는 영구 접근 가능)"""
+        data = super().to_representation(instance)
+
+        # 웹사이트 콘텐츠 이미지는 직접 S3 URL 사용
+        # Presigned URL이 아닌 영구 접근 가능한 URL이 필요
+
+        return data
 
 
 # ============================================================================
