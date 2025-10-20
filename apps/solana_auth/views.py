@@ -602,7 +602,10 @@ def upload_image(request):
         from .utils.s3_upload import S3Uploader
         uploader = S3Uploader()
         result = uploader.upload_file(file, folder=folder)
-        
+
+        # 웹사이트 콘텐츠는 영구 접근 가능한 직접 S3 URL 사용
+        # result['url']은 이미 직접 S3 URL을 포함하고 있음
+
         return Response({
             'success': True,
             'data': result,

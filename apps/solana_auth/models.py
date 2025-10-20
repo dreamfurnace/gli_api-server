@@ -254,7 +254,21 @@ class TeamMember(models.Model):
     # 기본 정보
     image_url = models.URLField(
         max_length=500,
-        help_text='팀원 사진 URL (S3)'
+        blank=True,
+        null=True,
+        help_text='팀원 사진 URL (S3) - 선택사항'
+    )
+
+    # 이름 (한글/영문)
+    name_ko = models.CharField(
+        max_length=50,
+        default='미입력',
+        help_text='이름 (한글) 예: 김GLI'
+    )
+    name_en = models.CharField(
+        max_length=50,
+        default='Not Entered',
+        help_text='이름 (영문) 예: GLI Kim'
     )
 
     # 직책 (한글/영문)
@@ -303,7 +317,7 @@ class TeamMember(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.position_ko} - {self.order}"
+        return f"{self.name_ko} ({self.position_ko}) - {self.order}"
 
 
 # ============================================================================

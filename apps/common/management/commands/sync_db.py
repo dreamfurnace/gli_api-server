@@ -70,6 +70,13 @@ class Command(BaseCommand):
         self.exclude = options['exclude']
         self.force = options['force']
 
+        # 환경별 S3 키 자동 설정
+        django_env = os.getenv('DJANGO_ENV', 'unknown')
+        if options['dump'] and django_env == 'development':
+            # 로컬에서 덤프할 때는 별도 S3 키 사용 (덮어쓰기 방지)
+            if self.s3_key == 'db-sync/latest-dump.json.gz':  # 기본값인 경우만 변경
+                self.s3_key = 'db-sync/local-to-staging-dump.json.gz'
+
         # S3 클라이언트 초기화
         self.s3_client = boto3.client(
             's3',
@@ -163,8 +170,21 @@ class Command(BaseCommand):
     def download_and_load(self):
         """S3에서 다운로드하여 현재 DB에 복원"""
         django_env = os.getenv('DJANGO_ENV', 'unknown')
-        if django_env != 'development':
-            raise CommandError('⚠️  이 명령은 development 환경에서만 실행하세요!')
+
+        # 환경별 제한 로직
+        if django_env == 'development':
+            # 로컬 환경: 모든 S3 키 허용 (Staging → 로컬 복원)
+            pass
+        elif django_env == 'staging':
+            # 스테이징 환경: 로컬→스테이징용 S3 키만 허용
+            if self.s3_key != 'db-sync/local-to-staging-dump.json.gz':
+                raise CommandError(
+                    '⚠️  Staging 환경에서는 로컬→스테이징 덤프만 복원할 수 있습니다!\n'
+                    '사용 가능한 S3 키: db-sync/local-to-staging-dump.json.gz'
+                )
+        else:
+            # 기타 환경 (production 등): 완전 금지
+            raise CommandError(f'⚠️  {django_env} 환경에서는 DB 복원이 금지되어 있습니다!')
 
         # 확인
         if not self.force:
