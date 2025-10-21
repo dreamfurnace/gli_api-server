@@ -108,26 +108,102 @@ class RWACategoryViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = ['order', 'name']
 
 
-class RWAAssetViewSet(viewsets.ReadOnlyModelViewSet):
+class RWAAssetViewSet(viewsets.ModelViewSet):
     """RWA 투자 자산 API"""
-    queryset = RWAAsset.objects.filter(status='active')
+    queryset = RWAAsset.objects.all()  # 관리자는 모든 상태의 자산을 볼 수 있어야 함
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['category', 'risk_level', 'is_featured']
-    search_fields = ['name', 'description', 'asset_type', 'asset_location']
+    filterset_fields = ['category', 'risk_level', 'is_featured', 'status']
+    search_fields = ['name', 'name_en', 'description', 'description_en', 'asset_type', 'asset_location']
     ordering = ['-is_featured', '-created_at']
-    
+
+    def get_queryset(self):
+        """사용자는 active 자산만, 관리자는 모든 자산 조회"""
+        queryset = super().get_queryset()
+        # 인증되지 않았거나 일반 사용자는 active 자산만
+        if not self.request.user.is_authenticated or not self.request.user.is_staff:
+            queryset = queryset.filter(status='active')
+        return queryset
+
     def get_serializer_class(self):
         if self.action == 'list':
             return RWAAssetListSerializer
         return RWAAssetSerializer
+
+    def get_permissions(self):
+        """생성/수정/삭제는 관리자만 가능"""
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            return [permissions.IsAdminUser()]
+        return super().get_permissions()
     
     @action(detail=False, methods=['get'])
     def featured(self, request):
         """추천 투자 자산 목록"""
-        featured_assets = self.queryset.filter(is_featured=True)[:10]
+        featured_assets = self.get_queryset().filter(is_featured=True)[:10]
         serializer = RWAAssetListSerializer(featured_assets, many=True)
         return Response(serializer.data)
+
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAdminUser])
+    def stats(self, request):
+        """RWA 자산 통계 (관리자 전용)"""
+        queryset = RWAAsset.objects.all()
+
+        # 기본 통계
+        total_assets = queryset.count()
+        active_assets = queryset.filter(status='active').count()
+
+        # 자산 가치 및 투자 통계
+        stats_data = queryset.aggregate(
+            total_value=Sum('total_value_usd'),
+            total_investment=Sum('total_invested_glib'),
+            average_return=Avg('expected_apy'),
+        )
+
+        # 위험도별 분포
+        risk_distribution = {
+            'low': queryset.filter(risk_level='low').count(),
+            'medium': queryset.filter(risk_level='medium').count(),
+            'high': queryset.filter(risk_level='high').count(),
+            'very_high': queryset.filter(risk_level='very_high').count(),
+        }
+
+        # 타입별 분포 (asset_type 기준)
+        type_stats = queryset.values('asset_type').annotate(
+            count=Count('id'),
+            total_value=Sum('total_value_usd')
+        )
+
+        # 월별 성장 데이터 (최근 6개월)
+        from django.utils import timezone
+        from datetime import timedelta
+
+        monthly_data = []
+        for i in range(6):
+            month_start = timezone.now() - timedelta(days=30 * (6 - i))
+            month_end = month_start + timedelta(days=30)
+
+            month_assets = queryset.filter(created_at__lte=month_end)
+            month_value = month_assets.aggregate(
+                value=Sum('total_value_usd'),
+                investment=Sum('total_invested_glib')
+            )
+
+            monthly_data.append({
+                'month': month_start.strftime('%Y-%m'),
+                'value': float(month_value['value'] or 0),
+                'investment': float(month_value['investment'] or 0)
+            })
+
+        return Response({
+            'totalAssets': total_assets,
+            'activeAssets': active_assets,
+            'totalValue': float(stats_data['total_value'] or 0),
+            'totalInvestment': float(stats_data['total_investment'] or 0),
+            'averageReturn': float(stats_data['average_return'] or 0),
+            'riskDistribution': risk_distribution,
+            'typeDistribution': list(type_stats),
+            'monthlyGrowth': monthly_data
+        })
     
     @action(detail=False, methods=['get'])
     def by_category(self, request):
@@ -180,33 +256,33 @@ class RWAAssetViewSet(viewsets.ReadOnlyModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        amount_gleb = request.data.get('amount_gleb')
-        if not amount_gleb:
+        amount_glib = request.data.get('amount_glib')
+        if not amount_glib:
             return Response(
-                {'error': 'amount_gleb is required'}, 
+                {'error': 'amount_glib is required'}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        amount_gleb = Decimal(str(amount_gleb))
+        amount_glib = Decimal(str(amount_glib))
         
         # 최소 투자 금액 확인
-        if amount_gleb < rwa_asset.min_investment_gleb:
+        if amount_glib < rwa_asset.min_investment_glib:
             return Response(
-                {'error': f'Minimum investment amount is {rwa_asset.min_investment_gleb} GLEB'}, 
+                {'error': f'Minimum investment amount is {rwa_asset.min_investment_glib} GLIB'}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
         
         # 최대 투자 금액 확인
-        if rwa_asset.max_investment_gleb and amount_gleb > rwa_asset.max_investment_gleb:
+        if rwa_asset.max_investment_glib and amount_glib > rwa_asset.max_investment_glib:
             return Response(
-                {'error': f'Maximum investment amount is {rwa_asset.max_investment_gleb} GLEB'}, 
+                {'error': f'Maximum investment amount is {rwa_asset.max_investment_glib} GLIB'}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
         
         # 투자 생성
         investment_data = {
             'rwa_asset': rwa_asset.id,
-            'amount_gleb': amount_gleb,
+            'amount_glib': amount_glib,
             'amount_usd_at_time': request.data.get('amount_usd_at_time', 0),
             'expected_apy_at_time': rwa_asset.expected_apy,
             'expected_return_date': timezone.now() + timezone.timedelta(days=rwa_asset.investment_period_months * 30),
@@ -218,9 +294,9 @@ class RWAAssetViewSet(viewsets.ReadOnlyModelViewSet):
             investment = serializer.save()
             
             # RWA 자산 투자 현황 업데이트
-            rwa_asset.total_invested_gleb += amount_gleb
+            rwa_asset.total_invested_glib += amount_glib
             rwa_asset.investor_count = rwa_asset.investments.values('investor').distinct().count()
-            rwa_asset.save(update_fields=['total_invested_gleb', 'investor_count'])
+            rwa_asset.save(update_fields=['total_invested_glib', 'investor_count'])
             
             return Response(
                 InvestmentSerializer(investment).data, 
@@ -248,8 +324,8 @@ class InvestmentViewSet(viewsets.ReadOnlyModelViewSet):
         investments = self.get_queryset().filter(status__in=['confirmed', 'active', 'completed'])
         
         stats_data = investments.aggregate(
-            total_invested=Sum('amount_gleb') or Decimal('0'),
-            total_current_value=Sum('current_value_gleb') or Decimal('0'),
+            total_invested=Sum('amount_glib') or Decimal('0'),
+            total_current_value=Sum('current_value_glib') or Decimal('0'),
             active_count=Count('id', filter=Q(status='active')),
             completed_count=Count('id', filter=Q(status='completed'))
         )
@@ -286,8 +362,8 @@ class InvestmentViewSet(viewsets.ReadOnlyModelViewSet):
                     'count': 0
                 }
             
-            category_stats[category]['total_invested'] += investment.amount_gleb
-            category_stats[category]['total_current_value'] += investment.current_value_gleb
+            category_stats[category]['total_invested'] += investment.amount_glib
+            category_stats[category]['total_current_value'] += investment.current_value_glib
             category_stats[category]['count'] += 1
         
         # 위험도별 투자 현황
@@ -301,8 +377,8 @@ class InvestmentViewSet(viewsets.ReadOnlyModelViewSet):
                     'count': 0
                 }
             
-            risk_stats[risk_level]['total_invested'] += investment.amount_gleb
-            risk_stats[risk_level]['total_current_value'] += investment.current_value_gleb
+            risk_stats[risk_level]['total_invested'] += investment.amount_glib
+            risk_stats[risk_level]['total_current_value'] += investment.current_value_glib
             risk_stats[risk_level]['count'] += 1
         
         return Response({
@@ -389,7 +465,7 @@ class DashboardStatsViewSet(viewsets.ViewSet):
         rwa_stats = RWAAsset.objects.filter(status='active').aggregate(
             total_assets=Count('id'),
             total_value_usd=Sum('total_value_usd') or Decimal('0'),
-            total_invested_gleb=Sum('total_invested_gleb') or Decimal('0'),
+            total_invested_glib=Sum('total_invested_glib') or Decimal('0'),
             average_apy=Avg('expected_apy') or Decimal('0'),
             total_investors=Sum('investor_count') or 0
         )
@@ -402,8 +478,8 @@ class DashboardStatsViewSet(viewsets.ViewSet):
         )
         
         user_stats = user_investments.aggregate(
-            total_invested=Sum('amount_gleb') or Decimal('0'),
-            total_current_value=Sum('current_value_gleb') or Decimal('0'),
+            total_invested=Sum('amount_glib') or Decimal('0'),
+            total_current_value=Sum('current_value_glib') or Decimal('0'),
             active_count=Count('id', filter=Q(status='active')),
             completed_count=Count('id', filter=Q(status='completed'))
         )
@@ -463,8 +539,8 @@ class UserProfileViewSet(viewsets.ViewSet):
         # 투자 통계 추가
         investments = Investment.objects.filter(investor=user)
         investment_stats = investments.aggregate(
-            total_invested=Sum('amount_gleb') or Decimal('0'),
-            total_current_value=Sum('current_value_gleb') or Decimal('0'),
+            total_invested=Sum('amount_glib') or Decimal('0'),
+            total_current_value=Sum('current_value_glib') or Decimal('0'),
             active_count=Count('id', filter=Q(status='active')),
             completed_count=Count('id', filter=Q(status='completed'))
         )

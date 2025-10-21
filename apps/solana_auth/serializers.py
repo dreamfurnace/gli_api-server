@@ -270,15 +270,21 @@ class StrategyPhaseSerializer(serializers.ModelSerializer):
         model = StrategyPhase
         fields = [
             'id', 'icon', 'title_ko', 'title_en',
-            'description_ko', 'description_en', 'features', 'order', 'is_active',
+            'description_ko', 'description_en', 'features_ko', 'features_en', 'order', 'is_active',
             'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-    def validate_features(self, value):
-        """features가 리스트 형식인지 검증"""
+    def validate_features_ko(self, value):
+        """features_ko가 리스트 형식인지 검증"""
         if not isinstance(value, list):
-            raise serializers.ValidationError("features는 배열 형식이어야 합니다.")
+            raise serializers.ValidationError("features_ko는 배열 형식이어야 합니다.")
+        return value
+
+    def validate_features_en(self, value):
+        """features_en이 리스트 형식인지 검증"""
+        if not isinstance(value, list):
+            raise serializers.ValidationError("features_en는 배열 형식이어야 합니다.")
         return value
 
     def validate_order(self, value):
@@ -322,16 +328,22 @@ class TokenEcosystemSerializer(serializers.ModelSerializer):
         model = TokenEcosystem
         fields = [
             'id', 'icon', 'name', 'symbol',
-            'description_ko', 'description_en', 'features',
+            'description_ko', 'description_en', 'features_ko', 'features_en',
             'total_supply', 'current_price', 'order', 'is_active',
             'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-    def validate_features(self, value):
-        """features가 리스트 형식인지 검증"""
+    def validate_features_ko(self, value):
+        """features_ko가 리스트 형식인지 검증"""
         if not isinstance(value, list):
-            raise serializers.ValidationError("features는 배열 형식이어야 합니다.")
+            raise serializers.ValidationError("features_ko는 배열 형식이어야 합니다.")
+        return value
+
+    def validate_features_en(self, value):
+        """features_en이 리스트 형식인지 검증"""
+        if not isinstance(value, list):
+            raise serializers.ValidationError("features_en는 배열 형식이어야 합니다.")
         return value
 
     def validate_order(self, value):

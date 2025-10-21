@@ -188,15 +188,15 @@ class Command(BaseCommand):
                 'description': '강남구 테헤란로 인근 신축 오피스텔 투자 상품입니다. 임대 수익률과 자본 증식을 동시에 추구할 수 있습니다.',
                 'short_description': '강남 테헤란로 신축 오피스텔',
                 'total_value_usd': Decimal('2500000.00'),
-                'min_investment_gleb': Decimal('1000'),
-                'max_investment_gleb': Decimal('100000'),
+                'min_investment_glib': Decimal('1000'),
+                'max_investment_glib': Decimal('100000'),
                 'expected_apy': Decimal('8.5'),
                 'risk_level': 'medium',
                 'investment_period_months': 36,
                 'lock_period_months': 12,
                 'asset_location': '서울특별시 강남구',
                 'asset_type': '상업용 부동산',
-                'funding_target_gleb': Decimal('800000'),
+                'funding_target_glib': Decimal('800000'),
                 'is_featured': True,
             },
             {
@@ -205,15 +205,15 @@ class Command(BaseCommand):
                 'description': '다양한 금 ETF로 구성된 포트폴리오로 인플레이션 헤지 효과를 제공합니다.',
                 'short_description': '분산 투자된 금 ETF 상품',
                 'total_value_usd': Decimal('1000000.00'),
-                'min_investment_gleb': Decimal('500'),
-                'max_investment_gleb': Decimal('50000'),
+                'min_investment_glib': Decimal('500'),
+                'max_investment_glib': Decimal('50000'),
                 'expected_apy': Decimal('6.2'),
                 'risk_level': 'low',
                 'investment_period_months': 24,
                 'lock_period_months': 6,
                 'asset_location': '글로벌',
                 'asset_type': '귀금속 ETF',
-                'funding_target_gleb': Decimal('320000'),
+                'funding_target_glib': Decimal('320000'),
                 'is_featured': True,
             },
             {
@@ -222,15 +222,15 @@ class Command(BaseCommand):
                 'description': '신진 및 중견 작가들의 작품으로 구성된 미술품 투자 펀드입니다.',
                 'short_description': '현대미술 작품 투자 포트폴리오',
                 'total_value_usd': Decimal('800000.00'),
-                'min_investment_gleb': Decimal('2000'),
-                'max_investment_gleb': Decimal('80000'),
+                'min_investment_glib': Decimal('2000'),
+                'max_investment_glib': Decimal('80000'),
                 'expected_apy': Decimal('12.3'),
                 'risk_level': 'high',
                 'investment_period_months': 60,
                 'lock_period_months': 24,
                 'asset_location': '한국, 미국, 유럽',
                 'asset_type': '미술품',
-                'funding_target_gleb': Decimal('256000'),
+                'funding_target_glib': Decimal('256000'),
             }
         ]
 
@@ -262,11 +262,11 @@ class Command(BaseCommand):
             {
                 'investor': user,
                 'rwa_asset': rwa_assets.first(),
-                'amount_gleb': Decimal('5000'),
+                'amount_glib': Decimal('5000'),
                 'amount_usd_at_time': Decimal('1750.00'),
                 'expected_return_date': datetime.now() + timedelta(days=1095),  # 3년
                 'expected_apy_at_time': Decimal('8.5'),
-                'current_value_gleb': Decimal('5425'),  # 8.5% 수익
+                'current_value_glib': Decimal('5425'),  # 8.5% 수익
                 'status': 'active',
             }
         ]
