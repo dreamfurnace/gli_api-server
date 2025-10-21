@@ -4,6 +4,7 @@ on:
   push:
     branches: [stg]
   workflow_dispatch:
+    branches: [stg]
 
 env:
   AWS_REGION: ap-northeast-2
@@ -223,20 +224,16 @@ jobs:
           --query 'Subnets[0:2].SubnetId' \
           --output text | tr '\t' ',')
 
-        # Security Group 조회 또는 생성
+        # Security Group 조회
         SG_ID=$(aws ec2 describe-security-groups \
           --filters "Name=group-name,Values=staging-ecs-sg" \
           --query 'SecurityGroups[0].GroupId' \
           --output text 2>/dev/null || echo "")
 
         if [ -z "$SG_ID" ] || [ "$SG_ID" = "None" ]; then
-          echo "⚠️  Security Group이 없습니다. 생성이 필요합니다."
-          echo "다음 명령으로 Security Group을 생성하세요:"
-          echo "aws ec2 create-security-group --group-name staging-ecs-sg --description 'ECS Staging Security Group' --vpc-id ${{ env.VPC_ID }}"
+          echo "❌ Security Group 'staging-ecs-sg' 가 필요합니다"
           exit 1
         fi
-
-        echo "네트워크 설정: Subnets=$SUBNETS, SecurityGroup=$SG_ID"
 
         # 마이그레이션 태스크 실행
         MIGRATION_TASK=$(aws ecs run-task \
@@ -247,9 +244,9 @@ jobs:
           --overrides '{
             "containerOverrides": [{
               "name": "django-api",
-              "command": ["uv", "run", "python", "manage.py", "migrate", "--verbosity=2", "--noinput"],
+              "command": ["sh", "-c", "uv run python manage.py sync_db --backup && uv run python manage.py sync_db --load --s3-key db-sync/local-to-staging-dump.json.gz --force"],
               "environment": [
-                {"name": "DJANGO_LOG_LEVEL", "value": "DEBUG"},
+                {"name": "DJANGO_LOG_LEVEL", "value": "INFO"},
                 {"name": "PYTHONUNBUFFERED", "value": "1"}
               ]
             }]
@@ -257,51 +254,41 @@ jobs:
           --query 'tasks[0].taskArn' \
           --output text)
 
-        echo "마이그레이션 태스크 실행: $MIGRATION_TASK"
+        echo "마이그레이션 태스크: $MIGRATION_TASK"
 
-        # 마이그레이션 완료 대기 (타임아웃 8분)
-        echo "⏳ 마이그레이션 완료 대기 중..."
-        START_TIME=$(date +%s)
-        TIMEOUT=480
-
-        while true; do
-          CURRENT_TIME=$(date +%s)
-          ELAPSED=$((CURRENT_TIME - START_TIME))
-
-          if [ $ELAPSED -gt $TIMEOUT ]; then
-            echo "❌ 마이그레이션 타임아웃 (8분 초과)"
-            exit 1
-          fi
-
+        # 완료 대기
+        for i in {1..24}; do
           TASK_STATUS=$(aws ecs describe-tasks \
             --cluster $ECS_CLUSTER \
             --tasks $MIGRATION_TASK \
             --query 'tasks[0].lastStatus' \
             --output text)
 
-          echo "📊 마이그레이션 상태: $TASK_STATUS (경과: ${ELAPSED}s)"
+          echo "상태: $TASK_STATUS (${i}0초 경과)"
 
           if [ "$TASK_STATUS" = "STOPPED" ]; then
-            echo "✅ 마이그레이션 태스크 완료"
-            break
+            EXIT_CODE=$(aws ecs describe-tasks \
+              --cluster $ECS_CLUSTER \
+              --tasks $MIGRATION_TASK \
+              --query 'tasks[0].containers[0].exitCode' \
+              --output text)
+
+            if [ "$EXIT_CODE" = "0" ]; then
+              echo "✅ 마이그레이션 성공"
+              break
+            else
+              echo "❌ 마이그레이션 실패 (종료코드: $EXIT_CODE)"
+              exit 1
+            fi
           fi
 
-          sleep 20
+          if [ $i -eq 24 ]; then
+            echo "❌ 마이그레이션 타임아웃"
+            exit 1
+          fi
+
+          sleep 10
         done
-
-        # 마이그레이션 결과 확인
-        MIGRATION_EXIT_CODE=$(aws ecs describe-tasks \
-          --cluster $ECS_CLUSTER \
-          --tasks $MIGRATION_TASK \
-          --query 'tasks[0].containers[0].exitCode' \
-          --output text)
-
-        if [ "$MIGRATION_EXIT_CODE" != "0" ]; then
-          echo "❌ 마이그레이션 실패 (종료 코드: $MIGRATION_EXIT_CODE)"
-          exit 1
-        else
-          echo "✅ 마이그레이션 성공!"
-        fi
 
     - name: ECS 서비스 업데이트
       run: |
