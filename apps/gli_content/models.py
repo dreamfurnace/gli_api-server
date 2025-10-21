@@ -54,15 +54,17 @@ class ShoppingCategory(BaseTimestampModel):
     """쇼핑몰 카테고리 모델"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, unique=True)
+    name_en = models.CharField(max_length=100, blank=True, verbose_name='카테고리명(영문)')
     description = models.TextField(blank=True)
+    description_en = models.TextField(blank=True, verbose_name='설명(영문)')
     icon = models.CharField(max_length=100, blank=True)  # 이모지 또는 아이콘 클래스
     order = models.PositiveIntegerField(default=0, db_index=True)
     is_active = models.BooleanField(default=True)
-    
+
     class Meta:
         db_table = 'shopping_categories'
         ordering = ['order', 'name']
-    
+
     def __str__(self):
         return self.name
 
@@ -86,8 +88,11 @@ class ShoppingProduct(BaseTimestampModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(ShoppingCategory, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=200)
+    name_en = models.CharField(max_length=200, blank=True, verbose_name='상품명(영문)')
     description = models.TextField()
+    description_en = models.TextField(blank=True, verbose_name='설명(영문)')
     short_description = models.CharField(max_length=500, blank=True)
+    short_description_en = models.CharField(max_length=500, blank=True, verbose_name='간단한 설명(영문)')
     product_type = models.CharField(max_length=20, choices=PRODUCT_TYPE_CHOICES, default='goods')
     
     # 가격 정보 (GLI-L 토큰으로 결제)
@@ -154,7 +159,7 @@ class RWAAsset(BaseTimestampModel):
         ('high', '높음'),
         ('very_high', '매우 높음'),
     ]
-    
+
     STATUS_CHOICES = [
         ('draft', '초안'),
         ('active', '투자 가능'),
@@ -162,19 +167,32 @@ class RWAAsset(BaseTimestampModel):
         ('completed', '완료'),
         ('cancelled', '취소'),
     ]
-    
+
+    OPERATION_TYPE_CHOICES = [
+        ('rental', '임대'),
+        ('consignment', '위탁 운영'),
+        ('direct', '직접 운영'),
+        ('development', '개발'),
+        ('other', '기타'),
+    ]
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(RWACategory, on_delete=models.CASCADE, related_name='assets')
-    
-    # 기본 정보
+
+    # 기본 정보 (한국어)
     name = models.CharField(max_length=200)
     description = models.TextField()
     short_description = models.CharField(max_length=500, blank=True)
+
+    # 기본 정보 (영어)
+    name_en = models.CharField(max_length=200, blank=True)
+    description_en = models.TextField(blank=True)
+    short_description_en = models.CharField(max_length=500, blank=True)
     
     # 투자 정보
     total_value_usd = models.DecimalField(max_digits=15, decimal_places=2)
-    min_investment_gleb = models.DecimalField(max_digits=20, decimal_places=8, validators=[MinValueValidator(0)])
-    max_investment_gleb = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+    min_investment_glib = models.DecimalField(max_digits=20, decimal_places=8, validators=[MinValueValidator(0)])
+    max_investment_glib = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
     
     # 수익률 정보
     expected_apy = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0), MaxValueValidator(100)])
@@ -189,8 +207,12 @@ class RWAAsset(BaseTimestampModel):
     lock_period_months = models.PositiveIntegerField(default=0)  # 락업 기간
     
     # 자산 세부 정보
-    asset_location = models.CharField(max_length=200, blank=True)
+    asset_location = models.CharField(max_length=200, blank=True, verbose_name='자산 위치')  # 한국어 주소
+    asset_location_en = models.CharField(max_length=200, blank=True, verbose_name='자산 위치(영문)')  # 영어 주소
     asset_type = models.CharField(max_length=100)  # 부동산, 주식, 채권 등
+    asset_type_en = models.CharField(max_length=100, blank=True)  # 자산 유형 영문
+    area_sqm = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='면적(㎡)')  # 면적 (제곱미터)
+    operation_type = models.CharField(max_length=20, choices=OPERATION_TYPE_CHOICES, default='rental', verbose_name='운영 형태')  # 운영 형태
     underlying_assets = models.JSONField(default=dict, blank=True)  # 기초 자산 정보
     
     # 이미지 및 문서
@@ -199,9 +221,9 @@ class RWAAsset(BaseTimestampModel):
     document_urls = models.JSONField(default=list, blank=True)  # 투자 설명서 등
     
     # 투자 현황
-    total_invested_gleb = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+    total_invested_glib = models.DecimalField(max_digits=20, decimal_places=8, default=0)
     investor_count = models.PositiveIntegerField(default=0)
-    funding_target_gleb = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+    funding_target_glib = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
     
     # 상태 및 기타
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
@@ -224,9 +246,9 @@ class RWAAsset(BaseTimestampModel):
     
     @property
     def funding_progress(self):
-        if not self.funding_target_gleb:
+        if not self.funding_target_glib:
             return 0
-        return min((self.total_invested_gleb / self.funding_target_gleb) * 100, 100)
+        return min((self.total_invested_glib / self.funding_target_glib) * 100, 100)
 
 
 class Investment(BaseTimestampModel):
@@ -245,7 +267,7 @@ class Investment(BaseTimestampModel):
     rwa_asset = models.ForeignKey(RWAAsset, on_delete=models.CASCADE, related_name='investments')
     
     # 투자 금액
-    amount_gleb = models.DecimalField(max_digits=20, decimal_places=8, validators=[MinValueValidator(0)])
+    amount_glib = models.DecimalField(max_digits=20, decimal_places=8, validators=[MinValueValidator(0)])
     amount_usd_at_time = models.DecimalField(max_digits=15, decimal_places=2)  # 투자 시점의 USD 가치
     
     # 투자 조건
@@ -255,8 +277,8 @@ class Investment(BaseTimestampModel):
     
     # 수익률 및 수익
     expected_apy_at_time = models.DecimalField(max_digits=5, decimal_places=2)
-    current_value_gleb = models.DecimalField(max_digits=20, decimal_places=8, default=0)
-    realized_profit_gleb = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+    current_value_glib = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+    realized_profit_glib = models.DecimalField(max_digits=20, decimal_places=8, default=0)
     
     # 투자 상태
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
@@ -278,17 +300,17 @@ class Investment(BaseTimestampModel):
         ]
     
     def __str__(self):
-        return f"{self.investor.username} -> {self.rwa_asset.name} ({self.amount_gleb} GLEB)"
+        return f"{self.investor.username} -> {self.rwa_asset.name} ({self.amount_glib} GLIB)"
     
     @property
     def current_profit_loss(self):
-        return self.current_value_gleb - self.amount_gleb
+        return self.current_value_glib - self.amount_glib
     
     @property
     def profit_loss_percentage(self):
-        if self.amount_gleb == 0:
+        if self.amount_glib == 0:
             return 0
-        return ((self.current_value_gleb - self.amount_gleb) / self.amount_gleb) * 100
+        return ((self.current_value_glib - self.amount_glib) / self.amount_glib) * 100
 
 
 class ShoppingOrder(BaseTimestampModel):

@@ -21,14 +21,14 @@ class BusinessContentSerializer(serializers.ModelSerializer):
 
 class ShoppingCategorySerializer(serializers.ModelSerializer):
     product_count = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = ShoppingCategory
         fields = [
-            'id', 'name', 'description', 'icon', 'order', 
+            'id', 'name', 'name_en', 'description', 'description_en', 'icon', 'order',
             'is_active', 'product_count', 'created_at', 'updated_at'
         ]
-    
+
     def get_product_count(self, obj):
         return obj.products.filter(status='active').count()
 
@@ -38,15 +38,15 @@ class ShoppingProductSerializer(serializers.ModelSerializer):
     product_type_display = serializers.CharField(source='get_product_type_display', read_only=True)
     status_display = serializers.CharField(source='get_status_display', read_only=True)
     is_in_stock = serializers.ReadOnlyField()
-    
+
     class Meta:
         model = ShoppingProduct
         fields = [
-            'id', 'category', 'category_name', 'name', 'description', 
-            'short_description', 'product_type', 'product_type_display',
+            'id', 'category', 'category_name', 'name', 'name_en', 'description', 'description_en',
+            'short_description', 'short_description_en', 'product_type', 'product_type_display',
             'price_glil', 'price_usd', 'stock_quantity', 'unlimited_stock',
             'main_image_url', 'image_urls', 'status', 'status_display',
-            'is_featured', 'tags', 'attributes', 'view_count', 
+            'is_featured', 'tags', 'attributes', 'view_count',
             'purchase_count', 'is_in_stock', 'created_at', 'updated_at'
         ]
 
@@ -56,11 +56,11 @@ class ShoppingProductListSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     product_type_display = serializers.CharField(source='get_product_type_display', read_only=True)
     is_in_stock = serializers.ReadOnlyField()
-    
+
     class Meta:
         model = ShoppingProduct
         fields = [
-            'id', 'category_name', 'name', 'short_description',
+            'id', 'category_name', 'name', 'name_en', 'short_description', 'short_description_en',
             'product_type_display', 'price_glil', 'price_usd',
             'main_image_url', 'status', 'is_featured', 'is_in_stock'
         ]
@@ -84,19 +84,24 @@ class RWAAssetSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     risk_level_display = serializers.CharField(source='get_risk_level_display', read_only=True)
     status_display = serializers.CharField(source='get_status_display', read_only=True)
+    operation_type_display = serializers.CharField(source='get_operation_type_display', read_only=True)
     funding_progress = serializers.ReadOnlyField()
-    
+
     class Meta:
         model = RWAAsset
         fields = [
-            'id', 'category', 'category_name', 'name', 'description',
-            'short_description', 'total_value_usd', 'min_investment_gleb',
-            'max_investment_gleb', 'expected_apy', 'historical_returns',
+            'id', 'category', 'category_name',
+            'name', 'name_en', 'description', 'description_en',
+            'short_description', 'short_description_en',
+            'total_value_usd', 'min_investment_glib',
+            'max_investment_glib', 'expected_apy', 'historical_returns',
             'risk_level', 'risk_level_display', 'risk_factors',
             'investment_period_months', 'lock_period_months',
-            'asset_location', 'asset_type', 'underlying_assets',
+            'asset_location', 'asset_location_en', 'asset_type', 'asset_type_en',
+            'area_sqm', 'operation_type', 'operation_type_display',
+            'underlying_assets',
             'main_image_url', 'image_urls', 'document_urls',
-            'total_invested_gleb', 'investor_count', 'funding_target_gleb',
+            'total_invested_glib', 'investor_count', 'funding_target_glib',
             'funding_progress', 'status', 'status_display', 'is_featured',
             'metadata', 'created_at', 'updated_at'
         ]
@@ -107,13 +112,19 @@ class RWAAssetListSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     risk_level_display = serializers.CharField(source='get_risk_level_display', read_only=True)
     funding_progress = serializers.ReadOnlyField()
-    
+
     class Meta:
         model = RWAAsset
         fields = [
-            'id', 'category_name', 'name', 'short_description',
-            'expected_apy', 'risk_level_display', 'min_investment_gleb',
-            'main_image_url', 'funding_progress', 'status', 'is_featured'
+            'id', 'category_name',
+            'name', 'name_en',
+            'short_description', 'short_description_en',
+            'description', 'description_en',
+            'expected_apy', 'risk_level_display', 'risk_level',
+            'min_investment_glib', 'total_value_usd', 'total_invested_glib',
+            'main_image_url', 'funding_progress', 'status', 'is_featured',
+            'asset_type', 'asset_location', 'asset_location_en',
+            'created_at', 'updated_at'
         ]
 
 
@@ -128,9 +139,9 @@ class InvestmentSerializer(serializers.ModelSerializer):
         model = Investment
         fields = [
             'id', 'investor', 'investor_name', 'rwa_asset', 'rwa_asset_name',
-            'amount_gleb', 'amount_usd_at_time', 'investment_date',
+            'amount_glib', 'amount_usd_at_time', 'investment_date',
             'expected_return_date', 'lock_end_date', 'expected_apy_at_time',
-            'current_value_gleb', 'realized_profit_gleb', 'current_profit_loss',
+            'current_value_glib', 'realized_profit_glib', 'current_profit_loss',
             'profit_loss_percentage', 'status', 'status_display',
             'investment_tx_hash', 'withdrawal_tx_hash', 'metadata'
         ]
@@ -141,7 +152,7 @@ class InvestmentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investment
         fields = [
-            'rwa_asset', 'amount_gleb', 'amount_usd_at_time',
+            'rwa_asset', 'amount_glib', 'amount_usd_at_time',
             'expected_return_date', 'lock_end_date', 'expected_apy_at_time'
         ]
     
@@ -230,6 +241,6 @@ class RWAAssetStatsSerializer(serializers.Serializer):
     total_assets = serializers.IntegerField()
     active_assets = serializers.IntegerField()
     total_value_usd = serializers.DecimalField(max_digits=15, decimal_places=2)
-    total_invested_gleb = serializers.DecimalField(max_digits=20, decimal_places=8)
+    total_invested_glib = serializers.DecimalField(max_digits=20, decimal_places=8)
     average_apy = serializers.DecimalField(max_digits=5, decimal_places=2)
     total_investors = serializers.IntegerField()

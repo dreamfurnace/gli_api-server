@@ -409,10 +409,14 @@ class StrategyPhase(models.Model):
         help_text='설명 (영문)'
     )
 
-    # 주요 기능 (JSON 배열)
-    features = models.JSONField(
+    # 주요 기능 (JSON 배열 - 한글/영문)
+    features_ko = models.JSONField(
         default=list,
-        help_text='주요 기능 목록 JSON 배열 예: ["웹 플랫폼 개발", "GLIB/GLID/GLIL 토큰 발행", "지갑 연동 시스템"]'
+        help_text='주요 기능 목록 (한글) JSON 배열 예: ["웹 플랫폼 개발", "GLIB/GLID/GLIL 토큰 발행", "지갑 연동 시스템"]'
+    )
+    features_en = models.JSONField(
+        default=list,
+        help_text='주요 기능 목록 (영문) JSON 배열 예: ["Web platform development", "GLIB/GLID/GLIL token issuance", "Wallet integration system"]'
     )
 
     # 정렬 및 표시 제어
@@ -535,10 +539,14 @@ class TokenEcosystem(models.Model):
         help_text='설명 (영문)'
     )
 
-    # 주요 기능 (JSON 배열)
-    features = models.JSONField(
+    # 주요 기능 (JSON 배열 - 한글/영문)
+    features_ko = models.JSONField(
         default=list,
-        help_text='주요 기능 목록 JSON 배열'
+        help_text='주요 기능 목록 (한글) JSON 배열 예: ["투표 및 의사 결정 참여", "특별 혜택 및 보상", "플랫폼 성장 수익 공유"]'
+    )
+    features_en = models.JSONField(
+        default=list,
+        help_text='주요 기능 목록 (영문) JSON 배열 예: ["Participation in voting and decision-making", "Special benefits and rewards", "Platform growth revenue sharing"]'
     )
 
     # 토큰 정보
