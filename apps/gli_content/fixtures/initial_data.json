@@ -1,140 +1,140 @@
 [
-  {
-    "model": "gli_content.shoppingcategory",
-    "pk": "550e8400-e29b-41d4-a716-446655440001",
-    "fields": {
-      "name": "리조트 예약",
-      "description": "프리미엄 리조트 및 호텔 예약 서비스",
-      "icon": "🏖️",
-      "order": 1,
-      "is_active": true,
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.shoppingcategory",
-    "pk": "550e8400-e29b-41d4-a716-446655440002",
-    "fields": {
-      "name": "레스토랑 예약",
-      "description": "고급 레스토랑 및 다이닝 예약",
-      "icon": "🍽️",
-      "order": 2,
-      "is_active": true,
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.shoppingcategory",
-    "pk": "550e8400-e29b-41d4-a716-446655440003",
-    "fields": {
-      "name": "레저 상품",
-      "description": "레저 및 액티비티 관련 상품",
-      "icon": "🎯",
-      "order": 3,
-      "is_active": true,
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.rwacategory",
-    "pk": "660e8400-e29b-41d4-a716-446655440001",
-    "fields": {
-      "name": "리조트 부동산",
-      "description": "리조트 및 호텔 부동산 투자",
-      "icon": "🏢",
-      "order": 1,
-      "is_active": true,
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.rwacategory",
-    "pk": "660e8400-e29b-41d4-a716-446655440002",
-    "fields": {
-      "name": "레저 시설",
-      "description": "골프장, 마리나 등 레저 시설 투자",
-      "icon": "⛳",
-      "order": 2,
-      "is_active": true,
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.rwacategory",
-    "pk": "660e8400-e29b-41d4-a716-446655440003",
-    "fields": {
-      "name": "상업 부동산",
-      "description": "상업용 부동산 및 임대 수익",
-      "icon": "🏬",
-      "order": 3,
-      "is_active": true,
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.businesscontent",
-    "pk": "770e8400-e29b-41d4-a716-446655440001",
-    "fields": {
-      "section": "background",
-      "title": "GLI 플랫폼 소개",
-      "subtitle": "Global Leisure Investment의 혁신적인 Web3 플랫폼",
-      "content": "GLI는 전 세계 레저 산업에 특화된 혁신적인 투자 플랫폼입니다. 블록체인 기술을 활용하여 투명하고 안전한 투자 환경을 제공하며, 실물 자산(RWA) 투자를 통해 안정적인 수익을 창출할 수 있습니다.",
-      "image_url": "https://example.com/images/gli-platform.jpg",
-      "order": 1,
-      "status": "published",
-      "meta_data": {
-        "featured": true,
-        "tags": ["platform", "introduction"]
-      },
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.businesscontent",
-    "pk": "770e8400-e29b-41d4-a716-446655440002",
-    "fields": {
-      "section": "team",
-      "title": "레저 산업 투자",
-      "subtitle": "전 세계 프리미엄 레저 시설에 대한 투자 기회",
-      "content": "GLI는 리조트, 골프장, 마리나 등 프리미엄 레저 시설에 대한 투자 기회를 제공합니다. 검증된 자산을 통해 안정적인 수익률을 추구하며, 토큰화를 통해 소액 투자도 가능합니다.",
-      "image_url": "https://example.com/images/leisure-investment.jpg",
-      "order": 1,
-      "status": "published",
-      "meta_data": {
-        "investment_focus": "leisure_industry",
-        "key_benefits": ["diversification", "stable_returns", "tokenization"]
-      },
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "gli_content.businesscontent",
-    "pk": "770e8400-e29b-41d4-a716-446655440003",
-    "fields": {
-      "section": "tokens",
-      "title": "GLI 토큰 생태계",
-      "subtitle": "GLEB, GLID, GLIL 토큰으로 구성된 완전한 생태계",
-      "content": "GLI 생태계는 세 가지 토큰으로 구성됩니다. GLEB는 투자용 토큰, GLID는 거버넌스 토큰, GLIL은 플랫폼 내 결제 토큰입니다. 각 토큰은 고유한 역할을 가지며 전체 생태계의 가치를 향상시킵니다.",
-      "image_url": "https://example.com/images/token-ecosystem.jpg",
-      "order": 1,
-      "status": "published",
-      "meta_data": {
-        "tokens": {
-          "GLEB": "Investment Token",
-          "GLID": "Governance Token", 
-          "GLIL": "Utility Token"
-        }
-      },
-      "created_at": "2024-01-15T10:00:00Z",
-      "updated_at": "2024-01-15T10:00:00Z"
-    }
-  }
+	{
+		"model": "gli_content.shoppingcategory",
+		"pk": "550e8400-e29b-41d4-a716-446655440001",
+		"fields": {
+			"name": "리조트 예약",
+			"description": "프리미엄 리조트 및 호텔 예약 서비스",
+			"icon": "🏖️",
+			"order": 1,
+			"is_active": true,
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.shoppingcategory",
+		"pk": "550e8400-e29b-41d4-a716-446655440002",
+		"fields": {
+			"name": "레스토랑 예약",
+			"description": "고급 레스토랑 및 다이닝 예약",
+			"icon": "🍽️",
+			"order": 2,
+			"is_active": true,
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.shoppingcategory",
+		"pk": "550e8400-e29b-41d4-a716-446655440003",
+		"fields": {
+			"name": "레저 상품",
+			"description": "레저 및 액티비티 관련 상품",
+			"icon": "🎯",
+			"order": 3,
+			"is_active": true,
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.rwacategory",
+		"pk": "660e8400-e29b-41d4-a716-446655440001",
+		"fields": {
+			"name": "리조트 부동산",
+			"description": "리조트 및 호텔 부동산 투자",
+			"icon": "🏢",
+			"order": 1,
+			"is_active": true,
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.rwacategory",
+		"pk": "660e8400-e29b-41d4-a716-446655440002",
+		"fields": {
+			"name": "레저 시설",
+			"description": "골프장, 마리나 등 레저 시설 투자",
+			"icon": "⛳",
+			"order": 2,
+			"is_active": true,
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.rwacategory",
+		"pk": "660e8400-e29b-41d4-a716-446655440003",
+		"fields": {
+			"name": "상업 부동산",
+			"description": "상업용 부동산 및 임대 수익",
+			"icon": "🏬",
+			"order": 3,
+			"is_active": true,
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.businesscontent",
+		"pk": "770e8400-e29b-41d4-a716-446655440001",
+		"fields": {
+			"section": "background",
+			"title": "GLI 플랫폼 소개",
+			"subtitle": "Global Leisure Investment의 혁신적인 Web3 플랫폼",
+			"content": "GLI는 전 세계 레저 산업에 특화된 혁신적인 투자 플랫폼입니다. 블록체인 기술을 활용하여 투명하고 안전한 투자 환경을 제공하며, 실물 자산(RWA) 투자를 통해 안정적인 수익을 창출할 수 있습니다.",
+			"image_url": "https://example.com/images/gli-platform.jpg",
+			"order": 1,
+			"status": "published",
+			"meta_data": {
+				"featured": true,
+				"tags": ["platform", "introduction"]
+			},
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.businesscontent",
+		"pk": "770e8400-e29b-41d4-a716-446655440002",
+		"fields": {
+			"section": "team",
+			"title": "레저 산업 투자",
+			"subtitle": "전 세계 프리미엄 레저 시설에 대한 투자 기회",
+			"content": "GLI는 리조트, 골프장, 마리나 등 프리미엄 레저 시설에 대한 투자 기회를 제공합니다. 검증된 자산을 통해 안정적인 수익률을 추구하며, 토큰화를 통해 소액 투자도 가능합니다.",
+			"image_url": "https://example.com/images/leisure-investment.jpg",
+			"order": 1,
+			"status": "published",
+			"meta_data": {
+				"investment_focus": "leisure_industry",
+				"key_benefits": ["diversification", "stable_returns", "tokenization"]
+			},
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	},
+	{
+		"model": "gli_content.businesscontent",
+		"pk": "770e8400-e29b-41d4-a716-446655440003",
+		"fields": {
+			"section": "tokens",
+			"title": "GLI 토큰 생태계",
+			"subtitle": "GLIB, GLID, GLIL 토큰으로 구성된 완전한 생태계",
+			"content": "GLI 생태계는 세 가지 토큰으로 구성됩니다. GLIB는 투자용 토큰, GLID는 거버넌스 토큰, GLIL은 플랫폼 내 결제 토큰입니다. 각 토큰은 고유한 역할을 가지며 전체 생태계의 가치를 향상시킵니다.",
+			"image_url": "https://example.com/images/token-ecosystem.jpg",
+			"order": 1,
+			"status": "published",
+			"meta_data": {
+				"tokens": {
+					"GLIB": "Investment Token",
+					"GLID": "Governance Token",
+					"GLIL": "Utility Token"
+				}
+			},
+			"created_at": "2024-01-15T10:00:00Z",
+			"updated_at": "2024-01-15T10:00:00Z"
+		}
+	}
 ]

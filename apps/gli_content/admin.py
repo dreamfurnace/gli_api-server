@@ -105,7 +105,7 @@ class RWAAssetAdmin(admin.ModelAdmin):
             'fields': ('category', 'name', 'description', 'short_description')
         }),
         ('투자 조건', {
-            'fields': ('total_value_usd', 'min_investment_gleb', 'max_investment_gleb', 'funding_target_gleb')
+            'fields': ('total_value_usd', 'min_investment_glib', 'max_investment_glib', 'funding_target_glib')
         }),
         ('수익률 및 위험', {
             'fields': ('expected_apy', 'historical_returns', 'risk_level', 'risk_factors')
@@ -123,7 +123,7 @@ class RWAAssetAdmin(admin.ModelAdmin):
             'fields': ('status', 'is_featured')
         }),
         ('현재 투자 현황', {
-            'fields': ('total_invested_gleb', 'investor_count'),
+            'fields': ('total_invested_glib', 'investor_count'),
             'classes': ('collapse',)
         }),
         ('메타데이터', {
@@ -144,7 +144,7 @@ class RWAAssetAdmin(admin.ModelAdmin):
 
 @admin.register(Investment)
 class InvestmentAdmin(admin.ModelAdmin):
-    list_display = ('investor', 'rwa_asset', 'amount_gleb', 'status', 'profit_loss_display', 'investment_date')
+    list_display = ('investor', 'rwa_asset', 'amount_glib', 'status', 'profit_loss_display', 'investment_date')
     list_filter = ('status', 'rwa_asset__category', 'investment_date')
     search_fields = ('investor__username', 'rwa_asset__name')
     ordering = ('-investment_date',)
@@ -152,13 +152,13 @@ class InvestmentAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('투자 정보', {
-            'fields': ('investor', 'rwa_asset', 'amount_gleb', 'amount_usd_at_time')
+            'fields': ('investor', 'rwa_asset', 'amount_glib', 'amount_usd_at_time')
         }),
         ('투자 조건', {
             'fields': ('investment_date', 'expected_return_date', 'lock_end_date', 'expected_apy_at_time')
         }),
         ('수익 현황', {
-            'fields': ('current_value_gleb', 'realized_profit_gleb', 'current_profit_loss', 'profit_loss_percentage')
+            'fields': ('current_value_glib', 'realized_profit_glib', 'current_profit_loss', 'profit_loss_percentage')
         }),
         ('상태 및 트랜잭션', {
             'fields': ('status', 'investment_tx_hash', 'withdrawal_tx_hash')
@@ -174,7 +174,7 @@ class InvestmentAdmin(admin.ModelAdmin):
         percentage = obj.profit_loss_percentage
         color = 'green' if profit_loss > 0 else 'red' if profit_loss < 0 else 'black'
         return format_html(
-            '<span style="color: {};">{:.8f} GLEB ({:+.2f}%)</span>',
+            '<span style="color: {};">{:.8f} GLIB ({:+.2f}%)</span>',
             color, profit_loss, percentage
         )
     profit_loss_display.short_description = '손익'
