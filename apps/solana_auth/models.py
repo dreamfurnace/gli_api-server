@@ -70,14 +70,14 @@ class AuthNonce(models.Model):
     wallet_address = models.CharField(max_length=50, db_index=True)
     nonce = models.CharField(max_length=64, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    used = models.BooleanField(default=False)
+    is_consumed = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'auth_nonces'
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Nonce for {self.wallet_address[:8]}... ({'used' if self.used else 'active'})"
+        return f"Nonce for {self.wallet_address[:8]}... ({'consumed' if self.is_consumed else 'active'})"
 
 
 class SolanaTransaction(models.Model):

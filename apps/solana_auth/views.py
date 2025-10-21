@@ -206,7 +206,7 @@ def verify_signature(request):
         )
 
     # Nonce 사용 처리
-    auth_nonce.used = True
+    auth_nonce.is_consumed = True
     auth_nonce.save()
 
     # 현재 로그인한 사용자의 지갑 주소 업데이트
