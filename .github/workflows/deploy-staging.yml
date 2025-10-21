@@ -247,7 +247,7 @@ jobs:
           --overrides '{
             "containerOverrides": [{
               "name": "django-api",
-              "command": ["sh", "-c", "uv run python manage.py migrate --verbosity=2 --noinput || (echo 'Migration failed, checking schema...' && uv run python manage.py showmigrations && exit 1)"],
+              "command": ["sh", "-c", "uv run python manage.py migrate --verbosity=2 --noinput || exit 1"],
               "environment": [
                 {"name": "DJANGO_LOG_LEVEL", "value": "DEBUG"},
                 {"name": "PYTHONUNBUFFERED", "value": "1"}
