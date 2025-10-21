@@ -214,9 +214,81 @@ jobs:
         echo "TASK_DEF_ARN=$NEW_TASK_DEF_ARN" >> $GITHUB_ENV
         echo "✅ Task Definition 등록 완료: $NEW_TASK_DEF_ARN"
 
-    - name: Skip migration for now
+    - name: Django 마이그레이션 실행
       run: |
-        echo "⚠️ 마이그레이션 건너뛰기 - 서비스 배포만 진행"
+        echo "🔄 Django 마이그레이션 시작..."
+
+        # 네트워크 설정 조회
+        SUBNETS=$(aws ec2 describe-subnets \
+          --filters "Name=vpc-id,Values=${{ env.VPC_ID }}" "Name=availability-zone,Values=ap-northeast-2a,ap-northeast-2b" \
+          --query 'Subnets[0:2].SubnetId' \
+          --output text | tr '\t' ',')
+
+        # Security Group 조회
+        SG_ID=$(aws ec2 describe-security-groups \
+          --filters "Name=group-name,Values=staging-ecs-sg" \
+          --query 'SecurityGroups[0].GroupId' \
+          --output text 2>/dev/null || echo "")
+
+        if [ -z "$SG_ID" ] || [ "$SG_ID" = "None" ]; then
+          echo "❌ Security Group 'staging-ecs-sg' 가 필요합니다"
+          exit 1
+        fi
+
+        # 마이그레이션 태스크 실행
+        MIGRATION_TASK=$(aws ecs run-task \
+          --cluster $ECS_CLUSTER \
+          --task-definition ${{ env.TASK_DEF_ARN }} \
+          --launch-type FARGATE \
+          --network-configuration "awsvpcConfiguration={subnets=[$SUBNETS],securityGroups=[$SG_ID],assignPublicIp=ENABLED}" \
+          --overrides '{
+            "containerOverrides": [{
+              "name": "django-api",
+              "command": ["uv", "run", "python", "manage.py", "migrate", "--noinput"],
+              "environment": [
+                {"name": "DJANGO_LOG_LEVEL", "value": "INFO"},
+                {"name": "PYTHONUNBUFFERED", "value": "1"}
+              ]
+            }]
+          }' \
+          --query 'tasks[0].taskArn' \
+          --output text)
+
+        echo "마이그레이션 태스크: $MIGRATION_TASK"
+
+        # 완료 대기
+        for i in {1..24}; do
+          TASK_STATUS=$(aws ecs describe-tasks \
+            --cluster $ECS_CLUSTER \
+            --tasks $MIGRATION_TASK \
+            --query 'tasks[0].lastStatus' \
+            --output text)
+
+          echo "상태: $TASK_STATUS (${i}0초 경과)"
+
+          if [ "$TASK_STATUS" = "STOPPED" ]; then
+            EXIT_CODE=$(aws ecs describe-tasks \
+              --cluster $ECS_CLUSTER \
+              --tasks $MIGRATION_TASK \
+              --query 'tasks[0].containers[0].exitCode' \
+              --output text)
+
+            if [ "$EXIT_CODE" = "0" ]; then
+              echo "✅ 마이그레이션 성공"
+              break
+            else
+              echo "❌ 마이그레이션 실패 (종료코드: $EXIT_CODE)"
+              exit 1
+            fi
+          fi
+
+          if [ $i -eq 24 ]; then
+            echo "❌ 마이그레이션 타임아웃"
+            exit 1
+          fi
+
+          sleep 10
+        done
 
     - name: ECS 서비스 업데이트
       run: |
