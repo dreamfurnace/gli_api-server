@@ -4,6 +4,7 @@ on:
   push:
     branches: [stg]
   workflow_dispatch:
+    branches: [stg]
 
 env:
   AWS_REGION: ap-northeast-2
