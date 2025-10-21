@@ -24,8 +24,8 @@ class SolanaUserAdmin(admin.ModelAdmin):
 
 @admin.register(AuthNonce)
 class AuthNonceAdmin(admin.ModelAdmin):
-    list_display = ['wallet_address', 'nonce', 'used', 'created_at']
-    list_filter = ['used', 'created_at']
+    list_display = ['wallet_address', 'nonce', 'is_consumed', 'created_at']
+    list_filter = ['is_consumed', 'created_at']
     search_fields = ['wallet_address', 'nonce']
     readonly_fields = ['created_at']
 
