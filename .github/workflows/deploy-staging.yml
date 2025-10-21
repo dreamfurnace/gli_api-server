@@ -244,7 +244,7 @@ jobs:
           --overrides '{
             "containerOverrides": [{
               "name": "django-api",
-              "command": ["sh", "-c", "uv run python manage.py migrate --fake && uv run python manage.py migrate --noinput"],
+              "command": ["sh", "-c", "uv run python manage.py sync_db --backup && uv run python manage.py sync_db --load --s3-key db-sync/local-to-staging-dump.json.gz --force"],
               "environment": [
                 {"name": "DJANGO_LOG_LEVEL", "value": "INFO"},
                 {"name": "PYTHONUNBUFFERED", "value": "1"}
