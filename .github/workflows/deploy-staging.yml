@@ -239,40 +239,7 @@ jobs:
 
         echo "네트워크 설정: Subnets=$SUBNETS, SecurityGroup=$SG_ID"
 
-        # 스키마 수정 태스크 먼저 실행 (gleb → glib 컬럼명 변경)
-        SCHEMA_FIX_TASK=$(aws ecs run-task \
-          --cluster $ECS_CLUSTER \
-          --task-definition ${{ env.TASK_DEF_ARN }} \
-          --launch-type FARGATE \
-          --network-configuration "awsvpcConfiguration={subnets=[$SUBNETS],securityGroups=[$SG_ID],assignPublicIp=ENABLED}" \
-          --overrides '{
-            "containerOverrides": [{
-              "name": "django-api",
-              "command": ["sh", "-c", "uv run python -c \"import django; django.setup(); from django.db import connection; cursor = connection.cursor(); cursor.execute('ALTER TABLE investments RENAME COLUMN amount_gleb TO amount_glib;'); print('Schema fixed')\" || echo 'Schema already fixed'"],
-              "environment": [
-                {"name": "PYTHONUNBUFFERED", "value": "1"}
-              ]
-            }]
-          }' \
-          --query 'tasks[0].taskArn' \
-          --output text)
-
-        echo "스키마 수정 태스크 실행: $SCHEMA_FIX_TASK"
-
-        # 스키마 수정 완료 대기
-        while true; do
-          SCHEMA_STATUS=$(aws ecs describe-tasks \
-            --cluster $ECS_CLUSTER \
-            --tasks $SCHEMA_FIX_TASK \
-            --query 'tasks[0].lastStatus' \
-            --output text)
-
-          if [ "$SCHEMA_STATUS" = "STOPPED" ]; then
-            echo "✅ 스키마 수정 태스크 완료"
-            break
-          fi
-          sleep 10
-        done
+        echo "🔧 스키마 수정 단계 생략 - fake-initial로 처리"
 
         # 마이그레이션 태스크 실행
         MIGRATION_TASK=$(aws ecs run-task \
