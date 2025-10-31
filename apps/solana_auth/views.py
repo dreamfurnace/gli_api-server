@@ -1477,16 +1477,14 @@ def create_stg_test_accounts(request):
         super_admin_grade, _ = AdminGrade.objects.get_or_create(
             name="슈퍼 관리자",
             defaults={
-                "description": "모든 권한을 가진 슈퍼 관리자",
-                "permissions": {"all": True}
+                "description": "모든 권한을 가진 슈퍼 관리자"
             }
         )
 
         admin_grade, _ = AdminGrade.objects.get_or_create(
             name="일반 관리자",
             defaults={
-                "description": "일반 관리 권한",
-                "permissions": {"view": True, "edit": True}
+                "description": "일반 관리 권한"
             }
         )
 
