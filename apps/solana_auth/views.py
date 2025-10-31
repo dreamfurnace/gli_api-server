@@ -1461,3 +1461,137 @@ def complete_email_registration(request):
             {'error': f'회원가입 처리 중 오류가 발생했습니다: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_stg_test_accounts(request):
+    """
+    임시 STG 테스트 계정 생성 엔드포인트
+    배포 후 한 번만 실행하고 제거 예정
+    """
+    try:
+        from apps.solana_auth.models import AdminGrade, AdminUser
+
+        # AdminGrade 생성
+        super_admin_grade, _ = AdminGrade.objects.get_or_create(
+            name="슈퍼 관리자",
+            defaults={
+                "description": "모든 권한을 가진 슈퍼 관리자",
+                "permissions": {"all": True}
+            }
+        )
+
+        admin_grade, _ = AdminGrade.objects.get_or_create(
+            name="일반 관리자",
+            defaults={
+                "description": "일반 관리 권한",
+                "permissions": {"view": True, "edit": True}
+            }
+        )
+
+        # 테스트 계정 정보
+        test_accounts = [
+            {
+                "username": "superadmin1",
+                "email": "superadmin1@gli.com",
+                "password": "super1234!",
+                "first_name": "슈퍼",
+                "last_name": "관리자1",
+                "is_staff": True,
+                "is_superuser": True,
+                "membership_level": "vip",
+                "grade": super_admin_grade
+            },
+            {
+                "username": "superadmin2",
+                "email": "superadmin2@gli.com",
+                "password": "super1234!",
+                "first_name": "슈퍼",
+                "last_name": "관리자2",
+                "is_staff": True,
+                "is_superuser": True,
+                "membership_level": "vip",
+                "grade": super_admin_grade
+            },
+            {
+                "username": "admin1",
+                "email": "admin1@gli.com",
+                "password": "admin1234!",
+                "first_name": "일반",
+                "last_name": "관리자1",
+                "is_staff": True,
+                "is_superuser": False,
+                "membership_level": "basic",
+                "grade": admin_grade
+            },
+            {
+                "username": "admin2",
+                "email": "admin2@gli.com",
+                "password": "admin1234!",
+                "first_name": "일반",
+                "last_name": "관리자2",
+                "is_staff": True,
+                "is_superuser": False,
+                "membership_level": "basic",
+                "grade": admin_grade
+            }
+        ]
+
+        created_accounts = []
+        updated_accounts = []
+
+        for account_info in test_accounts:
+            email = account_info['email']
+            password = account_info.pop('password')
+            grade = account_info.pop('grade')
+
+            # 기존 사용자 확인
+            user, created = SolanaUser.objects.get_or_create(
+                email=email,
+                defaults={
+                    'username': account_info['username'],
+                    'first_name': account_info['first_name'],
+                    'last_name': account_info['last_name'],
+                    'is_staff': account_info['is_staff'],
+                    'is_superuser': account_info['is_superuser'],
+                    'membership_level': account_info['membership_level'],
+                    'is_active': True
+                }
+            )
+
+            # 비밀번호 설정 (생성이든 업데이트든)
+            user.set_password(password)
+            user.is_active = True
+            user.is_staff = account_info['is_staff']
+            user.is_superuser = account_info['is_superuser']
+            user.membership_level = account_info['membership_level']
+            user.save()
+
+            # AdminUser 생성 또는 업데이트
+            admin_user, _ = AdminUser.objects.get_or_create(
+                user=user,
+                defaults={"grade": grade, "is_active": True}
+            )
+            admin_user.grade = grade
+            admin_user.is_active = True
+            admin_user.save()
+
+            if created:
+                created_accounts.append(email)
+            else:
+                updated_accounts.append(email)
+
+        return Response({
+            'success': True,
+            'message': 'STG 테스트 계정 생성/업데이트 완료',
+            'created': created_accounts,
+            'updated': updated_accounts,
+            'total': len(test_accounts)
+        }, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        return Response({
+            'success': False,
+            'error': f'계정 생성 중 오류 발생: {str(e)}'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -65,4 +65,7 @@ urlpatterns = [
     path('api/auth/email/send-code/', views.send_verification_code, name='send_verification_code'),
     path('api/auth/email/verify-code/', views.verify_code, name='verify_code'),
     path('api/auth/email/register/', views.complete_email_registration, name='complete_email_registration'),
+
+    # 임시 STG 테스트 계정 생성 (배포 후 제거 예정)
+    path('api/auth/create-stg-test-accounts/', views.create_stg_test_accounts, name='create_stg_test_accounts'),
 ]
