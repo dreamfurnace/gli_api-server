@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (
     BusinessContent, ShoppingCategory, ShoppingProduct,
-    RWACategory, RWAAsset, Investment,
+    RWACategory, RWAAsset, RWAAssetImage, Investment,
     ShoppingOrder, ShoppingOrderItem
 )
 
@@ -68,16 +68,27 @@ class ShoppingProductListSerializer(serializers.ModelSerializer):
 
 class RWACategorySerializer(serializers.ModelSerializer):
     asset_count = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = RWACategory
         fields = [
             'id', 'name', 'description', 'icon', 'order',
             'is_active', 'asset_count', 'created_at', 'updated_at'
         ]
-    
+
     def get_asset_count(self, obj):
         return obj.assets.filter(status='active').count()
+
+
+class RWAAssetImageSerializer(serializers.ModelSerializer):
+    """RWA 자산 이미지 시리얼라이저"""
+    class Meta:
+        model = RWAAssetImage
+        fields = [
+            'id', 'image_url', 'order', 'is_primary',
+            'alt_text', 'alt_text_en', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 class RWAAssetSerializer(serializers.ModelSerializer):
@@ -86,6 +97,8 @@ class RWAAssetSerializer(serializers.ModelSerializer):
     status_display = serializers.CharField(source='get_status_display', read_only=True)
     operation_type_display = serializers.CharField(source='get_operation_type_display', read_only=True)
     funding_progress = serializers.ReadOnlyField()
+    isActive = serializers.SerializerMethodField()
+    images = RWAAssetImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = RWAAsset
@@ -100,11 +113,14 @@ class RWAAssetSerializer(serializers.ModelSerializer):
             'asset_location', 'asset_location_en', 'asset_type', 'asset_type_en',
             'area_sqm', 'operation_type', 'operation_type_display',
             'underlying_assets',
-            'main_image_url', 'image_urls', 'document_urls',
+            'main_image_url', 'image_urls', 'images', 'document_urls',
             'total_invested_glib', 'investor_count', 'funding_target_glib',
-            'funding_progress', 'status', 'status_display', 'is_featured',
-            'metadata', 'created_at', 'updated_at'
+            'funding_progress', 'status', 'status_display', 'is_featured', 'order',
+            'isActive', 'metadata', 'created_at', 'updated_at'
         ]
+
+    def get_isActive(self, obj):
+        return obj.status == 'active'
 
 
 class RWAAssetListSerializer(serializers.ModelSerializer):
@@ -112,6 +128,8 @@ class RWAAssetListSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     risk_level_display = serializers.CharField(source='get_risk_level_display', read_only=True)
     funding_progress = serializers.ReadOnlyField()
+    isActive = serializers.SerializerMethodField()
+    images = RWAAssetImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = RWAAsset
@@ -122,10 +140,13 @@ class RWAAssetListSerializer(serializers.ModelSerializer):
             'description', 'description_en',
             'expected_apy', 'risk_level_display', 'risk_level',
             'min_investment_glib', 'total_value_usd', 'total_invested_glib',
-            'main_image_url', 'funding_progress', 'status', 'is_featured',
-            'asset_type', 'asset_location', 'asset_location_en',
+            'main_image_url', 'images', 'funding_progress', 'status', 'is_featured', 'order',
+            'isActive', 'asset_type', 'asset_location', 'asset_location_en',
             'created_at', 'updated_at'
         ]
+
+    def get_isActive(self, obj):
+        return obj.status == 'active'
 
 
 class InvestmentSerializer(serializers.ModelSerializer):

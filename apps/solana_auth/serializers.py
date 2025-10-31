@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SolanaUser, AuthNonce, SolanaTransaction, FaceVerification, AdminGrade, AdminUser, AdminPermission, GradePermission, TeamMember, ProjectFeature, StrategyPhase, DevelopmentTimeline, TokenEcosystem
+from .models import SolanaUser, AuthNonce, SolanaTransaction, FaceVerification, AdminGrade, AdminUser, AdminPermission, GradePermission, TeamMember, ProjectFeature, StrategyPhase, DevelopmentTimeline, TokenEcosystem, NewsArticle, EmailVerificationCode
 
 
 class SolanaUserSerializer(serializers.ModelSerializer):
@@ -77,10 +77,10 @@ class FaceVerificationCreateSerializer(serializers.Serializer):
     """얼굴 인증 결과 생성 시리얼라이저 (POST 요청용)"""
     verified = serializers.BooleanField()
     confidence = serializers.DecimalField(max_digits=5, decimal_places=4)
-    livenessScore = serializers.DecimalField(max_digits=5, decimal_places=4)
+    livenessScore = serializers.DecimalField(max_digits=5, decimal_places=4, source='liveness_score')
     timestamp = serializers.DateTimeField()
     attempts = serializers.IntegerField(default=1)
-    checkDetails = CheckDetailSerializer(many=True, required=False, allow_null=True)
+    checkDetails = CheckDetailSerializer(many=True, required=False, allow_null=True, source='check_details')
 
     def validate_confidence(self, value):
         """신뢰도 범위 검증 (0.0 ~ 1.0)"""
@@ -350,4 +350,91 @@ class TokenEcosystemSerializer(serializers.ModelSerializer):
         """정렬 순서는 0 이상이어야 함"""
         if value < 0:
             raise serializers.ValidationError("순서는 0 이상이어야 합니다.")
+        return value
+
+
+# ============================================================================
+# 뉴스/보도자료 Serializers (News Article Serializers)
+# ============================================================================
+
+class NewsArticleSerializer(serializers.ModelSerializer):
+    """뉴스 및 보도자료 시리얼라이저"""
+
+    class Meta:
+        model = NewsArticle
+        fields = [
+            'id', 'title_ko', 'title_en', 'content_ko', 'content_en',
+            'image_url', 'external_url', 'publication_date', 'status',
+            'order', 'is_active', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def validate_order(self, value):
+        """정렬 순서는 0 이상이어야 함"""
+        if value < 0:
+            raise serializers.ValidationError("순서는 0 이상이어야 합니다.")
+        return value
+
+    def validate_status(self, value):
+        """상태 값 검증"""
+        allowed_statuses = ['draft', 'published', 'archived']
+        if value not in allowed_statuses:
+            raise serializers.ValidationError(
+                f"상태는 {', '.join(allowed_statuses)} 중 하나여야 합니다."
+            )
+        return value
+
+
+# ============================================================================
+# 이메일 인증 Serializers (Email Verification Serializers)
+# ============================================================================
+
+class EmailRegistrationSerializer(serializers.Serializer):
+    """이메일 회원가입 요청 시리얼라이저"""
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        """이메일 중복 검증"""
+        if SolanaUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("이미 등록된 이메일 주소입니다.")
+        return value
+
+
+class VerificationCodeSerializer(serializers.Serializer):
+    """인증 코드 검증 시리얼라이저"""
+    email = serializers.EmailField()
+    code = serializers.CharField(max_length=6, min_length=6)
+
+    def validate_code(self, value):
+        """6자리 숫자인지 검증"""
+        if not value.isdigit():
+            raise serializers.ValidationError("인증 코드는 6자리 숫자여야 합니다.")
+        return value
+
+
+class CompleteRegistrationSerializer(serializers.Serializer):
+    """회원가입 완료 시리얼라이저"""
+    email = serializers.EmailField()
+    verification_code = serializers.CharField(max_length=6)
+    username = serializers.CharField(max_length=150)
+    password = serializers.CharField(write_only=True, min_length=8)
+    first_name = serializers.CharField(max_length=30, required=False, allow_blank=True)
+    last_name = serializers.CharField(max_length=150, required=False, allow_blank=True)
+
+    def validate_username(self, value):
+        """사용자 이름 중복 검증"""
+        if SolanaUser.objects.filter(username=value).exists():
+            raise serializers.ValidationError("이미 사용 중인 사용자 이름입니다.")
+        return value
+
+    def validate_password(self, value):
+        """비밀번호 강도 검증"""
+        if len(value) < 8:
+            raise serializers.ValidationError("비밀번호는 최소 8자 이상이어야 합니다.")
+        if not any(c.isupper() for c in value):
+            raise serializers.ValidationError("비밀번호는 대문자를 포함해야 합니다.")
+        if not any(c.islower() for c in value):
+            raise serializers.ValidationError("비밀번호는 소문자를 포함해야 합니다.")
+        if not any(c.isdigit() for c in value):
+            raise serializers.ValidationError("비밀번호는 숫자를 포함해야 합니다.")
         return value

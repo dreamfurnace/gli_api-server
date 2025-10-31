@@ -328,10 +328,11 @@ class ProjectFeature(models.Model):
     """프로젝트 소개 특징"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    # 아이콘
-    icon = models.CharField(
-        max_length=10,
-        help_text='아이콘 emoji 예: 🌊'
+    # 아이콘 이미지 URL
+    icon = models.URLField(
+        blank=True,
+        null=True,
+        help_text='아이콘 이미지 URL 예: https://example.com/icon.png'
     )
 
     # 제목 (한글/영문)
@@ -385,10 +386,11 @@ class StrategyPhase(models.Model):
     """전략 로드맵 페이즈"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    # 아이콘
-    icon = models.CharField(
-        max_length=10,
-        help_text='아이콘 emoji 예: 🚀'
+    # 아이콘 이미지 URL
+    icon = models.URLField(
+        blank=True,
+        null=True,
+        help_text='아이콘 이미지 URL 예: https://example.com/icon.png'
     )
 
     # 제목 (한글/영문)
@@ -458,10 +460,11 @@ class DevelopmentTimeline(models.Model):
         help_text='분기 정보 예: 2024 Q1'
     )
 
-    # 상태 아이콘
-    status_icon = models.CharField(
-        max_length=10,
-        help_text='상태 아이콘 예: ✅ (완료), 🔄 (진행중), ⏳ (대기)'
+    # 상태 아이콘 이미지 URL
+    status_icon = models.URLField(
+        blank=True,
+        null=True,
+        help_text='상태 아이콘 이미지 URL 예: https://example.com/status-icon.png'
     )
 
     # 제목 (한글/영문)
@@ -515,10 +518,11 @@ class TokenEcosystem(models.Model):
     """토큰 에코시스템 정보"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    # 아이콘
-    icon = models.CharField(
-        max_length=10,
-        help_text='아이콘 emoji 예: 🔵'
+    # 아이콘 이미지 URL
+    icon = models.URLField(
+        blank=True,
+        null=True,
+        help_text='아이콘 이미지 URL 예: https://example.com/icon.png'
     )
 
     # 토큰 이름 및 심볼
@@ -582,3 +586,120 @@ class TokenEcosystem(models.Model):
 
     def __str__(self):
         return f"{self.icon} {self.name} ({self.symbol})"
+
+
+# ============================================================================
+# 뉴스/보도자료 모델 (News Article Models)
+# ============================================================================
+
+class NewsArticle(models.Model):
+    """뉴스 및 보도자료 정보"""
+    STATUS_CHOICES = [
+        ('draft', '임시저장'),
+        ('published', '발행됨'),
+        ('archived', '보관됨'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    # 제목 (한글/영문)
+    title_ko = models.CharField(
+        max_length=200,
+        help_text='뉴스 제목 (한글)'
+    )
+    title_en = models.CharField(
+        max_length=200,
+        help_text='뉴스 제목 (영문)'
+    )
+
+    # 내용 (한글/영문)
+    content_ko = models.TextField(
+        help_text='뉴스 내용 (한글)'
+    )
+    content_en = models.TextField(
+        help_text='뉴스 내용 (영문)'
+    )
+
+    # 이미지 URL
+    image_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text='기사 대표 이미지 URL 예: https://example.com/news-image.jpg'
+    )
+
+    # 기사 원문 링크
+    external_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text='기사 원문 링크 URL 예: https://news.example.com/article/12345'
+    )
+
+    # 보도일
+    publication_date = models.DateField(
+        help_text='기사가 보도된 날짜'
+    )
+
+    # 상태
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='draft',
+        help_text='기사 상태 (draft: 임시저장, published: 발행됨, archived: 보관됨)'
+    )
+
+    # 정렬 및 표시 제어
+    order = models.IntegerField(
+        default=0,
+        help_text='표시 순서 (낮을수록 먼저 표시)'
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text='뉴스 표시 여부'
+    )
+
+    # 타임스탬프
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'news_articles'
+        ordering = ['-publication_date', '-created_at']
+        indexes = [
+            models.Index(fields=['status', 'is_active']),
+            models.Index(fields=['publication_date', '-created_at']),
+            models.Index(fields=['order', 'is_active']),
+        ]
+
+    def __str__(self):
+        return f"{self.title_ko} ({self.publication_date})"
+
+
+# ============================================================================
+# 이메일 인증 모델 (Email Verification Models)
+# ============================================================================
+
+class EmailVerificationCode(models.Model):
+    """이메일 인증 코드"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField(help_text='인증할 이메일 주소')
+    code = models.CharField(max_length=6, help_text='6자리 인증 코드')
+    expires_at = models.DateTimeField(help_text='인증 코드 만료 시간')
+    is_used = models.BooleanField(default=False, help_text='인증 코드 사용 여부')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'email_verification_codes'
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['email', 'code']),
+            models.Index(fields=['email', 'is_used']),
+            models.Index(fields=['expires_at']),
+        ]
+
+    def __str__(self):
+        return f"{self.email} - {self.code} ({'사용됨' if self.is_used else '미사용'})"
+
+    def is_expired(self):
+        """인증 코드가 만료되었는지 확인"""
+        from django.utils import timezone
+        return timezone.now() > self.expires_at
