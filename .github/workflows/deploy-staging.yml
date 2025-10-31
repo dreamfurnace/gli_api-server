@@ -235,7 +235,7 @@ jobs:
           exit 1
         fi
 
-        # 마이그레이션 및 더미 사용자 생성 태스크 실행
+        # 마이그레이션 태스크 실행
         MIGRATION_TASK=$(aws ecs run-task \
           --cluster $ECS_CLUSTER \
           --task-definition ${{ env.TASK_DEF_ARN }} \
@@ -244,7 +244,7 @@ jobs:
           --overrides '{
             "containerOverrides": [{
               "name": "django-api",
-              "command": ["sh", "-c", "uv run python manage.py migrate --run-syncdb --noinput && uv run python manage.py create_test_accounts"],
+              "command": ["sh", "-c", "uv run python manage.py migrate --run-syncdb --noinput"],
               "environment": [
                 {"name": "DJANGO_LOG_LEVEL", "value": "INFO"},
                 {"name": "PYTHONUNBUFFERED", "value": "1"}
