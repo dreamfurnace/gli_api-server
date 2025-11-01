@@ -1132,13 +1132,6 @@ def change_password(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    import re
-    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', new_password):
-        return Response(
-            {'new_password': '비밀번호는 특수문자를 포함해야 합니다.'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
     # 비밀번호 변경
     try:
         user.set_password(new_password)
