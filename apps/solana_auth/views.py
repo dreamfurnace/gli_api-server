@@ -1296,10 +1296,15 @@ def send_verification_code(request):
     )
 
     # 이메일 발송
+    from django.conf import settings
+    import os
+
+    # AWS SES 샌드박스 모드 체크
+    is_ses_sandbox = os.getenv('AWS_SES_SANDBOX_MODE', 'true').lower() == 'true'
+
     try:
         from django.core.mail import EmailMultiAlternatives
         from django.template.loader import render_to_string
-        from django.conf import settings
 
         # 템플릿 렌더링
         context = {'code': code}
@@ -1314,14 +1319,23 @@ def send_verification_code(request):
         msg = EmailMultiAlternatives(subject, text_content, from_email, to_email)
         msg.attach_alternative(html_content, "text/html")
 
-        # 이메일 전송
+        # 이메일 전송 시도
         msg.send(fail_silently=False)
 
-        return Response({
+        # 성공 응답
+        response_data = {
             'message': '인증 코드가 이메일로 발송되었습니다.',
             'email': email,
             'expires_in': 900  # 15분 (초)
-        }, status=status.HTTP_200_OK)
+        }
+
+        # 샌드박스 모드에서는 API 응답에 인증 코드 포함 (테스트용)
+        if is_ses_sandbox:
+            response_data['verification_code'] = code
+            response_data['sandbox_mode'] = True
+            response_data['note'] = '샌드박스 모드: 네트워크 탭에서 인증 코드를 확인하세요.'
+
+        return Response(response_data, status=status.HTTP_200_OK)
 
     except Exception as e:
         # 이메일 전송 실패 시
@@ -1329,9 +1343,21 @@ def send_verification_code(request):
         logger = logging.getLogger(__name__)
         logger.error(f"이메일 전송 실패: {email}, 오류: {str(e)}")
 
-        # 개발 환경에서는 콘솔에도 출력
-        print(f"[인증 코드 전송 실패] {email}: {code}, 오류: {str(e)}")
+        # 샌드박스 모드에서는 이메일 전송 실패해도 코드를 반환 (테스트 가능하도록)
+        if is_ses_sandbox:
+            print(f"[샌드박스 모드] 이메일 전송 실패했지만 인증 코드 반환: {email} -> {code}")
+            return Response({
+                'message': '이메일 발송은 실패했지만 샌드박스 모드에서 인증 코드를 제공합니다.',
+                'email': email,
+                'expires_in': 900,
+                'verification_code': code,
+                'sandbox_mode': True,
+                'note': '샌드박스 모드: 네트워크 탭에서 인증 코드를 확인하세요.',
+                'email_error': str(e) if settings.DEBUG else '이메일 서버 오류'
+            }, status=status.HTTP_200_OK)
 
+        # 프로덕션 모드에서는 에러 반환
+        print(f"[인증 코드 전송 실패] {email}: {code}, 오류: {str(e)}")
         return Response({
             'error': '이메일 발송에 실패했습니다. 잠시 후 다시 시도해주세요.',
             'detail': str(e) if settings.DEBUG else '이메일 서버 오류'
