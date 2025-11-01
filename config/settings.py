@@ -231,25 +231,26 @@ TEMPLATES = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('DATABASE_NAME'),
-        "USER": os.getenv('DATABASE_USER'),
-        "PASSWORD": os.getenv('DATABASE_PASSWORD'),
-        "HOST": os.getenv('DATABASE_HOST'),
+        "NAME": os.getenv('DATABASE_NAME', 'dummy_db'),
+        "USER": os.getenv('DATABASE_USER', 'dummy_user'),
+        "PASSWORD": os.getenv('DATABASE_PASSWORD', 'dummy_password'),
+        "HOST": os.getenv('DATABASE_HOST', 'localhost'),
         "PORT": os.getenv('DATABASE_PORT', '5432'),
     }
 }
 
-# Database 설정 검증
-if not all([
-    os.getenv('DATABASE_NAME'),
-    os.getenv('DATABASE_USER'),
-    os.getenv('DATABASE_PASSWORD'),
-    os.getenv('DATABASE_HOST'),
-]):
-    raise ValueError(
-        "Database configuration is incomplete. Required environment variables: "
-        "DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST"
-    )
+# Database 설정 검증 (Docker 빌드 타임은 제외)
+if not os.getenv("DOCKER_BUILD", "false") == "true":
+    if not all([
+        os.getenv('DATABASE_NAME'),
+        os.getenv('DATABASE_USER'),
+        os.getenv('DATABASE_PASSWORD'),
+        os.getenv('DATABASE_HOST'),
+    ]):
+        raise ValueError(
+            "Database configuration is incomplete. Required environment variables: "
+            "DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST"
+        )
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
