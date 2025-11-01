@@ -181,7 +181,8 @@ class RWAAssetListSerializer(serializers.ModelSerializer):
             'short_description', 'short_description_en',
             'description', 'description_en',
             'expected_apy', 'risk_level_display', 'risk_level',
-            'min_investment_glib', 'total_value_usd', 'total_invested_glib',
+            'min_investment_glib', 'max_investment_glib', 'investment_period_months',
+            'total_value_usd', 'total_invested_glib',
             'main_image_url', 'images', 'funding_progress', 'status', 'is_featured', 'order',
             'isActive', 'asset_type', 'asset_location', 'asset_location_en',
             'created_at', 'updated_at'
