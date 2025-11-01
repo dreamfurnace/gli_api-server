@@ -412,22 +412,22 @@ class ShoppingOrderItem(BaseTimestampModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     order = models.ForeignKey(ShoppingOrder, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(ShoppingProduct, on_delete=models.CASCADE)
-    
+
     # 주문 시점의 정보 (가격 변동 대비)
     product_name = models.CharField(max_length=200)
     product_price_glil = models.DecimalField(max_digits=20, decimal_places=8)
     quantity = models.PositiveIntegerField(default=1)
-    
+
     # 선택된 옵션 (크기, 색상 등)
     selected_attributes = models.JSONField(default=dict, blank=True)
-    
+
     class Meta:
         db_table = 'shopping_order_items'
         ordering = ['order', 'created_at']
-    
+
     def __str__(self):
         return f"{self.product_name} x{self.quantity}"
-    
+
     @property
     def total_price(self):
         return self.product_price_glil * self.quantity

@@ -116,11 +116,14 @@ class RWAAssetViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['category', 'risk_level', 'is_featured', 'status']
     search_fields = ['name', 'name_en', 'description', 'description_en', 'asset_type', 'asset_location']
-    ordering = ['-is_featured', '-created_at']
+    ordering = ['order', '-is_featured', '-created_at']
+    ordering_fields = ['order', 'is_featured', 'created_at', 'expected_apy', 'min_investment_glib', 'total_value_usd']
 
     def get_queryset(self):
         """사용자는 active 자산만, 관리자는 모든 자산 조회"""
         queryset = super().get_queryset()
+        # 이미지와 카테고리를 함께 가져오기 (N+1 쿼리 방지)
+        queryset = queryset.prefetch_related('images').select_related('category')
         # 인증되지 않았거나 일반 사용자는 active 자산만
         if not self.request.user.is_authenticated or not self.request.user.is_staff:
             queryset = queryset.filter(status='active')
@@ -402,32 +405,6 @@ class RWAAssetViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, methods=['delete'], url_path='images/(?P<image_id>[^/.]+)', permission_classes=[permissions.IsAdminUser])
-    def delete_image(self, request, pk=None, image_id=None):
-        """RWA 자산 이미지 삭제"""
-        asset = self.get_object()
-
-        try:
-            image = asset.images.get(id=image_id)
-            was_primary = image.is_primary
-            image.delete()
-
-            # 메인 이미지가 삭제된 경우, 남은 이미지 중 첫 번째를 메인으로 설정
-            if was_primary and asset.images.exists():
-                first_image = asset.images.order_by('order').first()
-                first_image.is_primary = True
-                first_image.save()
-
-            return Response(
-                {'message': '이미지가 성공적으로 삭제되었습니다.'},
-                status=status.HTTP_204_NO_CONTENT
-            )
-        except RWAAssetImage.DoesNotExist:
-            return Response(
-                {'error': '이미지를 찾을 수 없습니다.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
     @action(detail=True, methods=['patch'], url_path='images/reorder', permission_classes=[permissions.IsAdminUser])
     def reorder_images(self, request, pk=None):
         """RWA 자산 이미지 순서 재정렬
@@ -468,9 +445,35 @@ class RWAAssetViewSet(viewsets.ModelViewSet):
         serializer = RWAAssetImageSerializer(asset.images.all(), many=True)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['patch'], url_path='images/(?P<image_id>[^/.]+)/set-primary', permission_classes=[permissions.IsAdminUser])
+    @action(detail=True, methods=['delete'], url_path=r'images/(?P<image_id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', permission_classes=[permissions.IsAdminUser])
+    def delete_image(self, request, pk=None, image_id=None):
+        """RWA 자산 이미지 삭제 (UUID 형식만 매칭)"""
+        asset = self.get_object()
+
+        try:
+            image = asset.images.get(id=image_id)
+            was_primary = image.is_primary
+            image.delete()
+
+            # 메인 이미지가 삭제된 경우, 남은 이미지 중 첫 번째를 메인으로 설정
+            if was_primary and asset.images.exists():
+                first_image = asset.images.order_by('order').first()
+                first_image.is_primary = True
+                first_image.save()
+
+            return Response(
+                {'message': '이미지가 성공적으로 삭제되었습니다.'},
+                status=status.HTTP_204_NO_CONTENT
+            )
+        except RWAAssetImage.DoesNotExist:
+            return Response(
+                {'error': '이미지를 찾을 수 없습니다.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+    @action(detail=True, methods=['patch'], url_path=r'images/(?P<image_id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/set-primary', permission_classes=[permissions.IsAdminUser])
     def set_primary_image(self, request, pk=None, image_id=None):
-        """특정 이미지를 메인 이미지로 설정"""
+        """특정 이미지를 메인 이미지로 설정 (UUID 형식만 매칭)"""
         asset = self.get_object()
 
         try:
@@ -754,13 +757,13 @@ class UserProfileViewSet(viewsets.ViewSet):
         # 업데이트 가능한 필드들
         updatable_fields = ['name', 'phone', 'profile_image']
         updated_fields = []
-        
+
         for field in updatable_fields:
             if field in data:
                 setattr(user, field, data[field])
                 updated_fields.append(field)
-        
+
         if updated_fields:
             user.save(update_fields=updated_fields)
-        
+
         return self.get_profile(request)
