@@ -26,7 +26,7 @@ COPY . .
 
 # 정적 파일 수집 (빌드 타임 전용 환경변수 설정)
 ENV DOCKER_BUILD=true
-RUN uv run python manage.py collectstatic --noinput || true
+RUN uv run python manage.py collectstatic --noinput --clear
 
 # 로그 디렉토리 생성
 RUN mkdir -p /app/logs

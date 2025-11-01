@@ -24,20 +24,21 @@ urlpatterns = [
     path("", root_ok),
     # EB에서 Health Check URL
     path("health/", health_check),
-    
+
     # Admin URLs
     path('admin/', admin.site.urls),
-    
+
     # API Documentation URLs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='api-docs'),  # /api/docs 별칭 추가
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    
+
     # Common URLs
     path('api/common/', include('apps.common.urls')),
-    
+
     # Solana Auth URLs
     path('', include('apps.solana_auth.urls')),
-    
+
     # GLI Content Management URLs
     path('', include('apps.gli_content.urls')),
 ]
