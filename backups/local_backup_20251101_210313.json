@@ -1,0 +1,2936 @@
+[
+{
+  "model": "solana_auth.solanauser",
+  "pk": "03129597-8698-473b-bc65-9569b04b856f",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$OwFtuSRXleVbpBD3SsvnfE$QhbFzy4AqoNl0WF3xHhhundqX10vkmhfMs8VLgUaJCA=",
+    "is_superuser": true,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.102Z",
+    "wallet_address": null,
+    "username": "admin_gli",
+    "email": "admin@gli.com",
+    "first_name": "GLI",
+    "last_name": "Administrator",
+    "membership_level": "vip",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-13T14:56:55.103Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.103Z",
+    "updated_at": "2025-10-13T14:56:55.103Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "043da7d2-a85f-4d33-8059-5df077ca80a2",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$AkwnONYuQ4lQ18ctfQYT6K$9ymv0zrqF20YnKi41rIGppaKqUY1JQXP6apN877xRBM=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-13T14:56:55.108Z",
+    "wallet_address": "5utTkSwBzqhwMRYF71S7pu17gcBU6M53UrwS3JquRtgg",
+    "username": "member2",
+    "email": "member2@gli.com",
+    "first_name": "회원",
+    "last_name": "2",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T11:18:53.976Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.108Z",
+    "updated_at": "2025-11-01T11:18:53.976Z",
+    "last_login": "2025-11-01T11:18:53.976Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "0b8e3016-4c7e-4b91-89a7-024f250b89cb",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$a9TuSRCNTM9NcEWfZJk0NU$+ANQcJRG84eb1ar3JBQTLBygGnWVDZcpZOm2qWBMpwU=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-11-01T11:10:53.801Z",
+    "wallet_address": null,
+    "username": "나나나나",
+    "email": "aaa@a.com",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T11:10:54.694Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-11-01T11:10:54.695Z",
+    "updated_at": "2025-11-01T11:10:54.695Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "16516335-306a-4096-90c3-23ffb64fc17d",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$DKnapDIWLC2TYJvDUF4jfS$25Va9NYGlZmRlPGTFCab/T6KX3Gs2TO1Eik5m22kaBI=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-11-01T11:04:33.968Z",
+    "wallet_address": null,
+    "username": "ahn@dreamfurnace.imf",
+    "email": "ahn@dreamfurnace.im",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T11:04:36.191Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-11-01T11:04:36.191Z",
+    "updated_at": "2025-11-01T11:04:36.191Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "25b34ad5-ddc0-41bc-a35d-2c3de28e22c9",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$30ROgAwwx1Ebzd80xuMPyp$AAFDMdtJvXAOvllFhCLu3HV8CVE5rxTV5vt7e0Xocq4=",
+    "is_superuser": false,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.112Z",
+    "wallet_address": "m2WLvPZ5MdZ5LczEN2dhAnJmSXyn9M5tp5wYyevHA2KF",
+    "username": "token_manager",
+    "email": "token@gli.com",
+    "first_name": "Token",
+    "last_name": "Manager",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-13T14:56:55.113Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.113Z",
+    "updated_at": "2025-10-13T14:56:55.113Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "2dd24951-db0a-49b7-9dcb-47f06a366fca",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$1ph5z5wQTU4Z1jsjHK8Fna$VLf7nYtIwyUTX4lzCL+qFRkUvo9Ovqn3zZWDTQK16Bw=",
+    "is_superuser": true,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.117Z",
+    "wallet_address": null,
+    "username": "ahndong",
+    "email": "ahndong@user.gli.com",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-13T14:56:55.117Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.117Z",
+    "updated_at": "2025-10-13T14:56:55.117Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "3d60ddb5-7a76-4d34-bbf0-aab01a8913c9",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$asgL6mKMLXmPGpU2DXILSD$ZOLm9cYoVhDI8OllPeN/aPXH8W7ufd/navksfFwvAJo=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-11-01T08:23:18.838Z",
+    "wallet_address": null,
+    "username": "안동현",
+    "email": "yachtahn@gmail.com",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T08:23:19.317Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-11-01T08:23:19.317Z",
+    "updated_at": "2025-11-01T08:23:19.317Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "513bd8bd-bfdd-4c41-9062-06a93beec771",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$hhIgYlopJG2PdL9UzOlj8c$40dZ9PqS0XVmDeRZS/xLXUTlD2WeWqqN1NVOkca3xK8=",
+    "is_superuser": false,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.121Z",
+    "wallet_address": null,
+    "username": "admin1",
+    "email": "admin1@gli.com",
+    "first_name": "일반",
+    "last_name": "관리자1",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T06:45:54.961Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.121Z",
+    "updated_at": "2025-11-01T06:45:54.961Z",
+    "last_login": "2025-11-01T06:45:54.961Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "5b244624-8cb4-4645-94e6-95d71d365110",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$WaaKIPnRjLZfUh82u3ABOn$j+A5FVkODdQ1QYpUV9AHKziMS1eYUlDXbwPUFqVEyJg=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-13T14:56:55.125Z",
+    "wallet_address": "5rFHPQ62n6f7dTJRwvuEzjLrvgYtRyfuimnnnm7FTug6",
+    "username": "member1",
+    "email": "member1@gli.com",
+    "first_name": "회원",
+    "last_name": "1",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T08:10:34.626Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.125Z",
+    "updated_at": "2025-11-01T08:10:34.626Z",
+    "last_login": "2025-11-01T08:10:34.626Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "5b69886c-b7be-4780-bc56-9f9713aeaac6",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$TqKDD7v0WkFQG4qgdiUEIT$o90UaDgWIaVhaMT41CjtiRKG+F9i6hLEh2WjQUDAFSo=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-11-01T09:12:00.153Z",
+    "wallet_address": null,
+    "username": "testuser",
+    "email": "test_signup@gli.com",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T10:48:37.105Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-11-01T09:12:00.742Z",
+    "updated_at": "2025-11-01T10:48:37.105Z",
+    "last_login": "2025-11-01T10:48:37.105Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "627d08b1-bc46-4d70-9db8-5e842fdbbc63",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$Lb6Lu1RIWyTP3zGN83ljS6$S2ldoiAr4uw4j5GZD1ZxRc1bN4gbgFgRm04Z4wRubzc=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-30T20:22:54.376Z",
+    "wallet_address": null,
+    "username": "testuser123",
+    "email": "test@example.com",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-30T20:22:55.054Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-30T20:22:55.054Z",
+    "updated_at": "2025-10-30T20:22:55.054Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "6da4715f-dee9-4821-8c39-6310f46250b3",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$hxTSYyiyWa1e2M81IAYacx$0siJe4I2wEDOfO85c9Vic22mgjn34TqHicWuroJuHvA=",
+    "is_superuser": true,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.129Z",
+    "wallet_address": null,
+    "username": "superadmin1",
+    "email": "superadmin1@gli.com",
+    "first_name": "슈퍼",
+    "last_name": "관리자1",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T10:56:26.390Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.130Z",
+    "updated_at": "2025-11-01T10:56:26.390Z",
+    "last_login": "2025-11-01T10:56:26.390Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "7d6c5a92-d357-45a6-a533-6eb47c3af5d7",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$EkTPGJAibDkhhso2vSaMQE$nUXyRRfEVGHoh5opkuO7Su6BMbYYMQgoghxQOsolrTw=",
+    "is_superuser": true,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.134Z",
+    "wallet_address": null,
+    "username": "superadmin2",
+    "email": "superadmin2@gli.com",
+    "first_name": "슈퍼",
+    "last_name": "관리자2",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T08:21:01.156Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.135Z",
+    "updated_at": "2025-11-01T08:21:01.156Z",
+    "last_login": "2025-11-01T08:21:01.156Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "a24eec0b-88dd-401d-b8f6-d2ec9b9b63b9",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$Lq559WTMmxdsyDfCElqk1a$RyO/ThPMB52QGTt3IL7S47YXOJn3GyDtR74o19OJHv8=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-10-13T14:56:55.138Z",
+    "wallet_address": "qXNam8PzsgVrvXVi4KX2aTNcjYUHCobAd47yhWcN4RDV",
+    "username": "member3",
+    "email": "member3@gli.com",
+    "first_name": "회원",
+    "last_name": "3",
+    "membership_level": "basic",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-31T05:18:51.807Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.139Z",
+    "updated_at": "2025-10-31T05:18:51.807Z",
+    "last_login": "2025-10-31T05:18:51.807Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "b50c4ed5-c11f-41fc-966f-83d0736683d1",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$goJoVIskahfOz2VogUIZ9H$1d8vPohsaz2GFzG7Kd46apgxjD1XjxfR4ueI/GH5H/E=",
+    "is_superuser": false,
+    "is_staff": true,
+    "date_joined": "2025-10-13T14:56:55.143Z",
+    "wallet_address": null,
+    "username": "admin2",
+    "email": "admin2@gli.com",
+    "first_name": "일반",
+    "last_name": "관리자2",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-10-13T14:56:55.143Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-10-13T14:56:55.143Z",
+    "updated_at": "2025-10-13T14:56:55.143Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.solanauser",
+  "pk": "fba6ba8a-69d5-4559-951e-0af8b635ae3a",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$7KoZlW2X2zbcLesajGoLUd$1NhLQtEhheAAnK2FDQRD+3Pa4323yxAw68QfhRCPYoc=",
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2025-11-01T11:08:30.139Z",
+    "wallet_address": null,
+    "username": "가가가",
+    "email": "asdf@asdfs.com",
+    "first_name": "",
+    "last_name": "",
+    "membership_level": "premium",
+    "sol_balance": "0E-9",
+    "last_balance_update": "2025-11-01T11:08:31.037Z",
+    "vpx_verify": 1,
+    "vpx_partner": 0,
+    "vpx_experience": 0,
+    "is_active": true,
+    "created_at": "2025-11-01T11:08:31.038Z",
+    "updated_at": "2025-11-01T11:08:31.038Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "solana_auth.authnonce",
+  "pk": 1,
+  "fields": {
+    "wallet_address": "5rFHPQ62n6f7dTJRwvuEzjLrvgYtRyfuimnnnm7FTug6",
+    "nonce": "99be559b46ecc66d0b18320de8f04076fe0c15af957cae08d12437b47fef79ba",
+    "created_at": "2025-10-14T04:09:41.263Z",
+    "is_consumed": true
+  }
+},
+{
+  "model": "solana_auth.faceverification",
+  "pk": "0c6fb121-cfdf-46ed-91ee-bdcebf916c17",
+  "fields": {
+    "user": "a24eec0b-88dd-401d-b8f6-d2ec9b9b63b9",
+    "verified": true,
+    "confidence": "1.0000",
+    "liveness_score": "1.0000",
+    "attempts": 1,
+    "check_details": [
+      {
+        "type": "blink",
+        "score": 0.23529411764705882,
+        "passed": true,
+        "checkId": "blink",
+        "instruction": "눈을 한 번 깜빡여주세요",
+        "totalChecks": 34,
+        "checksPassed": 8
+      },
+      {
+        "type": "head_turn",
+        "score": 0.8157894736842105,
+        "passed": true,
+        "checkId": "head_turn",
+        "instruction": "고개를 천천히 좌우로 돌려주세요",
+        "totalChecks": 38,
+        "checksPassed": 31
+      }
+    ],
+    "verification_timestamp": "2025-10-31T05:18:42.780Z",
+    "created_at": "2025-10-31T05:18:42.996Z",
+    "updated_at": "2025-10-31T05:18:42.996Z"
+  }
+},
+{
+  "model": "solana_auth.faceverification",
+  "pk": "1aba520b-5370-4412-af9f-92289a3565f2",
+  "fields": {
+    "user": "043da7d2-a85f-4d33-8059-5df077ca80a2",
+    "verified": true,
+    "confidence": "1.0000",
+    "liveness_score": "1.0000",
+    "attempts": 1,
+    "check_details": [
+      {
+        "type": "blink",
+        "score": 0.2647058823529412,
+        "passed": true,
+        "checkId": "blink",
+        "instruction": "눈을 한 번 깜빡여주세요",
+        "totalChecks": 34,
+        "checksPassed": 9
+      },
+      {
+        "type": "head_turn",
+        "score": 0.8717948717948718,
+        "passed": true,
+        "checkId": "head_turn",
+        "instruction": "고개를 천천히 좌우로 돌려주세요",
+        "totalChecks": 39,
+        "checksPassed": 34
+      }
+    ],
+    "verification_timestamp": "2025-10-30T20:52:07.095Z",
+    "created_at": "2025-10-30T20:52:07.354Z",
+    "updated_at": "2025-10-30T20:52:07.354Z"
+  }
+},
+{
+  "model": "solana_auth.faceverification",
+  "pk": "43e806c0-f701-4bfa-ad70-ea32ca461ac7",
+  "fields": {
+    "user": "5b244624-8cb4-4645-94e6-95d71d365110",
+    "verified": true,
+    "confidence": "1.0000",
+    "liveness_score": "1.0000",
+    "attempts": 1,
+    "check_details": [
+      {
+        "type": "blink",
+        "score": 0.38235294117647056,
+        "passed": true,
+        "checkId": "blink",
+        "instruction": "눈을 한 번 깜빡여주세요",
+        "totalChecks": 34,
+        "checksPassed": 13
+      },
+      {
+        "type": "head_turn",
+        "score": 0.8857142857142857,
+        "passed": true,
+        "checkId": "head_turn",
+        "instruction": "고개를 천천히 좌우로 돌려주세요",
+        "totalChecks": 35,
+        "checksPassed": 31
+      }
+    ],
+    "verification_timestamp": "2025-10-30T20:59:57.711Z",
+    "created_at": "2025-10-30T20:59:57.874Z",
+    "updated_at": "2025-10-30T20:59:57.874Z"
+  }
+},
+{
+  "model": "solana_auth.faceverification",
+  "pk": "d1144151-4759-4696-ae6c-ab73f208e204",
+  "fields": {
+    "user": "043da7d2-a85f-4d33-8059-5df077ca80a2",
+    "verified": true,
+    "confidence": "1.0000",
+    "liveness_score": "1.0000",
+    "attempts": 1,
+    "check_details": [
+      {
+        "type": "blink",
+        "score": 0.1282051282051282,
+        "passed": true,
+        "checkId": "blink",
+        "instruction": "눈을 한 번 깜빡여주세요",
+        "totalChecks": 39,
+        "checksPassed": 5
+      },
+      {
+        "type": "head_turn",
+        "score": 0.7647058823529411,
+        "passed": true,
+        "checkId": "head_turn",
+        "instruction": "고개를 천천히 좌우로 돌려주세요",
+        "totalChecks": 34,
+        "checksPassed": 26
+      }
+    ],
+    "verification_timestamp": "2025-10-30T20:51:22.373Z",
+    "created_at": "2025-10-30T20:51:22.600Z",
+    "updated_at": "2025-10-30T20:51:22.600Z"
+  }
+},
+{
+  "model": "solana_auth.admingrade",
+  "pk": 1,
+  "fields": {
+    "name": "슈퍼 관리자",
+    "description": "모든 권한을 가진 최고 관리자",
+    "created_at": "2025-10-13T15:11:17.729Z",
+    "updated_at": "2025-10-13T15:11:17.729Z"
+  }
+},
+{
+  "model": "solana_auth.admingrade",
+  "pk": 2,
+  "fields": {
+    "name": "일반 관리자",
+    "description": "제한된 권한을 가진 일반 관리자",
+    "created_at": "2025-10-13T15:11:17.737Z",
+    "updated_at": "2025-10-13T15:11:17.737Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 1,
+  "fields": {
+    "user": "b50c4ed5-c11f-41fc-966f-83d0736683d1",
+    "grade": 2,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.757Z",
+    "updated_at": "2025-10-13T15:11:17.757Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 2,
+  "fields": {
+    "user": "7d6c5a92-d357-45a6-a533-6eb47c3af5d7",
+    "grade": 1,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.767Z",
+    "updated_at": "2025-10-13T15:11:17.768Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 3,
+  "fields": {
+    "user": "6da4715f-dee9-4821-8c39-6310f46250b3",
+    "grade": 1,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.778Z",
+    "updated_at": "2025-10-13T15:11:17.778Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 4,
+  "fields": {
+    "user": "513bd8bd-bfdd-4c41-9062-06a93beec771",
+    "grade": 2,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.787Z",
+    "updated_at": "2025-10-13T15:11:17.787Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 5,
+  "fields": {
+    "user": "2dd24951-db0a-49b7-9dcb-47f06a366fca",
+    "grade": 1,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.796Z",
+    "updated_at": "2025-10-13T15:11:17.796Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 6,
+  "fields": {
+    "user": "25b34ad5-ddc0-41bc-a35d-2c3de28e22c9",
+    "grade": 2,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.805Z",
+    "updated_at": "2025-10-13T15:11:17.805Z"
+  }
+},
+{
+  "model": "solana_auth.adminuser",
+  "pk": 7,
+  "fields": {
+    "user": "03129597-8698-473b-bc65-9569b04b856f",
+    "grade": 1,
+    "is_active": true,
+    "last_login_ip": null,
+    "created_at": "2025-10-13T15:11:17.815Z",
+    "updated_at": "2025-10-13T15:11:17.815Z"
+  }
+},
+{
+  "model": "solana_auth.teammember",
+  "pk": "37cd12fe-51e7-4f54-ade4-448674128b8d",
+  "fields": {
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/test-api-upload/443425cc97924e4e86ce4da27c71777b_20251020_112104.png",
+    "name_ko": "미입력",
+    "name_en": "Not Entered",
+    "position_ko": "테스트 직책",
+    "position_en": "Test Position",
+    "role_ko": "테스트 역할",
+    "role_en": "Test Role",
+    "tags": [
+      "test",
+      "api"
+    ],
+    "order": 999,
+    "is_active": true,
+    "created_at": "2025-10-20T02:21:04.471Z",
+    "updated_at": "2025-10-20T03:40:46.548Z"
+  }
+},
+{
+  "model": "solana_auth.teammember",
+  "pk": "7a17eb85-4738-4451-8e1c-8d21e0f42140",
+  "fields": {
+    "image_url": null,
+    "name_ko": "미입력",
+    "name_en": "Not Entered",
+    "position_ko": "테스트 CEO",
+    "position_en": "Test CEO",
+    "role_ko": "GLI Platform 테스트를 담당합니다.",
+    "role_en": "Responsible for GLI Platform testing.",
+    "tags": [
+      "Testing",
+      "Quality Assurance",
+      "Development"
+    ],
+    "order": 99,
+    "is_active": true,
+    "created_at": "2025-10-20T04:18:23.351Z",
+    "updated_at": "2025-10-20T04:21:14.943Z"
+  }
+},
+{
+  "model": "solana_auth.teammember",
+  "pk": "98ebcd9b-96ab-4f8c-be0b-39e849064309",
+  "fields": {
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/64ef8ed09dae4f01a0fad7c34b573517_20251020_132135.png",
+    "name_ko": "닥터메너톤",
+    "name_en": "Dr. MannerTone",
+    "position_ko": "CTO - IT 총괄",
+    "position_en": "CTO",
+    "role_ko": "테스트 역할",
+    "role_en": "Test Role",
+    "tags": [
+      "test",
+      "api"
+    ],
+    "order": 999,
+    "is_active": true,
+    "created_at": "2025-10-20T03:44:49.569Z",
+    "updated_at": "2025-10-20T05:01:44.227Z"
+  }
+},
+{
+  "model": "solana_auth.teammember",
+  "pk": "d72a04ea-3f7f-4318-9cd9-5d5b77841119",
+  "fields": {
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/test-api-upload/92859467962647ceae63271e3b9c7d8d_20251020_123508.png",
+    "name_ko": "미입력",
+    "name_en": "Not Entered",
+    "position_ko": "테스트 직책",
+    "position_en": "Test Position",
+    "role_ko": "테스트 역할",
+    "role_en": "Test Role",
+    "tags": [
+      "test",
+      "api"
+    ],
+    "order": 999,
+    "is_active": true,
+    "created_at": "2025-10-20T03:35:08.901Z",
+    "updated_at": "2025-10-20T03:35:08.901Z"
+  }
+},
+{
+  "model": "solana_auth.teammember",
+  "pk": "f879c0b5-14c5-46a8-9cc7-a85ceb44d967",
+  "fields": {
+    "image_url": null,
+    "name_ko": "김GLI",
+    "name_en": "GLI Kim",
+    "position_ko": "GLI CEO",
+    "position_en": "Chief Executive Officer",
+    "role_ko": "GLI Platform의 전반적인 운영과 전략적 방향을 담당합니다.",
+    "role_en": "Responsible for overall operations and strategic direction of GLI Platform.",
+    "tags": [
+      "Leadership",
+      "Strategy",
+      "Blockchain"
+    ],
+    "order": 1,
+    "is_active": true,
+    "created_at": "2025-10-20T04:30:50.451Z",
+    "updated_at": "2025-10-20T04:30:50.452Z"
+  }
+},
+{
+  "model": "solana_auth.teammember",
+  "pk": "fa0b2af5-242b-450d-b1b0-22d0cb752573",
+  "fields": {
+    "image_url": null,
+    "name_ko": "미입력",
+    "name_en": "Not Entered",
+    "position_ko": "테스트 직책",
+    "position_en": "Test Position",
+    "role_ko": "테스트 역할",
+    "role_en": "Test Role",
+    "tags": [
+      "test",
+      "api"
+    ],
+    "order": 999,
+    "is_active": true,
+    "created_at": "2025-10-20T03:45:45.915Z",
+    "updated_at": "2025-10-20T04:21:22.616Z"
+  }
+},
+{
+  "model": "solana_auth.projectfeature",
+  "pk": "8015fb5c-fa9b-46eb-bc90-89a9bdf0288e",
+  "fields": {
+    "icon": "💸",
+    "title_ko": "I - INVESTMENT : 왜 실물자산(RWA) 기반 블록체인인가?",
+    "title_en": "I - INVESTMENT : Why a Real Asset-Based Blockchain (RWA)?",
+    "description_ko": "온체인 실물자산은 스테이킹이나 파밍 등 다양한 DeFi 상품으로 활용이 가능하여, 단순 임대나 대여 수익에 그쳤던 오프라인 실물자산과 달리 새로운 가치를 창출할 수 있습니다. 또한 화폐 기반 스테이블코인은 중앙집중적 구조로 인플레이션에 취약하지만, 온체인 실물자산 토큰은 탈중앙화가 가능하고 인플레이션에 강한 안정적 자산입니다. 더불어 DeFi의 고수익률이 일시적이고 변동성이 큰 반면, 부동산 등의 실물자산은 임대 수익을 기반으로 지속 가능한 수익을 제공하며, 이를 블록체인과 결합하면 안정적인 수익 창출이 가능합니다.",
+    "description_en": "On-chain real-world assets can be utilized in various DeFi products such as staking and farming, creating new value beyond the simple rental or leasing income of traditional offline assets. While fiat-based stablecoins are centralized and vulnerable to inflation, on-chain asset tokens are decentralized and serve as stable, inflation-resistant assets. Moreover, unlike the temporary and volatile high yields of DeFi, real-world assets like real estate generate sustainable rental income, and when combined with blockchain, they enable stable and continuous profit generation.",
+    "order": 3,
+    "is_active": true,
+    "created_at": "2025-10-20T01:39:55.331Z",
+    "updated_at": "2025-10-20T01:47:21.768Z"
+  }
+},
+{
+  "model": "solana_auth.projectfeature",
+  "pk": "cd584d4a-545e-4ed8-a808-99d233155954",
+  "fields": {
+    "icon": "🎰",
+    "title_ko": "G - GAME : 소셜 카지노",
+    "title_en": "G - GAME : Social CASINO",
+    "description_ko": "네오위즈는 마카오의 LT게임과 슬롯 소프트웨어 공급 계약을 통해 B2B 시장을 확대하고, 개발비와 고정비가 낮은 소셜 카지노 사업 특성으로 30~40%의 높은 영업이익률을 유지하고 있습니다. 또한 강원랜드와의 슬롯머신 공동개발 협약으로 온·오프라인 카지노 산업을 연계하며 안정적인 고수익 구조를 구축했습니다.",
+    "description_en": "Neowiz has expanded its B2B presence by supplying slot software to Macau’s LT Game, maintaining a high operating margin of 30–40% due to the low-cost nature of its social casino business. Through an exclusive slot machine co-development agreement with Kangwon Land, the company has integrated online and offline casino operations, establishing a stable and highly profitable structure.",
+    "order": 1,
+    "is_active": true,
+    "created_at": "2025-10-20T01:35:19.976Z",
+    "updated_at": "2025-10-20T01:53:31.609Z"
+  }
+},
+{
+  "model": "solana_auth.projectfeature",
+  "pk": "f848d283-b3aa-4f1b-9fd8-e838fa193d30",
+  "fields": {
+    "icon": "🏨",
+    "title_ko": "L – LEISURE : 새로운 형태의 디지털 레저 산업",
+    "title_en": "L – LEISURE: A New Form of Digital Recreation Industry",
+    "description_ko": "온체인 레저 산업은 단순한 여가 활동을 넘어 참여와 보상, 그리고 자산화가 결합된 새로운 시장을 형성하고 있습니다. 이용자는 게임, 스포츠, 여행 등 다양한 레저 활동을 통해 토큰이나 NFT를 획득하고, 이를 거래하거나 보유함으로써 실질적인 경제적 가치를 얻을 수 있습니다. 이러한 구조는 기존의 소비 중심 레저 시장을 참여형·수익형 생태계로 전환시키며, 오프라인과 온라인을 아우르는 디지털 자산 기반 레저 경제를 만들어가고 있습니다.",
+    "description_en": "The on-chain leisure industry is evolving beyond traditional recreation, forming a new market that combines participation, rewards, and assetization. Users can earn tokens or NFTs through activities such as gaming, sports, or travel, gaining tangible economic value by trading or holding them. This model transforms the consumption-driven leisure market into a participatory and profit-generating ecosystem, bridging offline and online experiences to establish a digital asset–based leisure economy.",
+    "order": 2,
+    "is_active": true,
+    "created_at": "2025-10-20T01:53:00.143Z",
+    "updated_at": "2025-10-20T01:55:03.897Z"
+  }
+},
+{
+  "model": "solana_auth.strategyphase",
+  "pk": "4826c574-a7c7-4927-99f2-b24f595b6e48",
+  "fields": {
+    "icon": "🌐",
+    "title_ko": "글로벌 커뮤니티 확장",
+    "title_en": "Global Community Expansion",
+    "description_ko": "글로벌 여행·레저 플랫폼 기반의 토큰 커뮤니티를 구축하고, 브랜드 마케팅 파워를 강화합니다.",
+    "description_en": "Build a token-based global community around travel and leisure platforms and enhance brand marketing power.",
+    "features_ko": [
+      "글로벌 레저 파트너십 구축",
+      "커뮤니티 리워드 프로그램",
+      "마케팅 DAO 운영"
+    ],
+    "features_en": [
+      "Global leisure partnerships",
+      "Community reward programs",
+      "Marketing DAO operations"
+    ],
+    "order": 1,
+    "is_active": true,
+    "created_at": "2025-10-20T15:40:09.537Z",
+    "updated_at": "2025-10-20T15:40:09.537Z"
+  }
+},
+{
+  "model": "solana_auth.strategyphase",
+  "pk": "530400e9-81da-4c6e-9e8c-84623cf0963c",
+  "fields": {
+    "icon": "🚀",
+    "title_ko": "글로벌 상장 및 지속 성장",
+    "title_en": "Global Listing and Sustainable Growth",
+    "description_ko": "소셜 카지노 게임사로서 지속적인 성장 기반을 마련하고, 북미 시장 중심으로 나스닥 상장을 추진합니다.",
+    "description_en": "Build a foundation for sustainable growth as a social gaming company and pursue NASDAQ listing in North America.",
+    "features_ko": [
+      "북미 시장 진출",
+      "글로벌 상장 준비 및 IR 강화",
+      "지속 가능한 Web3 비즈니스 모델 확립"
+    ],
+    "features_en": [
+      "Expansion into North American markets",
+      "IPO readiness and investor relations",
+      "Establish sustainable Web3 business model"
+    ],
+    "order": 4,
+    "is_active": true,
+    "created_at": "2025-10-20T15:40:09.546Z",
+    "updated_at": "2025-10-20T15:40:09.546Z"
+  }
+},
+{
+  "model": "solana_auth.strategyphase",
+  "pk": "550565fb-392b-4a35-aba4-45e6527b87cb",
+  "fields": {
+    "icon": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-strategy/394296b3a11044a7a1bfbce02d9f836d_20251031_135822.jpeg",
+    "title_ko": "실물자산 토큰화 (RWA)",
+    "title_en": "Real-World Asset Tokenization",
+    "description_ko": "실물자산 토큰(RWA) 운용을 통해 안정적인 수익 기반을 확보하고 초기 투자 생태계를 형성합니다.",
+    "description_en": "Secure stable returns through real-world asset (RWA) token operations and establish the initial investment ecosystem.",
+    "features_ko": [
+      "부동산·리조트 RWA 토큰 발행",
+      "실물 담보 기반 운용 모델",
+      "안정형 투자 상품 출시"
+    ],
+    "features_en": [
+      "Real estate and resort RWA token issuance",
+      "Asset-backed operation model",
+      "Launch of stable investment products"
+    ],
+    "order": 0,
+    "is_active": true,
+    "created_at": "2025-10-20T15:40:09.534Z",
+    "updated_at": "2025-10-31T04:58:24.399Z"
+  }
+},
+{
+  "model": "solana_auth.strategyphase",
+  "pk": "83cf2d39-e9e7-4d86-b22b-2b847c0712aa",
+  "fields": {
+    "icon": "🎰",
+    "title_ko": "소셜 카지노 플랫폼 확장",
+    "title_en": "Social Casino Platform Expansion",
+    "description_ko": "소셜 카지노와 레저 플랫폼의 결합을 통해 수익성과 이용자 참여를 극대화하고, 매출 1천억 원 달성을 목표로 합니다.",
+    "description_en": "Combine social casino and leisure platforms to maximize profitability and user engagement, targeting KRW 100 billion in revenue.",
+    "features_ko": [
+      "카지노 게임·NFT 연동",
+      "크로스체인 결제 시스템",
+      "유저 랭킹 및 리워드 구조"
+    ],
+    "features_en": [
+      "Casino games integrated with NFTs",
+      "Cross-chain payment system",
+      "User ranking and reward mechanisms"
+    ],
+    "order": 3,
+    "is_active": true,
+    "created_at": "2025-10-20T15:40:09.543Z",
+    "updated_at": "2025-10-20T15:40:09.543Z"
+  }
+},
+{
+  "model": "solana_auth.strategyphase",
+  "pk": "baa65be7-1c04-49a4-8dc1-acf9160a2c6b",
+  "fields": {
+    "icon": "💱",
+    "title_ko": "라이선스 기반 디지털 자산 거래소 설립",
+    "title_en": "Licensed Digital Asset Exchange",
+    "description_ko": "GLI 생태계를 연결하는 허브로서, STO와 가상자산을 아우르는 거래소를 설립하여 DeFi 인프라를 확장합니다.",
+    "description_en": "Establish a licensed exchange connecting GLI's ecosystem, integrating STO and crypto markets to expand DeFi infrastructure.",
+    "features_ko": [
+      "STO 및 가상자산 상장",
+      "규제 대응형 거래 시스템",
+      "온·오프체인 연동 결제 시스템"
+    ],
+    "features_en": [
+      "STO and crypto listings",
+      "Regulatory-compliant trading system",
+      "On-chain/off-chain payment integration"
+    ],
+    "order": 2,
+    "is_active": true,
+    "created_at": "2025-10-20T15:40:09.541Z",
+    "updated_at": "2025-10-20T15:40:09.541Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "172d77df-4807-4eb5-9813-f61bddb72707",
+  "fields": {
+    "quarter": "2028 Q1",
+    "status_icon": "🟩",
+    "title_ko": "거래소 정식 오픈",
+    "title_en": "Exchange Official Launch",
+    "description_ko": "디지털자산 거래소를 정식 오픈하여, GLI 생태계 내 자산 순환 구조를 완성합니다.",
+    "description_en": "Officially launch the digital asset exchange, completing GLI's internal asset circulation ecosystem.",
+    "order": 9,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.216Z",
+    "updated_at": "2025-10-20T16:13:17.216Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "21190fda-ad83-455f-a3ed-33623b73d7e7",
+  "fields": {
+    "quarter": "2025 Q4",
+    "status_icon": "⏳",
+    "title_ko": "웹 플랫폼 개발 착수",
+    "title_en": "Web Platform Development Start",
+    "description_ko": "GLI 생태계의 핵심인 웹 플랫폼 개발을 시작하고, UX·UI 및 백엔드 구조 설계를 완료합니다.",
+    "description_en": "Begin core web platform development for the GLI ecosystem, completing UX/UI and backend architecture design.",
+    "order": 3,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.190Z",
+    "updated_at": "2025-10-20T16:13:17.190Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "29c6767b-63a9-4fac-9b3c-f9997694186e",
+  "fields": {
+    "quarter": "2025 Q3",
+    "status_icon": "🟩",
+    "title_ko": "글로벌 여행 및 레저 상품 기획",
+    "title_en": "Global Travel & Leisure Product Planning",
+    "description_ko": "해외 파트너사와 협력하여 여행·레저 상품을 공동 기획하고 현지 제휴 체계를 마련합니다.",
+    "description_en": "Collaborate with global partners to co-develop travel and leisure products and establish local alliances.",
+    "order": 2,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.186Z",
+    "updated_at": "2025-10-20T16:13:17.186Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "55da4e7a-48b5-48bb-ac2b-d2fdb9cde55f",
+  "fields": {
+    "quarter": "2026 Q3",
+    "status_icon": "🟩",
+    "title_ko": "멤버십 여행 플랫폼 출시",
+    "title_en": "Launch of Membership Travel Platform",
+    "description_ko": "멤버십 기반 여행 및 레저 상품을 정식 출시하며, 글로벌 이용자를 대상으로 커뮤니티를 확장합니다.",
+    "description_en": "Launch the membership-based travel and leisure platform, expanding community engagement worldwide.",
+    "order": 6,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.202Z",
+    "updated_at": "2025-10-20T16:13:17.202Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "70fc6037-ea51-498f-bde4-c8199fdc4085",
+  "fields": {
+    "quarter": "2029 Q2",
+    "status_icon": "🚀",
+    "title_ko": "IPO (나스닥 상장 추진)",
+    "title_en": "IPO (NASDAQ Listing Initiative)",
+    "description_ko": "글로벌 소셜 게이밍 및 투자 생태계를 기반으로 북미 중심의 IPO를 추진합니다.",
+    "description_en": "Pursue IPO on NASDAQ, leveraging global social gaming and investment ecosystem.",
+    "order": 10,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.220Z",
+    "updated_at": "2025-10-20T16:13:17.220Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "7342d07f-3350-47e6-8280-3ee24ccebb35",
+  "fields": {
+    "quarter": "2026 Q1",
+    "status_icon": "🕐",
+    "title_ko": "해외 실물자산(RWA) 프로젝트 개발",
+    "title_en": "Overseas RWA Project Development",
+    "description_ko": "해외 리조트·호텔 등 실물자산 기반 프로젝트를 발굴하고, RWA 토큰 발행 구조를 설계합니다.",
+    "description_en": "Identify overseas asset-backed projects such as resorts and hotels, and design the RWA token issuance model.",
+    "order": 4,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.194Z",
+    "updated_at": "2025-10-20T16:13:17.194Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "75e9555a-d885-43b1-8def-7cfac41509de",
+  "fields": {
+    "quarter": "2025 Q2",
+    "status_icon": "🟩",
+    "title_ko": "IR 및 법인 설립 준비",
+    "title_en": "IR & Entity Setup",
+    "description_ko": "IR 자료 및 홍보 콘텐츠 제작을 완료하고, 법인 설립 및 해외 ESTA 관련 초기 행정 절차를 진행합니다.",
+    "description_en": "Complete IR and marketing materials, and initiate corporate setup and overseas administrative (ESTA) procedures.",
+    "order": 1,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.181Z",
+    "updated_at": "2025-10-20T16:13:17.181Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "8595afb3-de1b-49e3-9ff3-a72bb7d62741",
+  "fields": {
+    "quarter": "2026 Q4",
+    "status_icon": "🕐",
+    "title_ko": "SERIES A 펀딩",
+    "title_en": "Series A Funding",
+    "description_ko": "60억 원 규모의 시드 펀딩에 이어, 플랫폼 고도화 및 글로벌 확장을 위한 Series A 라운드를 진행합니다.",
+    "description_en": "Following the 6B KRW seed funding, initiate Series A round for platform expansion and global scaling.",
+    "order": 7,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.206Z",
+    "updated_at": "2025-10-20T16:13:17.206Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "d8d10fc1-5d6a-4c04-a09d-6c55d6e7c6ae",
+  "fields": {
+    "quarter": "2027 Q2",
+    "status_icon": "⏳",
+    "title_ko": "디지털자산 거래소 개발",
+    "title_en": "Digital Asset Exchange Development",
+    "description_ko": "STO 및 가상자산이 통합된 라이선스 기반 거래소를 구축하고, DeFi 생태계 확장을 위한 연동 시스템을 개발합니다.",
+    "description_en": "Develop a licensed exchange integrating STO and crypto markets, with DeFi ecosystem interoperability.",
+    "order": 8,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.212Z",
+    "updated_at": "2025-10-20T16:13:17.212Z"
+  }
+},
+{
+  "model": "solana_auth.developmenttimeline",
+  "pk": "e6ef9b29-d42e-4dd7-8315-fc8b2de345f3",
+  "fields": {
+    "quarter": "2026 Q2",
+    "status_icon": "⏳",
+    "title_ko": "GLI 플랫폼 핵심 토큰 발행",
+    "title_en": "GLI Core Token Issuance",
+    "description_ko": "GLIB / GLID / GLIL 토큰을 발행하고, 온체인 기반의 지갑 연동 시스템을 구축합니다.",
+    "description_en": "Issue GLIB / GLID / GLIL tokens and deploy on-chain wallet integration systems.",
+    "order": 5,
+    "is_active": true,
+    "created_at": "2025-10-20T16:13:17.198Z",
+    "updated_at": "2025-10-20T16:13:17.198Z"
+  }
+},
+{
+  "model": "solana_auth.tokenecosystem",
+  "pk": "81564211-d453-404b-a818-ef4a5890f10c",
+  "fields": {
+    "icon": "🔵",
+    "name": "GLI Business",
+    "symbol": "GLIB",
+    "description_ko": "GLIB는 실물자산 기반의 투자형 코인으로, 동남아 부동산 및 사업 아이템에 투자됩니다.\n수익률에 따른 배당이 제공되며, 거래소 상장 계획은 없고, 일정 등급 이상의 보유자에게 주식매수권이 부여됩니다.",
+    "description_en": "GLIB is a real-asset investment token for Southeast Asian real estate and business ventures.\nHolders receive dividends based on performance; no exchange listing is planned. High-tier holders may be granted stock purchase rights.",
+    "features_ko": [
+      "프리세일을 통해 구매",
+      "수익률에 따른 배당",
+      "거래소 상장 계획 없음",
+      "등급 및 보유량에 따라 혜택 차등",
+      "주식매수권 부여"
+    ],
+    "features_en": [
+      "Purchase via presale",
+      "Dividend distribution by yield",
+      "No exchange listing plan",
+      "Tiered benefits by holding volume",
+      "Stock purchase rights granted"
+    ],
+    "total_supply": "1,000,000,000",
+    "current_price": "$1",
+    "order": 1,
+    "is_active": true,
+    "created_at": "2025-10-20T16:37:58.263Z",
+    "updated_at": "2025-10-20T16:37:58.263Z"
+  }
+},
+{
+  "model": "solana_auth.tokenecosystem",
+  "pk": "a211269a-9043-4544-9261-fde5bbd21087",
+  "fields": {
+    "icon": "🔷",
+    "name": "GLI Governance",
+    "symbol": "GLID",
+    "description_ko": "GLID는 플랫폼의 의사결정과 운영 투표에 참여할 수 있는 거버넌스 코인입니다.\n투자 사업 아이템 및 중개 서비스 수수료 지불에 활용되며, 거래소 상장 가능한 주요 유통 토큰입니다.",
+    "description_en": "GLID is a governance token enabling participation in platform voting and decision-making.\nUsed for investment project voting and service fee payments. It serves as a tradable exchange-listed governance asset.",
+    "features_ko": [
+      "투자 사업 아이템 투표 참여",
+      "중개 서비스 수수료 지불",
+      "투자 포트폴리오 검토",
+      "사업 일정 및 순위 검토",
+      "거래소 상장 토큰"
+    ],
+    "features_en": [
+      "Participate in investment project voting",
+      "Pay brokerage and service fees",
+      "Review investment portfolios",
+      "Evaluate business schedules and priorities",
+      "Exchange-listed governance token"
+    ],
+    "total_supply": "500,000,000",
+    "current_price": "$0.8",
+    "order": 2,
+    "is_active": true,
+    "created_at": "2025-10-20T16:37:58.267Z",
+    "updated_at": "2025-10-20T16:37:58.267Z"
+  }
+},
+{
+  "model": "solana_auth.tokenecosystem",
+  "pk": "f2b0454b-7a3d-4968-9b5c-13c19d0e4a88",
+  "fields": {
+    "icon": "🔹",
+    "name": "GLI Leisure",
+    "symbol": "GLIL",
+    "description_ko": "GLIL은 오프체인에서 사용되는 게임 및 레저 포인트로, 동남아 레저 상품 이용에 사용됩니다.\n현금 전환이 불가하며, 미화 달러에 1:1 페깅되어 GLI 플랫폼 내에서만 교환 가능합니다.",
+    "description_en": "GLIL is an off-chain game and leisure point used for Southeast Asian leisure services.\nIt is non-convertible to cash, pegged 1:1 with USD, and exchangeable only within the GLI platform.",
+    "features_ko": [
+      "게임 생태계 전용 포인트",
+      "현금 환전 불가",
+      "미화 달러 1:1 페깅",
+      "상장 및 세일 계획 없음",
+      "GLI 플랫폼 내 교환 가능"
+    ],
+    "features_en": [
+      "Used within the gaming ecosystem",
+      "Not convertible to cash",
+      "Pegged 1:1 to USD",
+      "No listing or sale plan",
+      "Exchangeable within GLI platform"
+    ],
+    "total_supply": "2,000,000,000",
+    "current_price": "$1",
+    "order": 3,
+    "is_active": true,
+    "created_at": "2025-10-20T16:37:58.269Z",
+    "updated_at": "2025-10-20T16:37:58.269Z"
+  }
+},
+{
+  "model": "solana_auth.newsarticle",
+  "pk": "ec77ba82-7abb-44cc-9328-486e1bac695d",
+  "fields": {
+    "title_ko": "제목1",
+    "title_en": "eng title1",
+    "content_ko": "내용",
+    "content_en": "content",
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/rwa-assets/38a24615f1564c54976d9ae7b4a41ab1_20251101_144736.png",
+    "external_url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8396244&ref=N",
+    "publication_date": "2025-11-01",
+    "status": "published",
+    "order": 0,
+    "is_active": true,
+    "created_at": "2025-11-01T07:14:38.756Z",
+    "updated_at": "2025-11-01T07:14:38.756Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "1021cd06-781d-4411-aa22-3116380a5842",
+  "fields": {
+    "email": "aaa@a.com",
+    "code": "876755",
+    "expires_at": "2025-11-01T11:25:28.573Z",
+    "is_used": true,
+    "created_at": "2025-11-01T11:10:28.587Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "203c84cf-8a47-4cf7-984c-81c06eb2fc7d",
+  "fields": {
+    "email": "ahn@dreamfurnace.im",
+    "code": "459546",
+    "expires_at": "2025-11-01T11:11:56.712Z",
+    "is_used": true,
+    "created_at": "2025-11-01T10:56:56.719Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "3e36cb79-545b-40c2-9c01-99f07fab1cb7",
+  "fields": {
+    "email": "asdf@asdfs.com",
+    "code": "678707",
+    "expires_at": "2025-11-01T11:22:51.616Z",
+    "is_used": true,
+    "created_at": "2025-11-01T11:07:51.619Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "4d7eef4f-89aa-47ff-8e07-d0b7cf222d1c",
+  "fields": {
+    "email": "yachtahn@gmail.com",
+    "code": "679624",
+    "expires_at": "2025-11-01T08:30:44.950Z",
+    "is_used": true,
+    "created_at": "2025-11-01T08:15:44.963Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "65949603-5dca-4075-886f-cae4bb733996",
+  "fields": {
+    "email": "ahn@dreamfurnace.imf",
+    "code": "040325",
+    "expires_at": "2025-11-01T11:22:16.847Z",
+    "is_used": false,
+    "created_at": "2025-11-01T11:07:16.857Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "8dcd0aef-090b-4e8a-a54a-b29dafc9ccaf",
+  "fields": {
+    "email": "test_signup@gli.com",
+    "code": "367912",
+    "expires_at": "2025-11-01T09:26:23.388Z",
+    "is_used": true,
+    "created_at": "2025-11-01T09:11:23.392Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "92ac7883-1f9c-4bac-b492-27ce9f5cd102",
+  "fields": {
+    "email": "bbb@b.com",
+    "code": "171603",
+    "expires_at": "2025-11-01T11:31:29.865Z",
+    "is_used": false,
+    "created_at": "2025-11-01T11:16:29.881Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "9b7f4555-c052-4f23-a87b-5be89e5c41c9",
+  "fields": {
+    "email": "yachtahn@gmail.com",
+    "code": "142350",
+    "expires_at": "2025-11-01T08:20:08.420Z",
+    "is_used": true,
+    "created_at": "2025-11-01T08:05:08.427Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "c79590a4-d078-4a42-af73-b72869a013ef",
+  "fields": {
+    "email": "test@example.com",
+    "code": "082489",
+    "expires_at": "2025-10-30T20:36:32.877Z",
+    "is_used": true,
+    "created_at": "2025-10-30T20:21:32.883Z"
+  }
+},
+{
+  "model": "solana_auth.emailverificationcode",
+  "pk": "f30bd5d7-4d74-4d84-b67c-1d124569a3c8",
+  "fields": {
+    "email": "bbb@b.com",
+    "code": "013124",
+    "expires_at": "2025-11-01T11:26:36.325Z",
+    "is_used": true,
+    "created_at": "2025-11-01T11:11:36.329Z"
+  }
+},
+{
+  "model": "gli_content.shoppingcategory",
+  "pk": "04617999-d1c9-4a59-b688-546211820c45",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.083Z",
+    "updated_at": "2025-10-20T19:51:38.083Z",
+    "name": "상품",
+    "name_en": "",
+    "description": "GLI-L 토큰으로 구매할 수 있는 프리미엄 상품들",
+    "description_en": "",
+    "icon": "🛍️",
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.shoppingcategory",
+  "pk": "7440548d-5680-4b9f-b930-42aad4a8a638",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.089Z",
+    "updated_at": "2025-10-20T19:51:38.089Z",
+    "name": "레스토랑",
+    "name_en": "",
+    "description": "GLI-L 토큰으로 예약할 수 있는 파인 다이닝 레스토랑",
+    "description_en": "",
+    "icon": "🍽️",
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.shoppingcategory",
+  "pk": "d624364e-e997-430d-91ef-3ef0171a11fc",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.071Z",
+    "updated_at": "2025-10-20T19:51:38.072Z",
+    "name": "리조트&호텔 예약",
+    "name_en": "",
+    "description": "GLI-L 토큰으로 예약할 수 있는 프리미엄 리조트와 호텔",
+    "description_en": "",
+    "icon": "🏨",
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "01a22a61-eea0-499a-84c8-e8d241425b20",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.161Z",
+    "updated_at": "2025-10-20T19:51:38.161Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI 요가매트",
+    "name_en": "",
+    "description": "프리미엄 친환경 소재 요가매트입니다. 미끄럼 방지 기능과 쿠션감이 뛰어나 편안한 운동을 즐길 수 있습니다.",
+    "description_en": "",
+    "short_description": "친환경 프리미엄 요가매트",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "75.00000000",
+    "price_usd": "75.00",
+    "stock_quantity": 6,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/600x400/9370DB/FFFFFF/png?text=GLI+Yoga+Mat",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": false,
+    "tags": [
+      "스포츠",
+      "요가",
+      "매트",
+      "운동",
+      "Sports",
+      "Yoga",
+      "Mat",
+      "Exercise"
+    ],
+    "attributes": {
+      "size": "183cm x 61cm",
+      "colors": [
+        "Purple",
+        "Pink",
+        "Blue",
+        "Green"
+      ],
+      "material": "TPE (Eco-Friendly)",
+      "thickness": "6mm",
+      "categoryId": "sports"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "1cf282f2-b443-4104-b753-459a5a5e1578",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.115Z",
+    "updated_at": "2025-10-20T19:51:38.115Z",
+    "category": "d624364e-e997-430d-91ef-3ef0171a11fc",
+    "name": "GLI Mountain Lodge",
+    "name_en": "",
+    "description": "설악산의 청정 자연 속에서 힐링할 수 있는 마운틴 리조트입니다. 사계절 아름다운 경관과 함께 다양한 액티비티를 즐길 수 있습니다.",
+    "description_en": "",
+    "short_description": "설악산 자연 속 힐링 리조트",
+    "short_description_en": "",
+    "product_type": "resort",
+    "price_glil": "120.00000000",
+    "price_usd": "120.00",
+    "stock_quantity": 40,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/800x600/228B22/FFFFFF/png?text=GLI+Mountain+Lodge",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "산악",
+      "자연",
+      "설악산",
+      "힐링",
+      "Mountain",
+      "Nature",
+      "Seoraksan",
+      "Healing"
+    ],
+    "attributes": {
+      "rooms": [
+        {
+          "type": "standard",
+          "price": 120,
+          "type_ko": "스탠다드",
+          "features": [
+            "Mountain View",
+            "Heating",
+            "Free Parking"
+          ],
+          "features_ko": [
+            "마운틴 뷰",
+            "난방",
+            "무료 주차"
+          ]
+        },
+        {
+          "type": "deluxe",
+          "price": 200,
+          "type_ko": "디럭스",
+          "features": [
+            "Premium Mountain View",
+            "Fireplace",
+            "Private Deck"
+          ],
+          "features_ko": [
+            "프리미엄 마운틴 뷰",
+            "벽난로",
+            "프라이빗 데크"
+          ]
+        },
+        {
+          "type": "villa",
+          "price": 380,
+          "type_ko": "빌라",
+          "features": [
+            "Private Villa",
+            "Hot Tub",
+            "Kitchen",
+            "BBQ Area"
+          ],
+          "features_ko": [
+            "프라이빗 빌라",
+            "온수 욕조",
+            "주방",
+            "BBQ 공간"
+          ]
+        }
+      ],
+      "rating": 4,
+      "location": "Gangwon-do, Korea",
+      "location_en": "Gangwon-do, Korea"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "2b008353-654a-4772-a30c-26250df830d8",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.197Z",
+    "updated_at": "2025-10-20T19:51:38.197Z",
+    "category": "7440548d-5680-4b9f-b930-42aad4a8a638",
+    "name": "GLI Japanese Omakase",
+    "name_en": "",
+    "description": "청담동에 위치한 정통 일식 오마카세 레스토랑입니다. 당일 공수한 신선한 재료로 최고의 스시를 선보입니다.",
+    "description_en": "",
+    "short_description": "정통 일식 오마카세",
+    "short_description_en": "",
+    "product_type": "restaurant",
+    "price_glil": "250.00000000",
+    "price_usd": "250.00",
+    "stock_quantity": 20,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/800x600/DC143C/FFFFFF/png?text=GLI+Omakase",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "일식",
+      "오마카세",
+      "스시",
+      "청담동",
+      "Japanese",
+      "Omakase",
+      "Sushi",
+      "Cheongdam"
+    ],
+    "attributes": {
+      "courses": [
+        {
+          "name": "스탠다드 오마카세",
+          "price": 250,
+          "name_en": "Standard Omakase",
+          "description": "15피스 니기리",
+          "description_en": "15-piece nigiri"
+        },
+        {
+          "name": "프리미엄 오마카세",
+          "price": 400,
+          "name_en": "Premium Omakase",
+          "description": "20피스 니기리 + 특선 요리",
+          "description_en": "20-piece nigiri + special dishes"
+        }
+      ],
+      "cuisine": "Japanese",
+      "seating": "Counter only (12 seats)",
+      "location": "Cheongdam-dong, Seoul",
+      "location_en": "Cheongdam-dong, Seoul",
+      "price_range": "₩₩₩₩₩",
+      "reservations": "Required",
+      "business_hours": {
+        "lunch": "By reservation only",
+        "dinner": "18:00 - 22:00"
+      }
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "2cfb3974-e80f-4c33-ad49-3e8a86af6d11",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.190Z",
+    "updated_at": "2025-10-20T19:51:38.190Z",
+    "category": "7440548d-5680-4b9f-b930-42aad4a8a638",
+    "name": "GLI Fine Dining Seoul",
+    "name_en": "",
+    "description": "서울 강남에 위치한 프렌치 파인 다이닝 레스토랑입니다. 미슐랭 스타 셰프가 선보이는 혁신적인 요리를 경험하세요.",
+    "description_en": "",
+    "short_description": "미슐랭 스타 프렌치 파인 다이닝",
+    "short_description_en": "",
+    "product_type": "restaurant",
+    "price_glil": "200.00000000",
+    "price_usd": "200.00",
+    "stock_quantity": 30,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/800x600/800020/FFFFFF/png?text=GLI+Fine+Dining",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "파인다이닝",
+      "프렌치",
+      "미슐랭",
+      "강남",
+      "Fine Dining",
+      "French",
+      "Michelin",
+      "Gangnam"
+    ],
+    "attributes": {
+      "courses": [
+        {
+          "name": "런치 코스",
+          "price": 150,
+          "name_en": "Lunch Course",
+          "description": "5코스 런치 메뉴",
+          "description_en": "5-course lunch menu"
+        },
+        {
+          "name": "디너 코스",
+          "price": 200,
+          "name_en": "Dinner Course",
+          "description": "7코스 디너 메뉴",
+          "description_en": "7-course dinner menu"
+        },
+        {
+          "name": "시그니처 코스",
+          "price": 350,
+          "name_en": "Signature Course",
+          "description": "10코스 시그니처 메뉴",
+          "description_en": "10-course signature menu"
+        }
+      ],
+      "cuisine": "French",
+      "location": "Gangnam, Seoul",
+      "dress_code": "Business Casual",
+      "location_en": "Gangnam, Seoul",
+      "price_range": "₩₩₩₩",
+      "business_hours": {
+        "lunch": "12:00 - 15:00",
+        "dinner": "18:00 - 22:00"
+      },
+      "michelin_stars": 2
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "36d20958-cf31-49b8-a02f-3315197e42a3",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.185Z",
+    "updated_at": "2025-10-20T19:51:38.185Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI 레더 지갑",
+    "name_en": "",
+    "description": "프리미엄 가죽으로 제작된 GLI 지갑입니다. 실용적인 디자인과 고급스러운 마감이 특징입니다.",
+    "description_en": "",
+    "short_description": "프리미엄 가죽 지갑",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "128.00000000",
+    "price_usd": "128.00",
+    "stock_quantity": 10,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/400x300/8B4513/FFFFFF/png?text=GLI+Wallet",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": false,
+    "tags": [
+      "액세서리",
+      "지갑",
+      "가죽",
+      "Accessories",
+      "Wallet",
+      "Leather"
+    ],
+    "attributes": {
+      "colors": [
+        "Black",
+        "Brown",
+        "Navy"
+      ],
+      "material": "Genuine Leather",
+      "cardSlots": 8,
+      "categoryId": "accessories",
+      "salePercent": 20,
+      "originalPrice": 160.0
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "926ba515-4a65-454c-be86-2af90989c3b7",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.139Z",
+    "updated_at": "2025-10-20T19:51:38.139Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI Signature 모자",
+    "name_en": "",
+    "description": "GLI 로고가 새겨진 시그니처 캡입니다. 어떤 스타일에도 잘 어울리는 베이직한 디자인입니다.",
+    "description_en": "",
+    "short_description": "GLI 로고 시그니처 캡",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "35.50000000",
+    "price_usd": "35.50",
+    "stock_quantity": 8,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/400x400/FFFFFF/000000/png?text=GLI+Cap",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": false,
+    "tags": [
+      "액세서리",
+      "모자",
+      "캡",
+      "Accessories",
+      "Hat",
+      "Cap"
+    ],
+    "attributes": {
+      "colors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "adjustable": true,
+      "categoryId": "accessories"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "92d3e996-a574-4708-9581-877a7c78d3cf",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.132Z",
+    "updated_at": "2025-10-20T19:51:38.132Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI Premium 후드티",
+    "name_en": "",
+    "description": "프리미엄 코튼 소재의 GLI 브랜드 후드티입니다. 부드럽고 따뜻한 착용감과 세련된 디자인이 특징입니다.",
+    "description_en": "",
+    "short_description": "GLI 브랜드 프리미엄 코튼 후드티",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "89.99000000",
+    "price_usd": "89.99",
+    "stock_quantity": 15,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/400x500/000000/D4AF37/png?text=GLI+Hoodie",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "패션",
+      "의류",
+      "후드티",
+      "프리미엄",
+      "Fashion",
+      "Clothing",
+      "Hoodie",
+      "Premium"
+    ],
+    "attributes": {
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Black",
+        "Navy",
+        "Gray"
+      ],
+      "material": "Premium Cotton",
+      "categoryId": "fashion",
+      "salePercent": 25,
+      "originalPrice": 120.0
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "b2509b04-9f03-45e2-9e48-d30559f0d67a",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.147Z",
+    "updated_at": "2025-10-20T19:51:38.147Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI 무선 이어폰",
+    "name_en": "",
+    "description": "고음질 GLI 브랜드 블루투스 이어폰입니다. 최신 노이즈 캔슬링 기술과 긴 배터리 수명을 자랑합니다.",
+    "description_en": "",
+    "short_description": "고음질 블루투스 이어폰",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "149.99000000",
+    "price_usd": "149.99",
+    "stock_quantity": 12,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/400x400/1E90FF/FFFFFF/png?text=GLI+Earphones",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "전자기기",
+      "이어폰",
+      "블루투스",
+      "Electronics",
+      "Earphones",
+      "Bluetooth"
+    ],
+    "attributes": {
+      "categoryId": "electronics",
+      "waterproof": "IPX4",
+      "batteryLife": "24 hours",
+      "salePercent": 25,
+      "originalPrice": 199.99,
+      "noiseCanceling": true
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "b950e99b-44cf-4100-970d-4369b4865d4e",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.124Z",
+    "updated_at": "2025-10-20T19:51:38.124Z",
+    "category": "d624364e-e997-430d-91ef-3ef0171a11fc",
+    "name": "GLI City Hotel",
+    "name_en": "",
+    "description": "서울 도심 속 비즈니스와 레저를 동시에 즐길 수 있는 프리미엄 호텔입니다. 최신 시설과 편리한 교통으로 완벽한 서울 여행을 경험하세요.",
+    "description_en": "",
+    "short_description": "서울 도심 프리미엄 호텔",
+    "short_description_en": "",
+    "product_type": "resort",
+    "price_glil": "180.00000000",
+    "price_usd": "180.00",
+    "stock_quantity": 60,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/800x600/FFD700/000000/png?text=GLI+City+Hotel",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "도심",
+      "비즈니스",
+      "서울",
+      "편리",
+      "City",
+      "Business",
+      "Seoul",
+      "Convenient"
+    ],
+    "attributes": {
+      "rooms": [
+        {
+          "type": "standard",
+          "price": 180,
+          "type_ko": "스탠다드",
+          "features": [
+            "City View",
+            "Business Center",
+            "Gym Access"
+          ],
+          "features_ko": [
+            "시티 뷰",
+            "비즈니스 센터",
+            "헬스장 이용"
+          ]
+        },
+        {
+          "type": "deluxe",
+          "price": 280,
+          "type_ko": "디럭스",
+          "features": [
+            "Han River View",
+            "Executive Lounge",
+            "Express Check-in"
+          ],
+          "features_ko": [
+            "한강 뷰",
+            "이그제큐티브 라운지",
+            "빠른 체크인"
+          ]
+        },
+        {
+          "type": "suite",
+          "price": 500,
+          "type_ko": "스위트",
+          "features": [
+            "Presidential Suite",
+            "Private Elevator",
+            "Personal Assistant",
+            "Rooftop Access"
+          ],
+          "features_ko": [
+            "프레지덴셜 스위트",
+            "전용 엘리베이터",
+            "개인 비서",
+            "루프탑 이용"
+          ]
+        }
+      ],
+      "rating": 5,
+      "location": "Seoul, Korea",
+      "location_en": "Seoul, Korea"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "c69e649a-2167-4f9d-a2ad-30becdb9d0c8",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.178Z",
+    "updated_at": "2025-10-20T19:51:38.178Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI 스마트워치",
+    "name_en": "",
+    "description": "GLI 브랜딩이 적용된 스마트워치입니다. 건강 관리와 스마트 기능이 완벽하게 조화를 이룹니다.",
+    "description_en": "",
+    "short_description": "GLI 브랜딩 스마트워치",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "299.99000000",
+    "price_usd": "299.99",
+    "stock_quantity": 5,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/400x400/000000/1E90FF/png?text=GLI+Watch",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "전자기기",
+      "스마트워치",
+      "웨어러블",
+      "Electronics",
+      "Smart Watch",
+      "Wearable"
+    ],
+    "attributes": {
+      "features": [
+        "Heart Rate Monitor",
+        "GPS",
+        "Sleep Tracking",
+        "Notification"
+      ],
+      "categoryId": "electronics",
+      "waterproof": "5ATM",
+      "batteryLife": "5 days",
+      "compatibility": [
+        "iOS",
+        "Android"
+      ]
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "caf15173-4869-493f-91e7-3398a8b825f8",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.103Z",
+    "updated_at": "2025-10-20T19:51:38.103Z",
+    "category": "d624364e-e997-430d-91ef-3ef0171a11fc",
+    "name": "GLI Ocean Resort",
+    "name_en": "",
+    "description": "제주도의 아름다운 해변가에 위치한 럭셔리 리조트입니다. 전 객실에서 오션뷰를 즐길 수 있으며, 최고급 편의시설을 갖추고 있습니다.",
+    "description_en": "",
+    "short_description": "제주도 오션뷰 럭셔리 리조트",
+    "short_description_en": "",
+    "product_type": "resort",
+    "price_glil": "150.00000000",
+    "price_usd": "150.00",
+    "stock_quantity": 50,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/800x600/1E90FF/FFFFFF/png?text=GLI+Ocean+Resort",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "오션뷰",
+      "럭셔리",
+      "제주도",
+      "5성급",
+      "Ocean View",
+      "Luxury",
+      "Jeju",
+      "5-Star"
+    ],
+    "attributes": {
+      "rooms": [
+        {
+          "type": "standard",
+          "price": 150,
+          "type_ko": "스탠다드",
+          "features": [
+            "Ocean View",
+            "Free WiFi",
+            "Breakfast Included"
+          ],
+          "features_ko": [
+            "오션뷰",
+            "무료 WiFi",
+            "조식 포함"
+          ]
+        },
+        {
+          "type": "deluxe",
+          "price": 250,
+          "type_ko": "디럭스",
+          "features": [
+            "Premium Ocean View",
+            "Balcony",
+            "Room Service",
+            "Mini Bar"
+          ],
+          "features_ko": [
+            "프리미엄 오션뷰",
+            "발코니",
+            "룸서비스",
+            "미니바"
+          ]
+        },
+        {
+          "type": "suite",
+          "price": 450,
+          "type_ko": "스위트",
+          "features": [
+            "Panoramic View",
+            "Separate Living Room",
+            "Jacuzzi",
+            "Butler Service"
+          ],
+          "features_ko": [
+            "파노라믹 뷰",
+            "별도 거실",
+            "자쿠지",
+            "버틀러 서비스"
+          ]
+        }
+      ],
+      "rating": 5,
+      "location": "Jeju Island, Korea",
+      "location_en": "Jeju Island, Korea"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "db7f4e92-d2b8-4e30-a94c-0ae1da3af871",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.170Z",
+    "updated_at": "2025-10-20T19:51:38.170Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI 디퓨저",
+    "name_en": "",
+    "description": "GLI 시그니처 향이 나는 아로마 디퓨저입니다. 고급스러운 디자인과 은은한 향으로 공간을 채워줍니다.",
+    "description_en": "",
+    "short_description": "GLI 시그니처 향 아로마 디퓨저",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "95.00000000",
+    "price_usd": "95.00",
+    "stock_quantity": 0,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/400x500/FFD700/000000/png?text=GLI+Diffuser",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": false,
+    "tags": [
+      "홈&리빙",
+      "디퓨저",
+      "향",
+      "인테리어",
+      "Home",
+      "Diffuser",
+      "Fragrance",
+      "Interior"
+    ],
+    "attributes": {
+      "scents": [
+        "Lavender",
+        "Ocean Breeze",
+        "Forest"
+      ],
+      "capacity": "200ml",
+      "duration": "60 days",
+      "categoryId": "home"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "eb8ac98f-8b7a-4566-872a-5a594cb3918f",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.154Z",
+    "updated_at": "2025-10-20T19:51:38.154Z",
+    "category": "04617999-d1c9-4a59-b688-546211820c45",
+    "name": "GLI 텀블러",
+    "name_en": "",
+    "description": "보온/보냉 기능이 있는 GLI 브랜드 텀블러입니다. 스테인레스 스틸 소재로 오래도록 사용할 수 있습니다.",
+    "description_en": "",
+    "short_description": "보온/보냉 스테인레스 텀블러",
+    "short_description_en": "",
+    "product_type": "goods",
+    "price_glil": "25.00000000",
+    "price_usd": "25.00",
+    "stock_quantity": 20,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/300x500/C0C0C0/000000/png?text=GLI+Tumbler",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": false,
+    "tags": [
+      "라이프스타일",
+      "텀블러",
+      "스테인레스",
+      "Lifestyle",
+      "Tumbler",
+      "Stainless"
+    ],
+    "attributes": {
+      "colors": [
+        "Silver",
+        "Black",
+        "Gold"
+      ],
+      "capacity": "500ml",
+      "material": "Stainless Steel",
+      "categoryId": "lifestyle"
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.shoppingproduct",
+  "pk": "edbfb793-7c22-4e72-bbdd-0754cf65a9ba",
+  "fields": {
+    "created_at": "2025-10-20T19:51:38.203Z",
+    "updated_at": "2025-10-20T19:51:38.203Z",
+    "category": "7440548d-5680-4b9f-b930-42aad4a8a638",
+    "name": "GLI Italian Trattoria",
+    "name_en": "",
+    "description": "이태원에 위치한 정통 이탈리안 트라토리아입니다. 전통 레시피와 신선한 재료로 진정한 이탈리아의 맛을 선사합니다.",
+    "description_en": "",
+    "short_description": "정통 이탈리안 트라토리아",
+    "short_description_en": "",
+    "product_type": "restaurant",
+    "price_glil": "120.00000000",
+    "price_usd": "120.00",
+    "stock_quantity": 40,
+    "unlimited_stock": true,
+    "main_image_url": "https://placehold.co/800x600/008000/FFFFFF/png?text=GLI+Trattoria",
+    "image_urls": [],
+    "status": "active",
+    "is_featured": true,
+    "tags": [
+      "이탈리안",
+      "파스타",
+      "피자",
+      "이태원",
+      "Italian",
+      "Pasta",
+      "Pizza",
+      "Itaewon"
+    ],
+    "attributes": {
+      "cuisine": "Italian",
+      "ambiance": "Casual",
+      "location": "Itaewon, Seoul",
+      "location_en": "Itaewon, Seoul",
+      "price_range": "₩₩₩",
+      "specialties": [
+        "Handmade Pasta",
+        "Wood-fired Pizza",
+        "Tiramisu"
+      ],
+      "business_hours": {
+        "lunch": "11:30 - 15:00",
+        "dinner": "17:30 - 22:00"
+      },
+      "menu_highlights": [
+        {
+          "name": "트러플 파스타",
+          "price": 45,
+          "name_en": "Truffle Pasta"
+        },
+        {
+          "name": "마르게리타 피자",
+          "price": 28,
+          "name_en": "Margherita Pizza"
+        },
+        {
+          "name": "오쏘부코",
+          "price": 55,
+          "name_en": "Osso Buco"
+        }
+      ]
+    },
+    "view_count": 0,
+    "purchase_count": 0
+  }
+},
+{
+  "model": "gli_content.rwacategory",
+  "pk": "11f03750-5b6d-4238-96a3-fc51923aaf53",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.503Z",
+    "updated_at": "2025-10-20T18:08:34.503Z",
+    "name": "브랜드",
+    "description": "브랜드 및 콘텐츠 사업",
+    "icon": "🏷️",
+    "order": 6,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.rwacategory",
+  "pk": "28ee1da1-a1d3-47b4-accd-2e866ff668f5",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.479Z",
+    "updated_at": "2025-10-20T18:08:34.479Z",
+    "name": "사업 아이템",
+    "description": "프랜차이즈 및 사업 투자",
+    "icon": "💼",
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.rwacategory",
+  "pk": "678cde9d-07d1-4c53-97b4-67d24548c1e9",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.487Z",
+    "updated_at": "2025-10-20T18:08:34.487Z",
+    "name": "농업",
+    "description": "농업 및 생산형 자산",
+    "icon": "🌾",
+    "order": 4,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.rwacategory",
+  "pk": "c587897d-ed66-4745-b6ba-60be2940c004",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.495Z",
+    "updated_at": "2025-10-20T18:08:34.495Z",
+    "name": "레저",
+    "description": "레저 및 휴양 시설",
+    "icon": "⛱️",
+    "order": 5,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.rwacategory",
+  "pk": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+  "fields": {
+    "created_at": "2025-10-20T17:01:13.615Z",
+    "updated_at": "2025-10-20T17:01:13.615Z",
+    "name": "부동산",
+    "description": "실물 부동산 투자",
+    "icon": "🏢",
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.rwacategory",
+  "pk": "d6699ecd-a9e7-4c1b-8e21-6b2f6f35a204",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.471Z",
+    "updated_at": "2025-10-20T18:08:34.471Z",
+    "name": "카지노",
+    "description": "카지노 및 복합 리조트",
+    "icon": "🎰",
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "0185f402-ac21-4304-9373-948c79496bb7",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.600Z",
+    "updated_at": "2025-10-20T19:47:10.690Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "세부 RYOUKU 고급 일식 리조트",
+    "description": "일본식 프리미엄 레저 리조트\n\n주요 특징:\n- 일본 브랜드 제휴 운영\n- 막탄섬 해안 프라임 입지\n- 일본식 온천 및 스파 시설\n\n투자 포인트:\n1. 일본 관광객 타깃\n2. 프리미엄 브랜드 파워\n3. 차별화된 일본식 서비스\n4. 막탄섬 관광 허브 입지",
+    "short_description": "일본 프랜차이즈와 제휴한 세부 고급 레저 리조트 프로젝트입니다.",
+    "name_en": "RYOUKU Japanese Resort, Cebu",
+    "description_en": "Japanese-style premium leisure resort\n\nKey Features:\n- Japanese brand partnership\n- Prime Mactan Island beachfront location\n- Japanese-style onsen and spa facilities\n\nInvestment Highlights:\n1. Targeting Japanese tourists\n2. Premium brand power\n3. Differentiated Japanese-style service\n4. Mactan Island tourism hub location",
+    "short_description_en": "A premium Japanese-branded resort project located on Cebu's Mactan Island.",
+    "total_value_usd": "9000000.00",
+    "min_investment_glib": "300.00000000",
+    "max_investment_glib": "90000000.00000000",
+    "expected_apy": "12.50",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "필리핀 세부 막탄섬 해안",
+    "asset_location_en": "Mactan Island Coast, Cebu, Philippines",
+    "asset_type": "리조트",
+    "asset_type_en": "Resort",
+    "area_sqm": "12000.00",
+    "operation_type": "consignment",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/07833508316f4f66b239553d9c8f9ed7_20251021_044709.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 4,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "13cbe358-17f5-43b1-a560-d2d474072000",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.521Z",
+    "updated_at": "2025-10-20T19:30:12.090Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "캄보디아 시아누크빌 Star Bay 리조트",
+    "description": "시아누크빌 중심 해안도로에 위치\n\n주요 특징:\n- 평균 객실 점유율 82%\n- 현지 정부 관광 인센티브 대상\n- 연평균 수익률 10~12% 예상\n\n투자 포인트:\n1. 캄보디아 신흥 휴양 도시의 성장 잠재력\n2. 중국 및 아시아 관광객 증가 추세\n3. 정부 관광 인센티브 혜택\n4. 안정적인 해안 리조트 운영",
+    "short_description": "캄보디아의 신흥 휴양지에 위치한 해안 리조트로, 안정적인 관광 수익 창출이 가능합니다.",
+    "name_en": "Star Bay Resort, Sihanoukville, Cambodia",
+    "description_en": "Located along Sihanoukville's main coastal road\n\nKey Features:\n- 82% average occupancy rate\n- Eligible for local government tourism incentives\n- Expected annual yield: 10–12%\n\nInvestment Highlights:\n1. Growth potential in Cambodia's emerging resort city\n2. Increasing Chinese and Asian tourist arrivals\n3. Government tourism incentive benefits\n4. Stable beachfront resort operations",
+    "short_description_en": "A beachfront resort in Cambodia's emerging coastal city, generating stable tourism revenue.",
+    "total_value_usd": "8000000.00",
+    "min_investment_glib": "200.00000000",
+    "max_investment_glib": "80000000.00000000",
+    "expected_apy": "11.20",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "캄보디아 시아누크빌 해안도로 인근",
+    "asset_location_en": "Near coastal road, Sihanoukville, Cambodia",
+    "asset_type": "리조트",
+    "asset_type_en": "Resort",
+    "area_sqm": "8500.00",
+    "operation_type": "consignment",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/93744357c3794e869ac310e8f4d5d5fd_20251021_043010.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 10,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "1a6918d2-e965-413d-a3ce-eb7e90a6ec91",
+  "fields": {
+    "created_at": "2025-10-20T17:01:13.631Z",
+    "updated_at": "2025-11-01T09:13:29.439Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "제주도 프리미엄 리조트",
+    "description": "제주도 서귀포시에 위치한 프리미엄 리조트입니다.\n\n주요 특징:\n- 오션뷰가 보이는 50개의 객실\n- 연중 높은 객실 점유율 (평균 85%)\n- 안정적인 임대 수익 구조\n- 연 8-12% 수익률 예상\n\n투자 포인트:\n1. 제주도 관광객 증가 추세\n2. 프리미엄 숙박 시설 수요 증가\n3. 전문 운영사의 위탁 운영\n4. 분기별 배당 지급\n\n리스크:\n- 계절적 수요 변동\n- 관광객 수 변화에 따른 수익률 변동\n- 시설 유지보수 비용\n\n본 자산은 GLI-B 토큰으로 투자 가능하며, 최소 투자금액은 100 GLEB입니다.",
+    "short_description": "제주도 서귀포 오션뷰 프리미엄 리조트, 연 8-12% 수익률",
+    "name_en": "asfasdfasdfas dfs",
+    "description_en": "as fsdfasdf",
+    "short_description_en": "fasdf asdf",
+    "total_value_usd": "5000000.00",
+    "min_investment_glib": "100.00000000",
+    "max_investment_glib": null,
+    "expected_apy": "10.50",
+    "historical_returns": [
+      {
+        "year": 2023,
+        "return": 11.2
+      },
+      {
+        "year": 2022,
+        "return": 9.8
+      },
+      {
+        "year": 2021,
+        "return": 10.5
+      }
+    ],
+    "risk_level": "medium",
+    "risk_factors": [
+      "계절적 수요 변동",
+      "관광객 수 변화",
+      "환율 변동",
+      "시설 노후화"
+    ],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "제주특별자치도 서귀포시 중문관광로 72번길",
+    "asset_location_en": "72-gil, Jungmun Tourism-ro, Seogwipo-si, Jeju-do, South Korea",
+    "asset_type": "real-estate",
+    "asset_type_en": "Resort",
+    "area_sqm": "12500.50",
+    "operation_type": "consignment",
+    "underlying_assets": {
+      "facilities": [
+        {
+          "type": "객실",
+          "count": 50,
+          "avg_size_sqm": 45
+        },
+        {
+          "type": "레스토랑",
+          "count": 2,
+          "size_sqm": 300
+        },
+        {
+          "type": "수영장",
+          "count": 1,
+          "size_sqm": 500
+        },
+        {
+          "type": "스파",
+          "count": 1,
+          "size_sqm": 200
+        }
+      ],
+      "land_value": 2000000,
+      "building_value": 3000000
+    },
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/72c432f942cd4c9da19cc918179ff5d3_20251031_165926.jpeg",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800"
+    ],
+    "document_urls": [
+      {
+        "url": "/documents/resort-prospectus.pdf",
+        "name": "투자설명서.pdf"
+      },
+      {
+        "url": "/documents/resort-appraisal.pdf",
+        "name": "감정평가서.pdf"
+      },
+      {
+        "url": "/documents/resort-operation-plan.pdf",
+        "name": "운영계획서.pdf"
+      }
+    ],
+    "total_invested_glib": "3500.00000000",
+    "investor_count": 12,
+    "funding_target_glib": "50000.00000000",
+    "status": "active",
+    "is_featured": false,
+    "order": 0,
+    "metadata": {
+      "operator": "제주리조트운영(주)",
+      "amenities": [
+        "와이파이",
+        "주차장",
+        "조식 포함",
+        "픽업 서비스",
+        "해변 접근"
+      ],
+      "languages": [
+        "한국어",
+        "영어",
+        "중국어",
+        "일본어"
+      ],
+      "certifications": [
+        "친환경 건축물 인증",
+        "관광숙박업 등록"
+      ],
+      "completion_date": "2020-06-15",
+      "last_renovation": "2023-01-10"
+    }
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "39f8ad8f-4838-490d-b87e-4f384c7d5898",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.569Z",
+    "updated_at": "2025-10-20T19:37:48.695Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "세부 Waterfront Hotel & Casino",
+    "description": "세부 대표 복합 카지노 리조트\n\n주요 특징:\n- 호텔, 카지노, 레스토랑 복합 운영\n- 관광객 유입 급증 지역\n- 연평균 13% 이상 수익률 예상\n\n투자 포인트:\n1. 필리핀 제2의 도시 세부 입지\n2. 복합 엔터테인먼트 시설\n3. 높은 수익률 잠재력\n4. 관광산업 성장 수혜",
+    "short_description": "세부 최대 복합 카지노 리조트 중 하나로, 관광객 유입이 급증하고 있습니다.",
+    "name_en": "Waterfront Hotel & Casino, Cebu",
+    "description_en": "Leading integrated casino resort in Cebu\n\nKey Features:\n- Hotel, casino, restaurant complex\n- Growing tourist destination\n- Expected annual yield above 13%\n\nInvestment Highlights:\n1. Located in Cebu, Philippines' 2nd largest city\n2. Integrated entertainment facility\n3. High yield potential\n4. Tourism industry growth benefits",
+    "short_description_en": "One of Cebu's largest integrated casino resorts with growing tourist influx.",
+    "total_value_usd": "12000000.00",
+    "min_investment_glib": "500.00000000",
+    "max_investment_glib": "120000000.00000000",
+    "expected_apy": "13.20",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "필리핀 세부 IT Park 인근",
+    "asset_location_en": "Near IT Park, Cebu, Philippines",
+    "asset_type": "호텔형",
+    "asset_type_en": "Hotel",
+    "area_sqm": "18000.00",
+    "operation_type": "consignment",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/9261985450a046c792b2b9a8f1c2c90b_20251021_043747.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 7,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "6237b6c1-f236-4ecd-a130-557efb4072d5",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.610Z",
+    "updated_at": "2025-10-20T19:49:02.199Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "Xijiu 싱가포르 브랜드 콘텐츠 투자",
+    "description": "Xijiu 글로벌 브랜드 콘텐츠 사업\n\n주요 특징:\n- 중국 명주 브랜드 글로벌 확장\n- 싱가포르 허브 라이프스타일 콘텐츠\n- 브랜드 마케팅 수익 배당\n\n투자 포인트:\n1. 중국 명품 주류 브랜드\n2. 동남아 시장 진출 전략\n3. 콘텐츠 및 브랜딩 수익\n4. 라이프스타일 비즈니스 확장",
+    "short_description": "중국 명주 Xijiu 브랜드의 글로벌 라이프스타일 콘텐츠 사업 투자.",
+    "name_en": "Xijiu Brand Content Investment, Singapore",
+    "description_en": "Xijiu global brand content business\n\nKey Features:\n- Global expansion of Chinese premium liquor brand\n- Singapore-based lifestyle content hub\n- Brand marketing revenue distribution\n\nInvestment Highlights:\n1. Chinese luxury liquor brand\n2. Southeast Asia market entry strategy\n3. Content and branding revenue\n4. Lifestyle business expansion",
+    "short_description_en": "Investment in global lifestyle brand expansion of China's Xijiu liquor company.",
+    "total_value_usd": "5500000.00",
+    "min_investment_glib": "150.00000000",
+    "max_investment_glib": "55000000.00000000",
+    "expected_apy": "10.00",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "싱가포르 Marina Bay",
+    "asset_location_en": "Marina Bay, Singapore",
+    "asset_type": "콘텐츠",
+    "asset_type_en": "Content",
+    "area_sqm": "800.00",
+    "operation_type": "other",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/ecf3d06c9c8f4e4ca9e46548de7b10db_20251021_044900.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 3,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "72c06b30-f54e-46c3-90fb-61e58627d7e8",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.590Z",
+    "updated_at": "2025-10-20T19:47:18.650Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "말레이시아 두리안 농장 RWA 프로젝트",
+    "description": "말레이시아 프리미엄 두리안 농장 투자\n\n주요 특징:\n- 고급 무산왕(Musang King) 품종\n- 중국 수출 중심 판로\n- 수확 기반 수익 분배\n\n투자 포인트:\n1. 중국 두리안 수요 급증\n2. 프리미엄 품종 생산\n3. 높은 수익률 가능성\n4. 농업 자산 다변화\n\n리스크:\n- 기후 및 작황 변동성\n- 수출 규제 변화 가능성",
+    "short_description": "고급 두리안 수출용 농장에 대한 수익 분배형 투자입니다.",
+    "name_en": "Durian Farm RWA Project, Malaysia",
+    "description_en": "Premium durian farm investment in Malaysia\n\nKey Features:\n- Premium Musang King variety\n- China export-focused distribution\n- Harvest-based revenue sharing\n\nInvestment Highlights:\n1. Surging durian demand in China\n2. Premium variety production\n3. High yield potential\n4. Agricultural asset diversification\n\nRisks:\n- Climate and crop volatility\n- Potential export regulation changes",
+    "short_description_en": "Revenue-sharing investment in export-grade durian farm.",
+    "total_value_usd": "2800000.00",
+    "min_investment_glib": "80.00000000",
+    "max_investment_glib": "28000000.00000000",
+    "expected_apy": "15.00",
+    "historical_returns": [],
+    "risk_level": "high",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "말레이시아 파항주",
+    "asset_location_en": "Pahang, Malaysia",
+    "asset_type": "생산형",
+    "asset_type_en": "Production",
+    "area_sqm": "25000.00",
+    "operation_type": "consignment",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/a07a94aaa83d478ca018878df120c1de_20251021_044717.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 5,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "7a07998e-ff46-4c59-87b9-7fc6edca91a1",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.621Z",
+    "updated_at": "2025-10-20T19:51:44.297Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "마카오 Sands Group 카지노 지분 참여",
+    "description": "마카오 대표 카지노 그룹 지분 투자\n\n주요 특징:\n- Sands Group 지분 참여형\n- 코타이 스트립 프라임 입지\n- 고수익 고위험 구조\n\n투자 포인트:\n1. 세계 최대 카지노 시장 마카오\n2. 업계 1위 그룹 지분 투자\n3. 높은 수익률 가능성\n4. 중국 관광객 회복 수혜\n\n리스크:\n- 규제 변화 리스크\n- 경기 민감도 높음\n- 최소 투자금 상대적 고액",
+    "short_description": "마카오 최대 카지노 그룹의 지분형 RWA 프로젝트입니다.",
+    "name_en": "Sands Group Casino Equity, Macau",
+    "description_en": "Equity investment in Macau's leading casino group\n\nKey Features:\n- Sands Group equity participation\n- Prime Cotai Strip location\n- High-risk high-return structure\n\nInvestment Highlights:\n1. Macau, world's largest casino market\n2. Industry leader equity investment\n3. High yield potential\n4. Chinese tourist recovery benefits\n\nRisks:\n- Regulatory change risks\n- High economic sensitivity\n- Relatively high minimum investment",
+    "short_description_en": "Equity-based RWA project in Macau's leading casino group.",
+    "total_value_usd": "20000000.00",
+    "min_investment_glib": "1000.00000000",
+    "max_investment_glib": "200000000.00000000",
+    "expected_apy": "16.30",
+    "historical_returns": [],
+    "risk_level": "high",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "마카오 Cotai Strip",
+    "asset_location_en": "Cotai Strip, Macau",
+    "asset_type": "지분형",
+    "asset_type_en": "Equity",
+    "area_sqm": "50000.00",
+    "operation_type": "other",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/b6ef2a04b30f4826975d16ca3bacb543_20251021_045143.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 2,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "969bfea8-284f-4cfb-95b0-a85807cbc5a3",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.579Z",
+    "updated_at": "2025-10-20T19:40:57.846Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "Brown Coffee 프랜차이즈",
+    "description": "캄보디아 1위 커피 브랜드 프랜차이즈\n\n주요 특징:\n- 현지 시장 점유율 1위\n- 신규 매장 투자형 모델\n- 안정적인 프랜차이즈 수익\n\n투자 포인트:\n1. 캄보디아 커피 시장 성장\n2. 검증된 브랜드 파워\n3. 프랜차이즈 수익 분배 모델\n4. 비교적 낮은 투자금",
+    "short_description": "캄보디아 대표 커피 브랜드 Brown의 신규 매장 투자형 프랜차이즈입니다.",
+    "name_en": "Brown Coffee Franchise Cambodia",
+    "description_en": "Cambodia's #1 coffee brand franchise\n\nKey Features:\n- Market leader in Cambodia\n- New store investment model\n- Stable franchise revenue\n\nInvestment Highlights:\n1. Growing coffee market in Cambodia\n2. Proven brand power\n3. Franchise revenue sharing model\n4. Relatively low investment amount",
+    "short_description_en": "Investment franchise for Brown, Cambodia's leading coffee brand.",
+    "total_value_usd": "3500000.00",
+    "min_investment_glib": "100.00000000",
+    "max_investment_glib": "35000000.00000000",
+    "expected_apy": "14.00",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "프놈펜, 캄보디아",
+    "asset_location_en": "Phnom Penh, Cambodia",
+    "asset_type": "프랜차이즈",
+    "asset_type_en": "Franchise",
+    "area_sqm": "150.00",
+    "operation_type": "direct",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/593d580d14ea401c9b0a4672fba87596_20251021_044057.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 6,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "a619424a-b8c5-4d37-b4de-d28aaaeb26ee",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.549Z",
+    "updated_at": "2025-10-20T19:29:32.650Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "호치민 ERA 부동산",
+    "description": "호치민 7군 푸미흥 비즈니스 지구 오피스 투자\n\n주요 특징:\n- 신흥 비즈니스 지구 중심 입지\n- 외국계 기업 임차인 다수\n- 안정적인 임대 수익 구조\n\n투자 포인트:\n1. 호치민 경제 성장 수혜\n2. 외국계 기업 수요 증가\n3. 안정적인 상업용 부동산\n4. 장기 임대 계약 기반",
+    "short_description": "호치민 신흥 비즈니스 지구의 오피스 빌딩 투자 프로젝트입니다.",
+    "name_en": "ERA Real Estate, Ho Chi Minh City",
+    "description_en": "Office investment in Phu My Hung District 7, HCMC\n\nKey Features:\n- Prime location in emerging business district\n- Multiple foreign corporate tenants\n- Stable rental income structure\n\nInvestment Highlights:\n1. Benefits from HCMC economic growth\n2. Increasing foreign corporate demand\n3. Stable commercial real estate\n4. Long-term lease agreements",
+    "short_description_en": "Office property investment in the emerging Phu My Hung business district.",
+    "total_value_usd": "6000000.00",
+    "min_investment_glib": "150.00000000",
+    "max_investment_glib": "60000000.00000000",
+    "expected_apy": "9.50",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "호치민 7군 푸미흥 비즈니스 지구",
+    "asset_location_en": "Phu My Hung Business District, District 7, Ho Chi Minh",
+    "asset_type": "상업용",
+    "asset_type_en": "Commercial",
+    "area_sqm": "4500.00",
+    "operation_type": "rental",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/1e4c0657c8414b5489e072261c1c3dd4_20251021_042931.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 9,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "cb7b6027-dd4e-4eb4-8f3f-158077d8ec84",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.560Z",
+    "updated_at": "2025-10-20T19:29:02.244Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "마닐라 Vista Land 부동산",
+    "description": "마닐라 BGC 인근 중고급 주거용 부동산\n\n주요 특징:\n- 안정적인 임대 수익 구조\n- 중산층 및 외국인 거주자 타깃\n- 낮은 위험도의 안정형 자산\n\n투자 포인트:\n1. BGC 비즈니스 지구 인접\n2. 안정적인 주거 수요\n3. 낮은 공실률\n4. 보수적 투자자에 적합",
+    "short_description": "안정적인 임대 수익을 창출하는 중고급 주거 프로젝트입니다.",
+    "name_en": "Vista Land Property, Manila",
+    "description_en": "Mid-to-high-end residential property near BGC Manila\n\nKey Features:\n- Stable rental income structure\n- Targeting middle class and expat residents\n- Low-risk stable asset\n\nInvestment Highlights:\n1. Adjacent to BGC business district\n2. Stable residential demand\n3. Low vacancy rate\n4. Suitable for conservative investors",
+    "short_description_en": "Mid-to-high-end residential project generating steady rental yields.",
+    "total_value_usd": "4000000.00",
+    "min_investment_glib": "100.00000000",
+    "max_investment_glib": "40000000.00000000",
+    "expected_apy": "8.70",
+    "historical_returns": [],
+    "risk_level": "low",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "필리핀 마닐라 Bonifacio Global City 인근",
+    "asset_location_en": "Near Bonifacio Global City, Manila, Philippines",
+    "asset_type": "주거용",
+    "asset_type_en": "Residential",
+    "area_sqm": "3200.00",
+    "operation_type": "rental",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/662f48187c474538b0cc1a58bb304673_20251021_042900.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 8,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaasset",
+  "pk": "cecbaf2e-bedf-41ec-9bd6-aa5037f3e0f2",
+  "fields": {
+    "created_at": "2025-10-20T18:08:34.533Z",
+    "updated_at": "2025-11-01T09:13:49.281Z",
+    "category": "d63d79db-6cff-420f-a63a-0680ad8c7bcc",
+    "name": "호이안 리조트 & 골프",
+    "description": "베트남 중부 호이안 해변 인근 프리미엄 리조트\n\n주요 특징:\n- 18홀 챔피언십 골프 코스\n- 외국인 관광객 비중 70% 이상\n- 안정적 숙박·그린피 수익\n\n투자 포인트:\n1. 유네스코 세계문화유산 도시 인근\n2. 골프 관광 복합 시설\n3. 높은 외국인 관광객 비중\n4. 다변화된 수익 구조",
+    "short_description": "베트남 중부의 명소 호이안에 위치한 프리미엄 리조트 & 골프 클럽입니다.",
+    "name_en": "Hoi An Resort & Golf",
+    "description_en": "Premium resort near Hoi An Beach, Central Vietnam\n\nKey Features:\n- 18-hole championship golf course\n- 70% foreign visitor ratio\n- Stable income from lodging and golf fees\n\nInvestment Highlights:\n1. Near UNESCO World Heritage city\n2. Golf tourism complex facility\n3. High proportion of international tourists\n4. Diversified revenue streams",
+    "short_description_en": "A premium resort and golf club located in the central Vietnamese city of Hoi An.",
+    "total_value_usd": "10000000.00",
+    "min_investment_glib": "300.00000000",
+    "max_investment_glib": null,
+    "expected_apy": "10.80",
+    "historical_returns": [],
+    "risk_level": "medium",
+    "risk_factors": [],
+    "investment_period_months": 36,
+    "lock_period_months": 12,
+    "asset_location": "베트남 꽝남성 호이안 해변 인근",
+    "asset_location_en": "Near Hoi An Beach, Quang Nam, Vietnam",
+    "asset_type": "리조트",
+    "asset_type_en": "Resort",
+    "area_sqm": "15000.00",
+    "operation_type": "consignment",
+    "underlying_assets": {},
+    "main_image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/62b18e882e89467683feff2051c23a65_20251021_042916.png",
+    "image_urls": [],
+    "document_urls": [],
+    "total_invested_glib": "0E-8",
+    "investor_count": 0,
+    "funding_target_glib": null,
+    "status": "active",
+    "is_featured": false,
+    "order": 1,
+    "metadata": {}
+  }
+},
+{
+  "model": "gli_content.rwaassetimage",
+  "pk": "0b1c8370-af87-41dd-84ed-fdd0e8ae8b25",
+  "fields": {
+    "created_at": "2025-11-01T05:47:37.910Z",
+    "updated_at": "2025-11-01T09:13:29.563Z",
+    "asset": "1a6918d2-e965-413d-a3ce-eb7e90a6ec91",
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/rwa-assets/38a24615f1564c54976d9ae7b4a41ab1_20251101_144736.png",
+    "order": 0,
+    "is_primary": true,
+    "alt_text": "11_Jeju.png",
+    "alt_text_en": "11_Jeju.png"
+  }
+},
+{
+  "model": "gli_content.rwaassetimage",
+  "pk": "6c0d30bc-97f9-4760-b908-b08abb89ebd7",
+  "fields": {
+    "created_at": "2025-11-01T07:54:48.204Z",
+    "updated_at": "2025-11-01T09:13:49.417Z",
+    "asset": "cecbaf2e-bedf-41ec-9bd6-aa5037f3e0f2",
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/62b18e882e89467683feff2051c23a65_20251021_042916.png",
+    "order": 0,
+    "is_primary": true,
+    "alt_text": "호이안 리조트 & 골프",
+    "alt_text_en": "Hoi An Resort & Golf"
+  }
+},
+{
+  "model": "gli_content.rwaassetimage",
+  "pk": "ae1391c3-619a-434c-8f87-3dc558eeb722",
+  "fields": {
+    "created_at": "2025-11-01T06:02:37.390Z",
+    "updated_at": "2025-11-01T08:21:40.055Z",
+    "asset": "cecbaf2e-bedf-41ec-9bd6-aa5037f3e0f2",
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/rwa-assets/d932e4ef865149f49582630d1e82940a_20251101_150235.jpeg",
+    "order": 2,
+    "is_primary": false,
+    "alt_text": "2f74bcc0-c863-4b76-a910-25d62d6be182.jpeg",
+    "alt_text_en": "2f74bcc0-c863-4b76-a910-25d62d6be182.jpeg"
+  }
+},
+{
+  "model": "gli_content.rwaassetimage",
+  "pk": "c5124773-8aca-4a86-9e82-f1965ceb7030",
+  "fields": {
+    "created_at": "2025-11-01T08:21:14.178Z",
+    "updated_at": "2025-11-01T09:13:16.758Z",
+    "asset": "1a6918d2-e965-413d-a3ce-eb7e90a6ec91",
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/business-content/72c432f942cd4c9da19cc918179ff5d3_20251031_165926.jpeg",
+    "order": 1,
+    "is_primary": false,
+    "alt_text": "제주도 프리미엄 리조트",
+    "alt_text_en": "asfasdfasdfas dfs"
+  }
+},
+{
+  "model": "gli_content.rwaassetimage",
+  "pk": "f5097e6c-5bfd-4824-8fbb-255cc1f2236a",
+  "fields": {
+    "created_at": "2025-11-01T06:11:04.318Z",
+    "updated_at": "2025-11-01T07:16:31.621Z",
+    "asset": "cecbaf2e-bedf-41ec-9bd6-aa5037f3e0f2",
+    "image_url": "https://gli-platform-media-staging.s3.ap-northeast-2.amazonaws.com/rwa-assets/44e23173626a492e8b4f41fc83b5bd01_20251101_151102.jpeg",
+    "order": 1,
+    "is_primary": false,
+    "alt_text": "6fbbefc6-c1f1-4bab-9152-d3e2e4ddedef.jpeg",
+    "alt_text_en": "6fbbefc6-c1f1-4bab-9152-d3e2e4ddedef.jpeg"
+  }
+}
+]
