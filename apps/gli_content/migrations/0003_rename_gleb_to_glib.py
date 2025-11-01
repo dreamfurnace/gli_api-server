@@ -10,21 +10,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # 직접 SQL로 컬럼 이름 변경
+        # 0001에서 이미 _glib으로 생성되므로 이 마이그레이션은 no-op
+        # 기존 데이터베이스와의 호환성을 위해 유지하되 실제 작업은 수행하지 않음
         migrations.RunSQL(
-            # Forward: gleb -> glib
-            sql=[
-                'ALTER TABLE rwa_assets RENAME COLUMN min_investment_gleb TO min_investment_glib;',
-                'ALTER TABLE rwa_assets RENAME COLUMN max_investment_gleb TO max_investment_glib;',
-                'ALTER TABLE rwa_assets RENAME COLUMN total_invested_gleb TO total_invested_glib;',
-                'ALTER TABLE rwa_assets RENAME COLUMN funding_target_gleb TO funding_target_glib;',
-            ],
-            # Reverse: glib -> gleb (rollback용)
-            reverse_sql=[
-                'ALTER TABLE rwa_assets RENAME COLUMN min_investment_glib TO min_investment_gleb;',
-                'ALTER TABLE rwa_assets RENAME COLUMN max_investment_glib TO max_investment_gleb;',
-                'ALTER TABLE rwa_assets RENAME COLUMN total_invested_glib TO total_invested_gleb;',
-                'ALTER TABLE rwa_assets RENAME COLUMN funding_target_glib TO funding_target_gleb;',
-            ],
+            sql=migrations.RunSQL.noop,
+            reverse_sql=migrations.RunSQL.noop,
         ),
     ]

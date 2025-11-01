@@ -14,6 +14,7 @@ urlpatterns = [
 
     # 사용자 프로필
     path('api/user/profile/', views.user_profile, name='user_profile'),
+    path('api/user/profile/change-password/', views.change_password, name='change_password'),
     path('api/user/transactions/', views.user_transactions, name='user_transactions'),
 
     # 얼굴 인증
@@ -55,4 +56,16 @@ urlpatterns = [
     # 토큰 에코시스템 관리
     path('api/token-ecosystems/', views.token_ecosystem_list, name='token_ecosystem_list'),
     path('api/token-ecosystems/<uuid:token_id>/', views.token_ecosystem_detail, name='token_ecosystem_detail'),
+
+    # 뉴스/보도자료 관리
+    path('api/news/', views.news_article_list, name='news_article_list'),
+    path('api/news/<uuid:article_id>/', views.news_article_detail, name='news_article_detail'),
+
+    # 이메일 인증 및 회원가입
+    path('api/auth/email/send-code/', views.send_verification_code, name='send_verification_code'),
+    path('api/auth/email/verify-code/', views.verify_code, name='verify_code'),
+    path('api/auth/email/register/', views.complete_email_registration, name='complete_email_registration'),
+
+    # 임시 STG 테스트 계정 생성 (배포 후 제거 예정)
+    path('api/auth/create-stg-test-accounts/', views.create_stg_test_accounts, name='create_stg_test_accounts'),
 ]

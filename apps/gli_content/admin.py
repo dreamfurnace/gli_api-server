@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import (
-    BusinessContent, ShoppingCategory, ShoppingProduct, 
-    RWACategory, RWAAsset, Investment, 
+    BusinessContent, ShoppingCategory, ShoppingProduct,
+    RWACategory, RWAAsset, RWAAssetImage, Investment,
     ShoppingOrder, ShoppingOrderItem
 )
 
@@ -92,13 +92,22 @@ class RWACategoryAdmin(admin.ModelAdmin):
     asset_count.short_description = '투자 자산 수'
 
 
+class RWAAssetImageInline(admin.TabularInline):
+    model = RWAAssetImage
+    extra = 1
+    max_num = 5
+    fields = ('image_url', 'order', 'is_primary', 'alt_text', 'alt_text_en')
+    ordering = ('order', '-is_primary')
+
+
 @admin.register(RWAAsset)
 class RWAAssetAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'expected_apy', 'risk_level', 'status', 'funding_progress_display', 'is_featured')
+    list_display = ('name', 'category', 'expected_apy', 'risk_level', 'status', 'funding_progress_display', 'is_featured', 'image_count')
     list_filter = ('category', 'risk_level', 'status', 'is_featured', 'created_at')
     search_fields = ('name', 'description')
     ordering = ('-is_featured', '-created_at')
     list_editable = ('status', 'is_featured')
+    inlines = [RWAAssetImageInline]
     
     fieldsets = (
         ('기본 정보', {
@@ -140,6 +149,22 @@ class RWAAssetAdmin(admin.ModelAdmin):
             color, progress
         )
     funding_progress_display.short_description = '펀딩 진행률'
+
+    def image_count(self, obj):
+        count = obj.images.count()
+        has_primary = obj.images.filter(is_primary=True).exists()
+        if has_primary:
+            return format_html(
+                '<span style="color: green;">{}/5 ✓</span>',
+                count
+            )
+        elif count > 0:
+            return format_html(
+                '<span style="color: orange;">{}/5</span>',
+                count
+            )
+        return format_html('<span style="color: red;">0/5</span>')
+    image_count.short_description = '이미지'
 
 
 @admin.register(Investment)

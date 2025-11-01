@@ -228,13 +228,14 @@ class RWAAsset(BaseTimestampModel):
     # 상태 및 기타
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_featured = models.BooleanField(default=False)
-    
+    order = models.PositiveIntegerField(default=0, db_index=True)
+
     # 메타데이터
     metadata = models.JSONField(default=dict, blank=True)
-    
+
     class Meta:
         db_table = 'rwa_assets'
-        ordering = ['-is_featured', '-created_at']
+        ordering = ['order', '-is_featured', '-created_at']
         indexes = [
             models.Index(fields=['category', 'status']),
             models.Index(fields=['risk_level', 'status']),
@@ -249,6 +250,51 @@ class RWAAsset(BaseTimestampModel):
         if not self.funding_target_glib:
             return 0
         return min((self.total_invested_glib / self.funding_target_glib) * 100, 100)
+
+
+class RWAAssetImage(BaseTimestampModel):
+    """RWA 자산 이미지 모델 - 최대 5개까지 관리"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    asset = models.ForeignKey(RWAAsset, on_delete=models.CASCADE, related_name='images')
+    image_url = models.URLField(verbose_name='이미지 URL')
+    order = models.PositiveIntegerField(default=0, verbose_name='표시 순서')
+    is_primary = models.BooleanField(default=False, verbose_name='메인 이미지 여부')
+    alt_text = models.CharField(max_length=200, blank=True, verbose_name='이미지 설명')
+    alt_text_en = models.CharField(max_length=200, blank=True, verbose_name='이미지 설명(영문)')
+
+    class Meta:
+        db_table = 'rwa_asset_images'
+        ordering = ['order', '-is_primary', 'created_at']
+        indexes = [
+            models.Index(fields=['asset', 'is_primary']),
+            models.Index(fields=['asset', 'order']),
+        ]
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(order__gte=0),
+                name='positive_order'
+            ),
+        ]
+
+    def __str__(self):
+        primary_text = " (메인)" if self.is_primary else ""
+        return f"{self.asset.name} - 이미지 {self.order}{primary_text}"
+
+    def save(self, *args, **kwargs):
+        # 메인 이미지로 설정 시, 같은 자산의 다른 이미지들의 메인 설정 해제
+        if self.is_primary:
+            RWAAssetImage.objects.filter(
+                asset=self.asset,
+                is_primary=True
+            ).exclude(pk=self.pk).update(is_primary=False)
+
+        # 자산당 최대 5개 이미지 제한 확인
+        existing_count = RWAAssetImage.objects.filter(asset=self.asset).exclude(pk=self.pk).count()
+        if existing_count >= 5 and not self.pk:
+            from django.core.exceptions import ValidationError
+            raise ValidationError('한 자산당 최대 5개의 이미지만 업로드할 수 있습니다.')
+
+        super().save(*args, **kwargs)
 
 
 class Investment(BaseTimestampModel):
@@ -366,22 +412,22 @@ class ShoppingOrderItem(BaseTimestampModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     order = models.ForeignKey(ShoppingOrder, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(ShoppingProduct, on_delete=models.CASCADE)
-    
+
     # 주문 시점의 정보 (가격 변동 대비)
     product_name = models.CharField(max_length=200)
     product_price_glil = models.DecimalField(max_digits=20, decimal_places=8)
     quantity = models.PositiveIntegerField(default=1)
-    
+
     # 선택된 옵션 (크기, 색상 등)
     selected_attributes = models.JSONField(default=dict, blank=True)
-    
+
     class Meta:
         db_table = 'shopping_order_items'
         ordering = ['order', 'created_at']
-    
+
     def __str__(self):
         return f"{self.product_name} x{self.quantity}"
-    
+
     @property
     def total_price(self):
         return self.product_price_glil * self.quantity

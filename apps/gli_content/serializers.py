@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (
     BusinessContent, ShoppingCategory, ShoppingProduct,
-    RWACategory, RWAAsset, Investment,
+    RWACategory, RWAAsset, RWAAssetImage, Investment,
     ShoppingOrder, ShoppingOrderItem
 )
 
@@ -68,16 +68,27 @@ class ShoppingProductListSerializer(serializers.ModelSerializer):
 
 class RWACategorySerializer(serializers.ModelSerializer):
     asset_count = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = RWACategory
         fields = [
             'id', 'name', 'description', 'icon', 'order',
             'is_active', 'asset_count', 'created_at', 'updated_at'
         ]
-    
+
     def get_asset_count(self, obj):
         return obj.assets.filter(status='active').count()
+
+
+class RWAAssetImageSerializer(serializers.ModelSerializer):
+    """RWA 자산 이미지 시리얼라이저"""
+    class Meta:
+        model = RWAAssetImage
+        fields = [
+            'id', 'asset', 'image_url', 'order', 'is_primary',
+            'alt_text', 'alt_text_en', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 class RWAAssetSerializer(serializers.ModelSerializer):
@@ -86,6 +97,8 @@ class RWAAssetSerializer(serializers.ModelSerializer):
     status_display = serializers.CharField(source='get_status_display', read_only=True)
     operation_type_display = serializers.CharField(source='get_operation_type_display', read_only=True)
     funding_progress = serializers.ReadOnlyField()
+    isActive = serializers.SerializerMethodField()
+    images = serializers.SerializerMethodField()
 
     class Meta:
         model = RWAAsset
@@ -100,11 +113,56 @@ class RWAAssetSerializer(serializers.ModelSerializer):
             'asset_location', 'asset_location_en', 'asset_type', 'asset_type_en',
             'area_sqm', 'operation_type', 'operation_type_display',
             'underlying_assets',
-            'main_image_url', 'image_urls', 'document_urls',
+            'main_image_url', 'image_urls', 'images', 'document_urls',
             'total_invested_glib', 'investor_count', 'funding_target_glib',
-            'funding_progress', 'status', 'status_display', 'is_featured',
-            'metadata', 'created_at', 'updated_at'
+            'funding_progress', 'status', 'status_display', 'is_featured', 'order',
+            'isActive', 'metadata', 'created_at', 'updated_at'
         ]
+
+    def get_isActive(self, obj):
+        return obj.status == 'active'
+
+    def get_images(self, obj):
+        """이미지 목록 반환 - RWAAssetImage와 main_image_url 모두 포함 (RWAAssetImage 우선)"""
+        images = []
+
+        # RWAAssetImage 테이블의 이미지들 (order 순으로)
+        if obj.images.exists():
+            images.extend(RWAAssetImageSerializer(obj.images.order_by('order'), many=True).data)
+
+        # main_image_url도 포함 (레거시 데이터, RWAAssetImage에 없는 경우만)
+        if obj.main_image_url:
+            existing_urls = [img['image_url'] for img in images]
+            if obj.main_image_url not in existing_urls:
+                # RWAAssetImage 중 is_primary인 이미지가 있는지 확인
+                has_primary = any(img.get('is_primary') for img in images)
+
+                # 레거시 이미지 생성
+                legacy_image = {
+                    'id': None,
+                    'image_url': obj.main_image_url,
+                    'order': 9999,  # 임시 큰 값
+                    'is_primary': not has_primary,  # primary 이미지가 없을 때만 True
+                    'alt_text': obj.name,
+                    'alt_text_en': obj.name_en or obj.name,
+                    'created_at': obj.created_at.isoformat() if obj.created_at else None,
+                    'updated_at': obj.updated_at.isoformat() if obj.updated_at else None
+                }
+
+                # RWAAssetImage가 없으면 0번에, 있으면 맨 뒤에
+                if not images:
+                    legacy_image['order'] = 0
+                    images.append(legacy_image)
+                else:
+                    legacy_image['order'] = len(images)
+                    images.append(legacy_image)
+
+        # order 순으로 정렬하고 0부터 순차적으로 재정렬
+        images.sort(key=lambda x: x['order'])
+        for idx, img in enumerate(images):
+            img['order'] = idx
+
+        return images
 
 
 class RWAAssetListSerializer(serializers.ModelSerializer):
@@ -112,6 +170,8 @@ class RWAAssetListSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     risk_level_display = serializers.CharField(source='get_risk_level_display', read_only=True)
     funding_progress = serializers.ReadOnlyField()
+    isActive = serializers.SerializerMethodField()
+    images = serializers.SerializerMethodField()
 
     class Meta:
         model = RWAAsset
@@ -122,10 +182,55 @@ class RWAAssetListSerializer(serializers.ModelSerializer):
             'description', 'description_en',
             'expected_apy', 'risk_level_display', 'risk_level',
             'min_investment_glib', 'total_value_usd', 'total_invested_glib',
-            'main_image_url', 'funding_progress', 'status', 'is_featured',
-            'asset_type', 'asset_location', 'asset_location_en',
+            'main_image_url', 'images', 'funding_progress', 'status', 'is_featured', 'order',
+            'isActive', 'asset_type', 'asset_location', 'asset_location_en',
             'created_at', 'updated_at'
         ]
+
+    def get_isActive(self, obj):
+        return obj.status == 'active'
+
+    def get_images(self, obj):
+        """이미지 목록 반환 - RWAAssetImage와 main_image_url 모두 포함 (RWAAssetImage 우선)"""
+        images = []
+
+        # RWAAssetImage 테이블의 이미지들 (order 순으로)
+        if obj.images.exists():
+            images.extend(RWAAssetImageSerializer(obj.images.order_by('order'), many=True).data)
+
+        # main_image_url도 포함 (레거시 데이터, RWAAssetImage에 없는 경우만)
+        if obj.main_image_url:
+            existing_urls = [img['image_url'] for img in images]
+            if obj.main_image_url not in existing_urls:
+                # RWAAssetImage 중 is_primary인 이미지가 있는지 확인
+                has_primary = any(img.get('is_primary') for img in images)
+
+                # 레거시 이미지 생성
+                legacy_image = {
+                    'id': None,
+                    'image_url': obj.main_image_url,
+                    'order': 9999,  # 임시 큰 값
+                    'is_primary': not has_primary,  # primary 이미지가 없을 때만 True
+                    'alt_text': obj.name,
+                    'alt_text_en': obj.name_en or obj.name,
+                    'created_at': obj.created_at.isoformat() if obj.created_at else None,
+                    'updated_at': obj.updated_at.isoformat() if obj.updated_at else None
+                }
+
+                # RWAAssetImage가 없으면 0번에, 있으면 맨 뒤에
+                if not images:
+                    legacy_image['order'] = 0
+                    images.append(legacy_image)
+                else:
+                    legacy_image['order'] = len(images)
+                    images.append(legacy_image)
+
+        # order 순으로 정렬하고 0부터 순차적으로 재정렬
+        images.sort(key=lambda x: x['order'])
+        for idx, img in enumerate(images):
+            img['order'] = idx
+
+        return images
 
 
 class InvestmentSerializer(serializers.ModelSerializer):

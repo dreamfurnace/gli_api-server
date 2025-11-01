@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import SolanaUser, AuthNonce, SolanaTransaction, FaceVerification, AdminGrade, AdminUser, AdminPermission, GradePermission, TeamMember, ProjectFeature, StrategyPhase
+from .models import (
+    SolanaUser, AuthNonce, SolanaTransaction, FaceVerification,
+    AdminGrade, AdminUser, AdminPermission, GradePermission,
+    TeamMember, ProjectFeature, StrategyPhase,
+    DevelopmentTimeline, TokenEcosystem, NewsArticle, EmailVerificationCode
+)
 
 
 @admin.register(SolanaUser)
@@ -204,3 +209,155 @@ class StrategyPhaseAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+
+# ============================================================================
+# 개발 일정 모델 Admin (Development Timeline Models)
+# ============================================================================
+
+@admin.register(DevelopmentTimeline)
+class DevelopmentTimelineAdmin(admin.ModelAdmin):
+    list_display = ['quarter', 'status_icon', 'title_ko', 'title_en', 'order', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['quarter', 'title_ko', 'title_en', 'description_ko', 'description_en']
+    readonly_fields = ['id', 'created_at', 'updated_at']
+    ordering = ['order', '-created_at']
+
+    fieldsets = (
+        ('기본 정보', {
+            'fields': ('id', 'quarter', 'status_icon')
+        }),
+        ('제목 및 설명', {
+            'fields': ('title_ko', 'title_en', 'description_ko', 'description_en')
+        }),
+        ('표시 설정', {
+            'fields': ('order', 'is_active')
+        }),
+        ('타임스탬프', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+
+
+# ============================================================================
+# 토큰 에코시스템 모델 Admin (Token Ecosystem Models)
+# ============================================================================
+
+@admin.register(TokenEcosystem)
+class TokenEcosystemAdmin(admin.ModelAdmin):
+    list_display = ['icon', 'name', 'symbol', 'total_supply', 'current_price', 'order', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['name', 'symbol', 'description_ko', 'description_en']
+    readonly_fields = ['id', 'created_at', 'updated_at']
+    ordering = ['order', '-created_at']
+
+    fieldsets = (
+        ('기본 정보', {
+            'fields': ('id', 'icon', 'name', 'symbol')
+        }),
+        ('설명', {
+            'fields': ('description_ko', 'description_en')
+        }),
+        ('주요 기능', {
+            'fields': ('features_ko', 'features_en')
+        }),
+        ('토큰 정보', {
+            'fields': ('total_supply', 'current_price')
+        }),
+        ('표시 설정', {
+            'fields': ('order', 'is_active')
+        }),
+        ('타임스탬프', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+
+
+# ============================================================================
+# 뉴스/보도자료 모델 Admin (News Article Models)
+# ============================================================================
+
+@admin.register(NewsArticle)
+class NewsArticleAdmin(admin.ModelAdmin):
+    list_display = ['title_ko', 'status', 'publication_date', 'order', 'is_active', 'created_at']
+    list_filter = ['status', 'is_active', 'publication_date', 'created_at']
+    search_fields = ['title_ko', 'title_en', 'content_ko', 'content_en']
+    readonly_fields = ['id', 'created_at', 'updated_at']
+    ordering = ['-publication_date', '-created_at']
+
+    # 관리자 액션 추가
+    actions = ['publish_articles', 'archive_articles', 'activate_articles', 'deactivate_articles']
+
+    fieldsets = (
+        ('기본 정보', {
+            'fields': ('id', 'status', 'publication_date')
+        }),
+        ('제목', {
+            'fields': ('title_ko', 'title_en')
+        }),
+        ('내용', {
+            'fields': ('content_ko', 'content_en')
+        }),
+        ('이미지 및 링크', {
+            'fields': ('image_url', 'external_url')
+        }),
+        ('표시 설정', {
+            'fields': ('order', 'is_active')
+        }),
+        ('타임스탬프', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+
+    def publish_articles(self, request, queryset):
+        """선택한 기사를 발행 상태로 변경"""
+        updated = queryset.update(status='published')
+        self.message_user(request, f'{updated}개의 기사가 발행되었습니다.')
+    publish_articles.short_description = '선택한 기사 발행하기'
+
+    def archive_articles(self, request, queryset):
+        """선택한 기사를 보관 상태로 변경"""
+        updated = queryset.update(status='archived')
+        self.message_user(request, f'{updated}개의 기사가 보관되었습니다.')
+    archive_articles.short_description = '선택한 기사 보관하기'
+
+    def activate_articles(self, request, queryset):
+        """선택한 기사를 활성화"""
+        updated = queryset.update(is_active=True)
+        self.message_user(request, f'{updated}개의 기사가 활성화되었습니다.')
+    activate_articles.short_description = '선택한 기사 활성화'
+
+    def deactivate_articles(self, request, queryset):
+        """선택한 기사를 비활성화"""
+        updated = queryset.update(is_active=False)
+        self.message_user(request, f'{updated}개의 기사가 비활성화되었습니다.')
+    deactivate_articles.short_description = '선택한 기사 비활성화'
+
+
+# ============================================================================
+# 이메일 인증 모델 Admin (Email Verification Models)
+# ============================================================================
+
+@admin.register(EmailVerificationCode)
+class EmailVerificationCodeAdmin(admin.ModelAdmin):
+    list_display = ['email', 'code', 'is_used', 'expires_at', 'created_at']
+    list_filter = ['is_used', 'created_at', 'expires_at']
+    search_fields = ['email', 'code']
+    readonly_fields = ['id', 'created_at']
+    ordering = ['-created_at']
+
+    fieldsets = (
+        ('인증 정보', {
+            'fields': ('id', 'email', 'code')
+        }),
+        ('상태', {
+            'fields': ('is_used', 'expires_at')
+        }),
+        ('타임스탬프', {
+            'fields': ('created_at',)
+        }),
+    )
+
+    def get_queryset(self, request):
+        """최근 생성된 인증 코드 우선 표시"""
+        qs = super().get_queryset(request)
+        return qs.order_by('-created_at')

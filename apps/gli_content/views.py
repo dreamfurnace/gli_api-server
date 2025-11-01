@@ -9,13 +9,14 @@ from decimal import Decimal
 
 from .models import (
     BusinessContent, ShoppingCategory, ShoppingProduct,
-    RWACategory, RWAAsset, Investment,
+    RWACategory, RWAAsset, RWAAssetImage, Investment,
     ShoppingOrder, ShoppingOrderItem
 )
 from .serializers import (
-    BusinessContentSerializer, ShoppingCategorySerializer, 
+    BusinessContentSerializer, ShoppingCategorySerializer,
     ShoppingProductSerializer, ShoppingProductListSerializer,
     RWACategorySerializer, RWAAssetSerializer, RWAAssetListSerializer,
+    RWAAssetImageSerializer,
     InvestmentSerializer, InvestmentCreateSerializer,
     ShoppingOrderSerializer, ShoppingOrderCreateSerializer,
     InvestmentStatsSerializer, RWAAssetStatsSerializer
@@ -115,11 +116,14 @@ class RWAAssetViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['category', 'risk_level', 'is_featured', 'status']
     search_fields = ['name', 'name_en', 'description', 'description_en', 'asset_type', 'asset_location']
-    ordering = ['-is_featured', '-created_at']
+    ordering = ['order', '-is_featured', '-created_at']
+    ordering_fields = ['order', 'is_featured', 'created_at', 'expected_apy', 'min_investment_glib', 'total_value_usd']
 
     def get_queryset(self):
         """사용자는 active 자산만, 관리자는 모든 자산 조회"""
         queryset = super().get_queryset()
+        # 이미지와 카테고리를 함께 가져오기 (N+1 쿼리 방지)
+        queryset = queryset.prefetch_related('images').select_related('category')
         # 인증되지 않았거나 일반 사용자는 active 자산만
         if not self.request.user.is_authenticated or not self.request.user.is_staff:
             queryset = queryset.filter(status='active')
@@ -230,14 +234,66 @@ class RWAAssetViewSet(viewsets.ModelViewSet):
         risk_level = request.query_params.get('risk_level')
         if not risk_level:
             return Response(
-                {'error': 'risk_level parameter is required'}, 
+                {'error': 'risk_level parameter is required'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
+
         assets = self.queryset.filter(risk_level=risk_level)
         serializer = RWAAssetListSerializer(assets, many=True)
         return Response(serializer.data)
-    
+
+    @action(detail=True, methods=['patch'], permission_classes=[permissions.IsAdminUser], url_path='status')
+    def toggle_status(self, request, pk=None):
+        """RWA 자산 상태 토글 (관리자 전용)"""
+        rwa_asset = self.get_object()
+        is_active = request.data.get('isActive')
+
+        if is_active is None:
+            return Response(
+                {'error': 'isActive parameter is required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # isActive 값에 따라 status 필드 업데이트
+        if is_active:
+            rwa_asset.status = 'active'
+        else:
+            rwa_asset.status = 'paused'
+
+        rwa_asset.save(update_fields=['status'])
+
+        serializer = self.get_serializer(rwa_asset)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['post'], permission_classes=[permissions.IsAdminUser], url_path='reorder')
+    def reorder_assets(self, request):
+        """RWA 자산 순서 변경 (관리자 전용)"""
+        asset_ids = request.data.get('assetIds', [])
+
+        if not asset_ids or not isinstance(asset_ids, list):
+            return Response(
+                {'error': 'assetIds array is required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 트랜잭션으로 순서 업데이트
+        from django.db import transaction
+
+        try:
+            with transaction.atomic():
+                for idx, asset_id in enumerate(asset_ids):
+                    RWAAsset.objects.filter(id=asset_id).update(order=idx)
+
+            return Response({
+                'message': 'Asset order updated successfully',
+                'count': len(asset_ids)
+            })
+        except Exception as e:
+            return Response(
+                {'error': f'Failed to update order: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
     @action(detail=True, methods=['post'])
     def invest(self, request, pk=None):
         """투자하기"""
@@ -304,6 +360,136 @@ class RWAAssetViewSet(viewsets.ModelViewSet):
             )
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # ===== 이미지 관리 액션들 =====
+
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAdminUser])
+    def upload_image(self, request, pk=None):
+        """RWA 자산 이미지 업로드 (최대 5개)"""
+        asset = self.get_object()
+
+        # 현재 이미지 개수 확인
+        current_image_count = asset.images.count()
+        if current_image_count >= 5:
+            return Response(
+                {'error': '한 자산당 최대 5개의 이미지만 업로드할 수 있습니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 이미지 URL 필수
+        image_url = request.data.get('image_url')
+        if not image_url:
+            return Response(
+                {'error': 'image_url은 필수입니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 순서 자동 설정 (기존 이미지 개수 + 1)
+        order = request.data.get('order', current_image_count)
+        is_primary = request.data.get('is_primary', current_image_count == 0)  # 첫 이미지는 자동으로 메인
+
+        # 이미지 생성
+        image_data = {
+            'asset': asset.id,
+            'image_url': image_url,
+            'order': order,
+            'is_primary': is_primary,
+            'alt_text': request.data.get('alt_text', ''),
+            'alt_text_en': request.data.get('alt_text_en', '')
+        }
+
+        serializer = RWAAssetImageSerializer(data=image_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['patch'], url_path='images/reorder', permission_classes=[permissions.IsAdminUser])
+    def reorder_images(self, request, pk=None):
+        """RWA 자산 이미지 순서 재정렬
+
+        Request body:
+        {
+            "image_orders": [
+                {"id": "image_id_1", "order": 0},
+                {"id": "image_id_2", "order": 1},
+                ...
+            ]
+        }
+        """
+        asset = self.get_object()
+        image_orders = request.data.get('image_orders', [])
+
+        if not image_orders:
+            return Response(
+                {'error': 'image_orders는 필수입니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 각 이미지의 순서 업데이트
+        updated_images = []
+        for item in image_orders:
+            image_id = item.get('id')
+            new_order = item.get('order')
+
+            try:
+                image = asset.images.get(id=image_id)
+                image.order = new_order
+                image.save(update_fields=['order'])
+                updated_images.append(image)
+            except RWAAssetImage.DoesNotExist:
+                pass
+
+        # 업데이트된 이미지 목록 반환
+        serializer = RWAAssetImageSerializer(asset.images.all(), many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['delete'], url_path=r'images/(?P<image_id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', permission_classes=[permissions.IsAdminUser])
+    def delete_image(self, request, pk=None, image_id=None):
+        """RWA 자산 이미지 삭제 (UUID 형식만 매칭)"""
+        asset = self.get_object()
+
+        try:
+            image = asset.images.get(id=image_id)
+            was_primary = image.is_primary
+            image.delete()
+
+            # 메인 이미지가 삭제된 경우, 남은 이미지 중 첫 번째를 메인으로 설정
+            if was_primary and asset.images.exists():
+                first_image = asset.images.order_by('order').first()
+                first_image.is_primary = True
+                first_image.save()
+
+            return Response(
+                {'message': '이미지가 성공적으로 삭제되었습니다.'},
+                status=status.HTTP_204_NO_CONTENT
+            )
+        except RWAAssetImage.DoesNotExist:
+            return Response(
+                {'error': '이미지를 찾을 수 없습니다.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+    @action(detail=True, methods=['patch'], url_path=r'images/(?P<image_id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/set-primary', permission_classes=[permissions.IsAdminUser])
+    def set_primary_image(self, request, pk=None, image_id=None):
+        """특정 이미지를 메인 이미지로 설정 (UUID 형식만 매칭)"""
+        asset = self.get_object()
+
+        try:
+            image = asset.images.get(id=image_id)
+            image.is_primary = True
+            image.save()  # save 메서드에서 자동으로 다른 이미지들의 is_primary를 False로 변경
+
+            return Response(
+                RWAAssetImageSerializer(image).data,
+                status=status.HTTP_200_OK
+            )
+        except RWAAssetImage.DoesNotExist:
+            return Response(
+                {'error': '이미지를 찾을 수 없습니다.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
 
 class InvestmentViewSet(viewsets.ReadOnlyModelViewSet):
@@ -571,13 +757,13 @@ class UserProfileViewSet(viewsets.ViewSet):
         # 업데이트 가능한 필드들
         updatable_fields = ['name', 'phone', 'profile_image']
         updated_fields = []
-        
+
         for field in updatable_fields:
             if field in data:
                 setattr(user, field, data[field])
                 updated_fields.append(field)
-        
+
         if updated_fields:
             user.save(update_fields=updated_fields)
-        
+
         return self.get_profile(request)

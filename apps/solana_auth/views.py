@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from .models import SolanaUser, AuthNonce, SolanaTransaction, FaceVerification, AdminUser, AdminGrade, TeamMember, ProjectFeature, DevelopmentTimeline, TokenEcosystem
+from .models import SolanaUser, AuthNonce, SolanaTransaction, FaceVerification, AdminUser, AdminGrade, TeamMember, ProjectFeature, DevelopmentTimeline, TokenEcosystem, NewsArticle
 from .serializers import (
     SolanaUserSerializer,
     NonceRequestSerializer,
@@ -1054,3 +1054,535 @@ def token_ecosystem_detail(request, token_id):
             {'message': '토큰 정보가 삭제되었습니다.'},
             status=status.HTTP_204_NO_CONTENT
         )
+
+
+# ============================================================================
+# 사용자 프로필 관리 Views (User Profile Management Views)
+# ============================================================================
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def change_password(request):
+    """
+    사용자 비밀번호 변경
+    POST /api/user/profile/change-password/
+
+    Request Body:
+    {
+        "current_password": "현재 비밀번호",
+        "new_password": "새 비밀번호",
+        "confirm_password": "새 비밀번호 확인"
+    }
+    """
+    user = request.user
+    current_password = request.data.get('current_password')
+    new_password = request.data.get('new_password')
+    confirm_password = request.data.get('confirm_password')
+
+    # 필수 필드 검증
+    if not current_password or not new_password or not confirm_password:
+        return Response(
+            {'error': '모든 필드를 입력해주세요.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # 현재 비밀번호 확인
+    if not user.check_password(current_password):
+        return Response(
+            {'current_password': '현재 비밀번호가 올바르지 않습니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # 새 비밀번호와 확인 비밀번호 일치 여부 확인
+    if new_password != confirm_password:
+        return Response(
+            {'confirm_password': '새 비밀번호가 일치하지 않습니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # 새 비밀번호가 현재 비밀번호와 같은지 확인
+    if current_password == new_password:
+        return Response(
+            {'new_password': '새 비밀번호는 현재 비밀번호와 달라야 합니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # 비밀번호 강도 검증 (최소 8자, 대소문자, 숫자, 특수문자 포함)
+    if len(new_password) < 8:
+        return Response(
+            {'new_password': '비밀번호는 최소 8자 이상이어야 합니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if not any(c.isupper() for c in new_password):
+        return Response(
+            {'new_password': '비밀번호는 대문자를 포함해야 합니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if not any(c.islower() for c in new_password):
+        return Response(
+            {'new_password': '비밀번호는 소문자를 포함해야 합니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if not any(c.isdigit() for c in new_password):
+        return Response(
+            {'new_password': '비밀번호는 숫자를 포함해야 합니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # 비밀번호 변경
+    try:
+        user.set_password(new_password)
+        user.save()
+
+        return Response({
+            'message': '비밀번호가 성공적으로 변경되었습니다.',
+            'success': True
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': f'비밀번호 변경 중 오류가 발생했습니다: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+# ============================================================================
+# 뉴스/보도자료 Views (News Article Views)
+# ============================================================================
+
+@api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
+def news_article_list(request):
+    """
+    뉴스 기사 목록 조회 및 생성
+    GET /api/news/
+    POST /api/news/ (관리자만)
+    """
+    if request.method == 'GET':
+        # 일반 사용자는 published + is_active인 기사만 조회
+        # 관리자는 show_all 파라미터로 모든 기사 조회 가능
+        show_all = request.query_params.get('show_all', 'false').lower() == 'true'
+
+        if show_all and request.user.is_authenticated:
+            articles = NewsArticle.objects.all()
+        else:
+            articles = NewsArticle.objects.filter(status='published', is_active=True)
+
+        from .serializers import NewsArticleSerializer
+        serializer = NewsArticleSerializer(articles, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        # POST 요청은 인증 필요
+        if not request.user or not request.user.is_authenticated:
+            return Response(
+                {'error': '인증이 필요합니다.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        from .serializers import NewsArticleSerializer
+        serializer = NewsArticleSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([AllowAny])
+def news_article_detail(request, article_id):
+    """
+    뉴스 기사 상세 조회, 수정, 삭제
+    GET /api/news/{article_id}/
+    PUT /api/news/{article_id}/ (관리자만)
+    DELETE /api/news/{article_id}/ (관리자만)
+    """
+    try:
+        article = NewsArticle.objects.get(id=article_id)
+    except NewsArticle.DoesNotExist:
+        return Response(
+            {'error': '뉴스 기사를 찾을 수 없습니다.'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if request.method == 'GET':
+        # 일반 사용자는 published + is_active인 기사만 조회
+        if not request.user.is_authenticated:
+            if article.status != 'published' or not article.is_active:
+                return Response(
+                    {'error': '접근 권한이 없습니다.'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
+        from .serializers import NewsArticleSerializer
+        serializer = NewsArticleSerializer(article)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        # PUT 요청은 인증 필요
+        if not request.user or not request.user.is_authenticated:
+            return Response(
+                {'error': '인증이 필요합니다.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        from .serializers import NewsArticleSerializer
+        serializer = NewsArticleSerializer(article, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        # DELETE 요청은 인증 필요
+        if not request.user or not request.user.is_authenticated:
+            return Response(
+                {'error': '인증이 필요합니다.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        article.delete()
+        return Response(
+            {'message': '뉴스 기사가 삭제되었습니다.'},
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+
+# ============================================================================
+# 이메일 인증 Views (Email Verification Views)
+# ============================================================================
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def send_verification_code(request):
+    """
+    이메일 인증 코드 발송
+    POST /api/auth/email/send-code/
+    """
+    from .serializers import EmailRegistrationSerializer
+    from .models import EmailVerificationCode
+    import random
+    from datetime import timedelta
+
+    serializer = EmailRegistrationSerializer(data=request.data)
+
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    email = serializer.validated_data['email']
+
+    # 6자리 랜덤 코드 생성
+    code = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+
+    # 만료 시간 설정 (15분)
+    expires_at = timezone.now() + timedelta(minutes=15)
+
+    # 기존 미사용 코드 무효화
+    EmailVerificationCode.objects.filter(
+        email=email,
+        is_used=False
+    ).update(is_used=True)
+
+    # 새 인증 코드 생성
+    verification = EmailVerificationCode.objects.create(
+        email=email,
+        code=code,
+        expires_at=expires_at
+    )
+
+    # 이메일 발송
+    try:
+        from django.core.mail import EmailMultiAlternatives
+        from django.template.loader import render_to_string
+        from django.conf import settings
+
+        # 템플릿 렌더링
+        context = {'code': code}
+        text_content = render_to_string('emails/verification_code.txt', context)
+        html_content = render_to_string('emails/verification_code.html', context)
+
+        # 이메일 생성
+        subject = 'GLI 이메일 인증 코드'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        to_email = [email]
+
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+        msg.attach_alternative(html_content, "text/html")
+
+        # 이메일 전송
+        msg.send(fail_silently=False)
+
+        return Response({
+            'message': '인증 코드가 이메일로 발송되었습니다.',
+            'email': email,
+            'expires_in': 900  # 15분 (초)
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        # 이메일 전송 실패 시
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"이메일 전송 실패: {email}, 오류: {str(e)}")
+
+        # 개발 환경에서는 콘솔에도 출력
+        print(f"[인증 코드 전송 실패] {email}: {code}, 오류: {str(e)}")
+
+        return Response({
+            'error': '이메일 발송에 실패했습니다. 잠시 후 다시 시도해주세요.',
+            'detail': str(e) if settings.DEBUG else '이메일 서버 오류'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_code(request):
+    """
+    인증 코드 검증
+    POST /api/auth/email/verify-code/
+    """
+    from .serializers import VerificationCodeSerializer
+    from .models import EmailVerificationCode
+
+    serializer = VerificationCodeSerializer(data=request.data)
+
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    email = serializer.validated_data['email']
+    code = serializer.validated_data['code']
+
+    try:
+        # 최신 미사용 코드 조회
+        verification = EmailVerificationCode.objects.filter(
+            email=email,
+            code=code,
+            is_used=False
+        ).latest('created_at')
+
+        # 만료 확인
+        if verification.is_expired():
+            return Response(
+                {'error': '인증 코드가 만료되었습니다. 새로운 코드를 요청하세요.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response({
+            'message': '인증 코드가 확인되었습니다.',
+            'verified': True
+        }, status=status.HTTP_200_OK)
+
+    except EmailVerificationCode.DoesNotExist:
+        return Response(
+            {'error': '올바르지 않은 인증 코드입니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def complete_email_registration(request):
+    """
+    이메일 회원가입 완료
+    POST /api/auth/email/register/
+    """
+    from .serializers import CompleteRegistrationSerializer
+    from .models import EmailVerificationCode, SolanaUser
+
+    serializer = CompleteRegistrationSerializer(data=request.data)
+
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    email = serializer.validated_data['email']
+    verification_code = serializer.validated_data['verification_code']
+
+    try:
+        # 인증 코드 확인
+        verification = EmailVerificationCode.objects.filter(
+            email=email,
+            code=verification_code,
+            is_used=False
+        ).latest('created_at')
+
+        # 만료 확인
+        if verification.is_expired():
+            return Response(
+                {'error': '인증 코드가 만료되었습니다. 처음부터 다시 시작하세요.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 사용자 생성
+        user = SolanaUser.objects.create_user(
+            username=serializer.validated_data['username'],
+            email=email,
+            password=serializer.validated_data['password'],
+            first_name=serializer.validated_data.get('first_name', ''),
+            last_name=serializer.validated_data.get('last_name', '')
+        )
+
+        # 인증 코드 사용 처리
+        verification.is_used = True
+        verification.save()
+
+        # JWT 토큰 생성
+        refresh = RefreshToken.for_user(user)
+
+        # 사용자 정보 반환
+        user_serializer = SolanaUserSerializer(user)
+
+        return Response({
+            'message': '회원가입이 완료되었습니다.',
+            'token': {
+                'access': str(refresh.access_token),
+                'refresh': str(refresh)
+            },
+            'user': user_serializer.data
+        }, status=status.HTTP_201_CREATED)
+
+    except EmailVerificationCode.DoesNotExist:
+        return Response(
+            {'error': '올바르지 않은 인증 코드입니다.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    except Exception as e:
+        return Response(
+            {'error': f'회원가입 처리 중 오류가 발생했습니다: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_stg_test_accounts(request):
+    """
+    임시 STG 테스트 계정 생성 엔드포인트
+    배포 후 한 번만 실행하고 제거 예정
+    """
+    try:
+        from apps.solana_auth.models import AdminGrade, AdminUser
+
+        # AdminGrade 생성
+        super_admin_grade, _ = AdminGrade.objects.get_or_create(
+            name="슈퍼 관리자",
+            defaults={
+                "description": "모든 권한을 가진 슈퍼 관리자"
+            }
+        )
+
+        admin_grade, _ = AdminGrade.objects.get_or_create(
+            name="일반 관리자",
+            defaults={
+                "description": "일반 관리 권한"
+            }
+        )
+
+        # 테스트 계정 정보
+        test_accounts = [
+            {
+                "username": "superadmin1",
+                "email": "superadmin1@gli.com",
+                "password": "super1234!",
+                "first_name": "슈퍼",
+                "last_name": "관리자1",
+                "is_staff": True,
+                "is_superuser": True,
+                "membership_level": "vip",
+                "grade": super_admin_grade
+            },
+            {
+                "username": "superadmin2",
+                "email": "superadmin2@gli.com",
+                "password": "super1234!",
+                "first_name": "슈퍼",
+                "last_name": "관리자2",
+                "is_staff": True,
+                "is_superuser": True,
+                "membership_level": "vip",
+                "grade": super_admin_grade
+            },
+            {
+                "username": "admin1",
+                "email": "admin1@gli.com",
+                "password": "admin1234!",
+                "first_name": "일반",
+                "last_name": "관리자1",
+                "is_staff": True,
+                "is_superuser": False,
+                "membership_level": "basic",
+                "grade": admin_grade
+            },
+            {
+                "username": "admin2",
+                "email": "admin2@gli.com",
+                "password": "admin1234!",
+                "first_name": "일반",
+                "last_name": "관리자2",
+                "is_staff": True,
+                "is_superuser": False,
+                "membership_level": "basic",
+                "grade": admin_grade
+            }
+        ]
+
+        created_accounts = []
+        updated_accounts = []
+
+        for account_info in test_accounts:
+            email = account_info['email']
+            password = account_info.pop('password')
+            grade = account_info.pop('grade')
+
+            # 기존 사용자 확인
+            user, created = SolanaUser.objects.get_or_create(
+                email=email,
+                defaults={
+                    'username': account_info['username'],
+                    'first_name': account_info['first_name'],
+                    'last_name': account_info['last_name'],
+                    'is_staff': account_info['is_staff'],
+                    'is_superuser': account_info['is_superuser'],
+                    'membership_level': account_info['membership_level'],
+                    'is_active': True
+                }
+            )
+
+            # 비밀번호 설정 (생성이든 업데이트든)
+            user.set_password(password)
+            user.is_active = True
+            user.is_staff = account_info['is_staff']
+            user.is_superuser = account_info['is_superuser']
+            user.membership_level = account_info['membership_level']
+            user.save()
+
+            # AdminUser 생성 또는 업데이트
+            admin_user, _ = AdminUser.objects.get_or_create(
+                user=user,
+                defaults={"grade": grade, "is_active": True}
+            )
+            admin_user.grade = grade
+            admin_user.is_active = True
+            admin_user.save()
+
+            if created:
+                created_accounts.append(email)
+            else:
+                updated_accounts.append(email)
+
+        return Response({
+            'success': True,
+            'message': 'STG 테스트 계정 생성/업데이트 완료',
+            'created': created_accounts,
+            'updated': updated_accounts,
+            'total': len(test_accounts)
+        }, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        return Response({
+            'success': False,
+            'error': f'계정 생성 중 오류 발생: {str(e)}'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

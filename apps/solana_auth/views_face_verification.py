@@ -50,9 +50,9 @@ def submit_face_verification(request, user_id):
         user=user,
         verified=validated_data['verified'],
         confidence=validated_data['confidence'],
-        liveness_score=validated_data['livenessScore'],
+        liveness_score=validated_data['liveness_score'],
         attempts=validated_data.get('attempts', 1),
-        check_details=validated_data.get('checkDetails'),
+        check_details=validated_data.get('check_details'),
         verification_timestamp=validated_data['timestamp']
     )
 
